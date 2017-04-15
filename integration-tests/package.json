@@ -2,13 +2,15 @@
   "private": true,
   "scripts": {
     "test": "jest",
-    "test:screenshots": "react-percy"
+    "test:screenshots": "react-percy",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
   "devDependencies": {
+    "@kadira/storybook": "^2.35.3",
     "babel-core": "^6.24.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
