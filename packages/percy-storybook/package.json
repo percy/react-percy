@@ -1,0 +1,30 @@
+{
+  "name": "percy-storybook",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/percy/react-percy.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0",
+    "npm": ">=3.0"
+  },
+  "bin": {
+    "percy-storybook": "./bin/percy-storybook.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "peerDependencies": {
+    "@kadira/storybook": "^2.17.0",
+    "react": "^15.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "yargs": "^7.0.2"
+  }
+}
