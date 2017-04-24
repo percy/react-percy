@@ -2,12 +2,14 @@ import { createBuild, finalizeBuild } from './build';
 import { getMissingResources, makeResources, uploadResources } from './resources';
 import PercyClient from 'percy-client';
 import { runSnapshots } from './snapshot';
+import { runStories } from './story';
 
 export default class PercyApiClient {
 
-    constructor(token) {
+    constructor(token, apiUrl) {
         this._client = new PercyClient({
-            token
+            token,
+            apiUrl
         });
     }
 
@@ -29,6 +31,10 @@ export default class PercyApiClient {
 
     runSnapshots(build, testCases, assets, renderer) {
         return runSnapshots(this._client, build, testCases, assets, renderer);
+    }
+
+    runStories(build, stories, assets, storyHtml) {
+        return runStories(this._client, build, stories, assets, storyHtml);
     }
 
     uploadResources(build, resources) {
