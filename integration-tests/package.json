@@ -4,7 +4,8 @@
     "test": "jest",
     "test:screenshots": "react-percy",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook:percy": "percy-storybook -c .storybook"
+    "storybook:percy": "build-storybook && percy-storybook",
+    "storybook:percy-no-build": "percy-storybook"
   },
   "dependencies": {
     "react": "^15.4.2",
