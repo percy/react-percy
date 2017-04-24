@@ -17,14 +17,22 @@
     "bin",
     "lib"
   ],
-  "peerDependencies": {
-    "@kadira/storybook": "^2.17.0",
-    "react": "^15.0.0"
-  },
   "devDependencies": {
-    "webpack": "^2.2.1"
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.20.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.16.0"
   },
   "dependencies": {
-    "yargs": "^7.0.2"
+    "chalk": "^1.1.3",
+    "debug": "^2.6.3",
+    "react-percy-api-client": "^0.1.0",
+    "react-percy-config": "^0.1.0",
+    "@kadira/storybook": "*",
+    "babel-runtime": "^6.20.0",
+    "prop-types": "^15.5.7",
+    "read-pkg-up": "^2.0.0"
   }
 }
