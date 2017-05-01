@@ -1,9 +1,8 @@
+// Ignore includig css and related files from storybooks.
+// This is okay at this point, because we're only trying to fetch a list of stories,
+// not an accurate rendering of them.
 // eslint-disable-next-line import/no-unresolved
 require('ignore-styles');
-
-require('babel-core/register')({
-    ignore: /node_modules\/(?!@bufferapp\/components)/
-});
 
 import path from 'path';
 import readPkgUp from 'read-pkg-up';
@@ -20,7 +19,14 @@ const isStorybook =
   (pkg.dependencies && pkg.dependencies['@kadira/storybook']);
 
 
-export default function getStories() {
+export default function getStories(ignoreString) {
+    // Allow the adjustment of what babel ignores for transpilation.
+    // Means that the default of node_modules can be overridden to include some modeules.
+    // eslint-disable-next-line global-require
+    require('babel-core/register')({
+        ignore: new RegExp(ignoreString)
+    });
+
     if (isStorybook) {
         const configDirPath = path.resolve('.storybook');
         const configPath = path.join(configDirPath, 'config.js');
@@ -37,7 +43,7 @@ export default function getStories() {
         runWithRequireContext(content, contextOpts);
     } else {
         throw new Error(
-          'percy-storybook is intended only to be used with react storybook',
+          'percy-storybook is intended only to be used with react storybook.',
         );
     }
 

@@ -5,6 +5,11 @@ export const options = {
         alias: 'w',
         description: 'Comma seperated lists of strings.',
         requiresArg: false
+    },
+    ignore: {
+        alias: 'i',
+        description: 'Filepath regex Babel should ignore when loading. Default: node_modules',
+        requiresArg: false
     }
 };
 

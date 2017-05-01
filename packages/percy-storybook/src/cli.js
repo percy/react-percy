@@ -23,6 +23,7 @@ export async function run(argv) {
         .alias('help', 'h')
         .options(args.options)
         .epilogue(args.docs)
+        .default('ignore', 'node_modules')
         .argv;
 
     if (argv.help) {
@@ -39,7 +40,7 @@ export async function run(argv) {
 
     const widths = getWidths(argv.widths);
 
-    const stories = getStories();
+    const stories = getStories(argv.ignore);
     debug('stories %o', stories);
 
     const selectedStories = selectStories(stories);
