@@ -32,11 +32,10 @@ beforeEach(() => {
 it('creates a snapshot for the given test case', async () => {
     const story = {
         name: 'test case',
-        markup: '<div>test</div>',
-        sizes: [{ width: 320 }, { width: 768 }]
+        markup: '<div>test</div>'
     };
 
-    await runStory(percyClient, build, story, assets, storyHtml);
+    await runStory(percyClient, build, story, [320, 768], assets, storyHtml);
 
     expect(createSnapshot).toHaveBeenCalledWith(percyClient, build, [mockResource], { name: 'test case', widths: [320, 768], enableJavaScript: true });
 });
@@ -48,7 +47,7 @@ it('does not re-upload resource given nothing has changed', async () => {
     };
     mockMissingResources = [];
 
-    await runStory(percyClient, build, story, assets, storyHtml);
+    await runStory(percyClient, build, story, [320, 768], assets, storyHtml);
 
     expect(uploadResources).not.toHaveBeenCalled();
 });
@@ -60,7 +59,7 @@ it('re-uploads resource given changes', async () => {
     };
     mockMissingResources = ['foo'];
 
-    await runStory(percyClient, build, story, assets, storyHtml);
+    await runStory(percyClient, build, story, [320, 768], assets, storyHtml);
 
     expect(uploadResources).toHaveBeenCalledWith(percyClient, build, [mockResource]);
 });

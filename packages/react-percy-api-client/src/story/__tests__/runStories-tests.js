@@ -13,9 +13,9 @@ it('runs stories for each test case', async () => {
     ];
     const storyHtml = '<html></html>';
 
-    await runStories(percyClient, build, stories, assets, storyHtml);
+    await runStories(percyClient, build, stories, [328, 768], assets, storyHtml);
 
     stories.forEach(story =>
-        expect(runStory).toHaveBeenCalledWith(percyClient, build, story, assets, storyHtml)
+        expect(runStory).toHaveBeenCalledWith(percyClient, build, story, [328, 768], assets, storyHtml)
     );
 });

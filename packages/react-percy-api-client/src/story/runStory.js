@@ -2,14 +2,9 @@ import { getMissingResourceShas, makeRootResource, uploadResources } from '../re
 import createSnapshot from '../snapshot/createSnapshot';
 import finalizeSnapshot from '../snapshot/finalizeSnapshot';
 
-export default async function runStory(percyClient, build, story, assets, storyHtml) {
+export default async function runStory(percyClient, build, story, widths, assets, storyHtml) {
     try {
         const resource = makeRootResource(percyClient, story.name, storyHtml, story.encodedParams);
-
-        let widths = [];
-        if (story.sizes) {
-            widths = story.sizes.map(size => size.width);
-        }
 
         const snapshotOptions = {
             name: story.name,

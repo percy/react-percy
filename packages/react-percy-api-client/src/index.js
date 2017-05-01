@@ -33,8 +33,8 @@ export default class PercyApiClient {
         return runSnapshots(this._client, build, testCases, assets, renderer);
     }
 
-    runStories(build, stories, assets, storyHtml) {
-        return runStories(this._client, build, stories, assets, storyHtml);
+    runStories(build, stories, widths, assets, storyHtml) {
+        return runStories(this._client, build, stories, widths, assets, storyHtml);
     }
 
     uploadResources(build, resources) {
