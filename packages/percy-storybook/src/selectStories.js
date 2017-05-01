@@ -8,8 +8,7 @@ export default function selectStories(stories) {
 
             selectedStories.push({
                 name,
-                encodedParams,
-                sizes: []
+                encodedParams
             });
         }
     }
