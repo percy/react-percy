@@ -1,3 +1,6 @@
+// This file is originally from the MIT licensed Storyshots package
+// Copyright (c) 2016 Kadira Inc. <hello@kadira.io>
+
 import vm from 'vm';
 import fs from 'fs';
 import path from 'path';
