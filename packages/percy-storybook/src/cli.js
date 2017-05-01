@@ -1,5 +1,8 @@
+// eslint-disable-next-line import/no-unresolved
+require('ignore-styles');
+
 require('babel-core/register')({
-    ignore: /node_modules\//
+    ignore: /node_modules\/(?!@bufferapp\/components)/
 });
 
 import ApiClient from 'react-percy-api-client';
@@ -7,9 +10,13 @@ import ApiClient from 'react-percy-api-client';
 import path from 'path';
 import readPkgUp from 'read-pkg-up';
 import createDebug from 'debug';
+import runWithRequireContext from './require_context';
 
 const storybook = require('@kadira/storybook');
+
 const fs = require('fs');
+const babel = require('babel-core');
+const loadBabelConfig = require('@kadira/storybook/dist/server/babel_config').default;
 
 const debug = createDebug('percy-storybook');
 
@@ -23,8 +30,17 @@ export async function run() {
     if (isStorybook) {
         const configDirPath = path.resolve('.storybook');
         const configPath = path.join(configDirPath, 'config.js');
-        // eslint-disable-next-line
-        require(configPath);
+
+        const babelConfig = loadBabelConfig(configDirPath);
+
+        const content = babel.transformFileSync(configPath, babelConfig).code;
+
+        const contextOpts = {
+            filename: configPath,
+            dirname: configDirPath
+        };
+
+        runWithRequireContext(content, contextOpts);
     } else {
         throw new Error(
           'percy-storybook is intended only to be used with react storybook',
@@ -40,6 +56,8 @@ export async function run() {
     const storyJavascript = fs.readFileSync(path.join(storybookStaticPath, storybookJavascriptPath), 'utf8');
 
     const stories = storybook.getStorybook();
+    debug('stories %o', stories);
+
     const selectedStories = [];
     for (const group of stories) {
         for (const story of group.stories) {
