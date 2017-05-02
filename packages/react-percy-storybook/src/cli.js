@@ -6,7 +6,7 @@ import getWidths from './getWidths';
 import selectStories from './selectStories';
 import uploadStories from './uploadStories';
 
-import ApiClient from 'react-percy-api-client';
+import ApiClient from '@percy-io/react-percy-api-client';
 import createDebug from 'debug';
 
 import yargs from 'yargs';
@@ -46,8 +46,13 @@ export async function run(argv) {
     const selectedStories = selectStories(stories);
     debug('selectedStories %o', selectedStories);
 
+    if (selectedStories.length === 0) {
+        console.log('No stories were found.');
+        return;
+    }
+
     const { storyHtml, assets } = getStaticAssets();
-    debug('assets %o', assets);
+    // debug('assets %o', assets);
 
     const client = new ApiClient(
       process.env.PERCY_TOKEN,

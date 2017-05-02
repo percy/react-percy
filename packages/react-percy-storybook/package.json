@@ -1,5 +1,5 @@
 {
-  "name": "react-percy-storybook",
+  "name": "@percy-io/react-percy-storybook",
   "version": "0.1.0",
   "repository": {
     "type": "git",
@@ -32,9 +32,10 @@
     "ignore-styles": "5.0.1",
     "@kadira/storybook": "*",
     "prop-types": "^15.5.7",
-    "react-percy-api-client": "^0.1.0",
-    "react-percy-config": "^0.1.0",
+    "@percy-io/react-percy-api-client": "^0.1.0",
     "read-pkg-up": "^2.0.0",
-    "yargs": "^7.0.2"
+    "yargs": "^7.0.2",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   }
 }
