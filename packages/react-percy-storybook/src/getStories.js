@@ -1,17 +1,13 @@
 // Ignore includig css and related files from storybooks.
 // This is okay at this point, because we're only trying to fetch a list of stories,
 // not an accurate rendering of them.
-// eslint-disable-next-line import/no-unresolved
-require('ignore-styles');
-
+import 'ignore-styles';
 import path from 'path';
 import readPkgUp from 'read-pkg-up';
 import runWithRequireContext from './require_context';
-
-const storybook = require('@kadira/storybook');
-
-const babel = require('babel-core');
-const loadBabelConfig = require('@kadira/storybook/dist/server/babel_config').default;
+import { transformFileSync } from 'babel-core';
+import { getStorybook } from '@kadira/storybook';
+import loadBabelConfig from '@kadira/storybook/dist/server/babel_config';
 
 const pkg = readPkgUp.sync().pkg;
 const isStorybook =
@@ -33,7 +29,7 @@ export default function getStories(ignoreString) {
 
         const babelConfig = loadBabelConfig(configDirPath);
 
-        const content = babel.transformFileSync(configPath, babelConfig).code;
+        const content = transformFileSync(configPath, babelConfig).code;
 
         const contextOpts = {
             filename: configPath,
@@ -47,5 +43,5 @@ export default function getStories(ignoreString) {
         );
     }
 
-    return storybook.getStorybook();
+    return getStorybook();
 }
