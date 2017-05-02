@@ -24,8 +24,8 @@
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "jest": "^19.0.2",
-    "percy-storybook": "./packages/percy-storybook.tgz",
-    "react-percy": "./packages/react-percy.tgz",
+    "percy-storybook": "./packages/percy-io-react-percy-storybook.tgz",
+    "react-percy": "./packages/percy-io-react-percy.tgz",
     "style-loader": "^0.14.1",
     "webpack": "^2.2.1"
   },
