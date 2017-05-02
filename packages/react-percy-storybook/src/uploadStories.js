@@ -1,8 +1,15 @@
-export default async function uploadStories(client, selectedStories, widths, storyHtml, assets) {
-    const resources = client.makeResources(assets);
-    const build = await client.createBuild(resources);
-    const missingResources = client.getMissingResources(build, resources);
-    await client.uploadResources(build, missingResources);
-    await client.runStories(build, selectedStories, widths, assets, storyHtml);
-    await client.finalizeBuild(build);
+import PromisePool from 'es6-promise-pool';
+import uploadStory from './uploadStory';
+
+const concurrency = 5;
+
+export default function uploadStories(percyClient, build, stories, widths, assets, storyHtml) {
+    function* generatePromises() {
+        for (const story of stories) {
+            yield uploadStory(percyClient, build, story, widths, assets, storyHtml);
+        }
+    }
+
+    const pool = new PromisePool(generatePromises(), concurrency);
+    return pool.start();
 }

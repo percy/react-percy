@@ -1,7 +1,7 @@
 import slugify from 'slugify';
 
-export default function makeRootResource(percyClient, testName, html, encodedResourceParams) {
-    let resourceUrl = `/${slugify(testName).toLowerCase()}.html`;
+export default function makeRootResource(percyClient, name, html, encodedResourceParams) {
+    let resourceUrl = `/${slugify(name).toLowerCase()}.html`;
     if (encodedResourceParams) {
         resourceUrl = `${resourceUrl}?${encodedResourceParams}`;
     }

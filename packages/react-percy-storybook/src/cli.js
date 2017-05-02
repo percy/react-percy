@@ -4,7 +4,7 @@ import getStories from './getStories';
 import getStaticAssets from './getStaticAssets';
 import getWidths from './getWidths';
 import selectStories from './selectStories';
-import uploadStories from './uploadStories';
+import uploadStorybook from './uploadStorybook';
 
 import ApiClient from '@percy-io/react-percy-api-client';
 import createDebug from 'debug';
@@ -59,5 +59,5 @@ export async function run(argv) {
       process.env.PERCY_API
     );
 
-    return uploadStories(client, selectedStories, widths, storyHtml, assets);
+    return uploadStorybook(client, selectedStories, widths, storyHtml, assets);
 }

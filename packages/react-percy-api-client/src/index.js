@@ -1,8 +1,12 @@
 import { createBuild, finalizeBuild } from './build';
-import { getMissingResources, makeResources, uploadResources } from './resources';
+import {
+  getMissingResources,
+  getMissingResourceShas,
+  makeResources,
+  makeRootResource,
+  uploadResources } from './resources';
 import PercyClient from 'percy-client';
-import { runSnapshots } from './snapshot';
-import { runStories } from './story';
+import { createSnapshot, finalizeSnapshot, runSnapshots } from './snapshot';
 
 export default class PercyApiClient {
 
@@ -17,24 +21,36 @@ export default class PercyApiClient {
         return createBuild(this._client, resources);
     }
 
-    finalizeBuild(build) {
-        return finalizeBuild(this._client, build);
+    createSnapshot(build, resources, options) {
+        return createSnapshot(this._client, build, resources, options);
     }
 
     getMissingResources(build, resources) {
         return getMissingResources(build, resources);
     }
 
+    getMissingResourceShas(build) {
+        return getMissingResourceShas(build);
+    }
+
+    finalizeBuild(build) {
+        return finalizeBuild(this._client, build);
+    }
+
+    finalizeSnapshot(snapshot) {
+        finalizeSnapshot(this._client, snapshot);
+    }
+
     makeResources(assets) {
         return makeResources(this._client, assets);
     }
 
-    runSnapshots(build, testCases, assets, renderer) {
-        return runSnapshots(this._client, build, testCases, assets, renderer);
+    makeRootResource(name, html, encodedResourceParams) {
+        return makeRootResource(this._client, name, html, encodedResourceParams);
     }
 
-    runStories(build, stories, widths, assets, storyHtml) {
-        return runStories(this._client, build, stories, widths, assets, storyHtml);
+    runSnapshots(build, testCases, assets, renderer) {
+        return runSnapshots(this._client, build, testCases, assets, renderer);
     }
 
     uploadResources(build, resources) {
