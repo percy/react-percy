@@ -1,5 +1,7 @@
 import jsdom from 'jsdom';
 
+// jsdom doesn't support localStorage yet.
+// We use localStorageMock to allow the user's preview.js to interact with localStorage.
 const localStorageMock = `
     var localStorageMock = (function() {
       var store = {};
@@ -39,7 +41,7 @@ function getStoriesFromDom(previewJavascriptCode, options) {
     });
 }
 
-export default async function getStories(assets, options) {
+export default async function getStories(assets, options = {}) {
     if (!assets) throw new Error('Preview asset was not received.');
     if (Object.keys(assets).length !== 1) throw new Error('Expected to receive only 1 asset');
 
