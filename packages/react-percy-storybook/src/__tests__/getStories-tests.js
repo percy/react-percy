@@ -15,7 +15,7 @@ it('returns an empty array when no stories loaded', async () => {
     const assets = { code };
 
     try {
-        await getStories(assets);
+        await getStories(assets, {});
     } catch (e) {
         expect(e).toEqual(new Error('Storybook object not found on window.'));
     }
@@ -27,6 +27,6 @@ it('returns the value __storybook_stories__ is set to', async () => {
     const code = 'if (typeof window === \'object\') window.__storybook_stories__ = \'hi\';';
     const assets = { code };
 
-    const stories = await getStories(assets);
+    const stories = await getStories(assets, {});
     expect(stories).toEqual('hi');
 });
