@@ -1,10 +1,29 @@
 import jsdom from 'jsdom';
 
+const localStorageMock = `
+    var localStorageMock = (function() {
+      var store = {};
+      return {
+        getItem: function(key) {
+          return store[key];
+        },
+        setItem: function(key, value) {
+          store[key] = value.toString();
+        },
+        clear: function() {
+          store = {};
+        }
+      };
+    })();
+    Object.defineProperty(window, 'localStorage', { value: localStorageMock });
+    `;
+
 function getStoriesFromDom(previewJavascriptCode) {
     return new Promise((resolve, reject) => {
         const jsDomConfig = {
             html: '',
-            src: [previewJavascriptCode],
+            url: 'https://example.com/iframe.js?selectedKind=none&selectedStory=none',
+            src: [localStorageMock, previewJavascriptCode],
             done: (err, window) => {
                 if (err) return reject(err.response.body);
                 if (!window || !window.__storybook_stories__) {
