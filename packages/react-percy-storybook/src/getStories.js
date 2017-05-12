@@ -18,7 +18,7 @@ const localStorageMock = `
     Object.defineProperty(window, 'localStorage', { value: localStorageMock });
     `;
 
-function getStoriesFromDom(previewJavascriptCode) {
+function getStoriesFromDom(previewJavascriptCode, options) {
     return new Promise((resolve, reject) => {
         const jsDomConfig = {
             html: '',
@@ -32,17 +32,19 @@ function getStoriesFromDom(previewJavascriptCode) {
                 resolve(window.__storybook_stories__);
             }
         };
-        // parse preview bundle js code and retrieve window object
+        if (options.debug) {
+            jsDomConfig.virtualConsole = jsdom.createVirtualConsole().sendTo(console);
+        }
         jsdom.env(jsDomConfig);
     });
 }
 
-export default async function getStories(assets) {
+export default async function getStories(assets, options) {
     if (!assets) throw new Error('Preview asset was not received.');
     if (Object.keys(assets).length !== 1) throw new Error('Expected to receive only 1 asset');
 
     // TODO: Assumes assets has just one key, that contains the preview.js.  Tidy this.
     const previewJavascriptCode = assets[Object.keys(assets)[0]];
-    const stories = await getStoriesFromDom(previewJavascriptCode);
+    const stories = await getStoriesFromDom(previewJavascriptCode, options);
     return stories;
 }
