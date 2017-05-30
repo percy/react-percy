@@ -57,10 +57,10 @@ export async function run(argv) {
         return;
     }
 
-    const { storyHtml, assets } = getStaticAssets(options);
+    const { storyHtml, assets, storybookJavascriptPath } = getStaticAssets(options);
     // debug('assets %o', assets);
 
-    getStories(assets, options).then((stories) => {
+    getStories(assets[storybookJavascriptPath], options).then((stories) => {
         debug('stories %o', stories);
 
         const selectedStories = selectStories(stories);

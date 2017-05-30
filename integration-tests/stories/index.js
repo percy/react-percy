@@ -10,6 +10,9 @@ storiesOf('Button', module)
   ));
 
 storiesOf('Text', module)
-  .add('just text', () => (
+  .add('green text using static css', () => (
       <p className="green">Hi there! This text should be green.</p>
+  ))
+  .add('blue text using static css in sub_dir', () => (
+      <p className="blue">Hi there! This text should be blue.</p>
   ));
