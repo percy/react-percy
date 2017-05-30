@@ -15,6 +15,8 @@
   },
   "devDependencies": {
     "@kadira/storybook": "^2.35.3",
+    "@percy-io/react-percy": "^0.1.1",
+    "@percy-io/react-percy-storybook": "^0.1.1",
     "babel-core": "^6.24.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
@@ -26,8 +28,6 @@
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "jest": "^19.0.2",
-    "@percy-io/react-percy-storybook": "./packages/percy-io-react-percy-storybook.tgz",
-    "@percy-io/react-percy": "./packages/percy-io-react-percy.tgz",
     "style-loader": "^0.14.1",
     "webpack": "^2.2.1"
   },
