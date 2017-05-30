@@ -8,3 +8,8 @@ storiesOf('Button', module)
   .add('with some emoji', () => (
       <button onClick={action('clicked')}>😀 😎 👍 💯</button>
   ));
+
+storiesOf('Text', module)
+  .add('just text', () => (
+      <p className="green">Hi there! This text should be green.</p>
+  ));
