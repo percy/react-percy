@@ -1,6 +1,5 @@
 // Returns true if executing in the Percy rendering environment
 export default function inPercy() {
-    if (typeof window !== 'object') return false;
-    if (!window.location || !window.location.hostname) return false;
-    return window.location.hostname.match('proxyme.percy.io');
+    const hasHostname = typeof window === 'object' && window.location && window.location.hostname;
+    return hasHostname && window.location.hostname.match('proxyme.percy.io');
 }
