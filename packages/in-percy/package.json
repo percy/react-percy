@@ -22,8 +22,9 @@
     "access": "public"
   },
   "eslintConfig": {
-  "globals": {
-    "window": true
-  }
-}
+    "globals": {
+      "window": true
+    }
+  },
+  "main": "lib/index.js"
 }
