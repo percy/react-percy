@@ -21,7 +21,7 @@ storiesOf('Text', module)
 storiesOf('Time', module)
     .add('Show the current date', () => (
         <div>
-            <p>The current date should be frozen to 2015 thanks to timemachine.</p>
+            <p>In Percy&apos;s screenshot the current date should be frozen to 2015 thanks to timemachine.</p>
             <p>See .storybook/config.js or&nbsp;
             <a href="https://www.npmjs.com/package/faker#setting-a-randomness-seed">
               faker&apos;s docs
@@ -37,7 +37,7 @@ const email = faker.internet.email();
 storiesOf('Faker', module)
     .add('Show a fake name and email', () => (
         <div>
-            <p>The fake data should be the same thanks to faker&apos;s seed.</p>
+            <p>In Percy&apos;s screenshot the fake data should be the same thanks to faker&apos;s seed.</p>
             <p>See .storybook/config.js or&nbsp;
               <a href="https://www.npmjs.com/package/timemachine#config">
                 timemachine&apos;s docs
