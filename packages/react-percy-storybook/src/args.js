@@ -7,7 +7,6 @@ export const options = {
         requiresArg: true
     },
     minimum_height: {
-        alias: 'h',
         description: 'Minimum height for the screenshot (integer)',
         requiresArg: true
     },
