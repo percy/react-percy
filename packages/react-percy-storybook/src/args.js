@@ -3,7 +3,12 @@ export const docs = 'Documentation: https://percy.io/percy-storybook';
 export const options = {
     widths: {
         alias: 'w',
-        description: 'Comma seperated lists of widths.',
+        description: 'Comma seperated lists of widths',
+        requiresArg: true
+    },
+    minimum_height: {
+        alias: 'h',
+        description: 'Minimum height for the screenshot (integer)',
         requiresArg: true
     },
     debug: {
