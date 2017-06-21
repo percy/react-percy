@@ -63,3 +63,19 @@ storiesOf('MatchMedia', module)
           <ComponentForSmallScreen>Example for small screen</ComponentForSmallScreen>
       </div>
   ));
+
+const rtl = window && window.location &&
+  new URL(window.location).searchParams.get('direction') === 'rtl';
+let direction = 'ltr';
+if (rtl) {
+    direction = 'rtl';
+}
+
+storiesOf('Direction Demo', module)
+  .add('Show the direction', () => (
+      <div className={direction}>
+          <p>The direction is {direction}.</p>
+          <p>In Percy this story will be rendered twice automatically, once for each direction.</p>
+          <p>This happens because the name matches the rtl_regex command line argument.</p>
+      </div>
+  ));
