@@ -64,10 +64,8 @@ storiesOf('MatchMedia', module)
       </div>
   ));
 
-const rtl = window && window.location &&
-  new URL(window.location).searchParams.get('direction') === 'rtl';
 let direction = 'ltr';
-if (rtl) {
+if (window && window.location && window.location.search.indexOf('direction=rtl') > -1) {
     direction = 'rtl';
 }
 
