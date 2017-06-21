@@ -7,9 +7,12 @@ it('returns null when rtl and rtl_regex not provided', () => {
 
 it('returns a regex that matches everything when rtl true', () => {
     expect(getRtlRegex(true, null)).toEqual(/.*/gim);
-    expect(getRtlRegex(true, 'abc')).toEqual(/.*/gim);
 });
 
 it('returns a regex from the rtlRegex param', () => {
     expect(getRtlRegex(false, 'abc')).toEqual(/abc/);
+});
+
+it('raises an error when both rtl and rtlRegex are provided', () => {
+    expect(() => getRtlRegex(true, 'abc')).toThrow();
 });
