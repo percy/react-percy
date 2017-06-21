@@ -15,7 +15,7 @@ export default function selectStories(stories, rtlRegex) {
 
     if (rtlRegex) {
         const rtlStories = [];
-        for (const story of stories) {
+        for (const story of selectedStories) {
             if (story.name.match(rtlRegex)) {
                 rtlStories.push({
                     name: `${story.name} [RTL]`,
