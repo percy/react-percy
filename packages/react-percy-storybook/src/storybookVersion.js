@@ -1,9 +1,9 @@
 export default function storybookVersion() {
-         // story book react dependencies
+         // storybook react dependencies
   return process.env['npm_package_dependencies_@storybook/react'] ||
          process.env.npm_package_dependencies__storybook_react ||
 
-         // story book react dev dependencies
+         // storybook react dev dependencies
          process.env['npm_package_devDependencies_@storybook/react'] ||
          process.env.npm_package_devDependencies__storybook_react ||
 
