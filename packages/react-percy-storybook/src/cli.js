@@ -78,7 +78,9 @@ export async function run(argv) {
 
   const client = new ApiClient(
       process.env.PERCY_TOKEN,
-      process.env.PERCY_API
+      process.env.PERCY_API,
+      'react-percy-storybook-client/XX',
+      'storybook/(XX|unknown)',
     );
 
   return uploadStorybook(client, selectedStories, widths, minimumHeight, storyHtml, assets);
