@@ -14,7 +14,7 @@ export default class PercyApiClient {
     this._client = new PercyClient({
       token,
       apiUrl,
-      clientInfo, // TODO: add react-percy-api-client version
+      clientInfo,
       environmentInfo
     });
   }
