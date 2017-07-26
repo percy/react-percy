@@ -8,7 +8,7 @@ if (inPercy()) {
   // Seed faker so it generates deterministic fake data
   faker.seed(123);
   // Mock the current date
-  mockdate.set('October 21, 2015 04:19:00');
+  mockdate.set('October 21, 2000 04:19:00');
 }
 
 function loadStories() {
