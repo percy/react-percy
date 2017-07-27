@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "test:screenshots": "react-percy",
-    "storybook": "start-storybook -p 9001 -c .storybook -s ./.storybook/public",
+    "storybook": "start-storybook start -p 9001 -c .storybook -s ./.storybook/public",
     "storybook:build": "build-storybook -s ./.storybook/public",
     "storybook:percy-debug": "percy-storybook --debug",
     "storybook:percy": "build-storybook -s ./.storybook/public && percy-storybook --widths=320,1280 --rtl_regex=Direction",
@@ -13,16 +13,21 @@
   },
   "dependencies": {
     "faker": "^4.1.0",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
     "react-match-media": "^2.0.1",
     "mockdate": "^2.0.1"
   },
   "devDependencies": {
-    "@kadira/storybook": "^2.35.3",
     "@percy-io/in-percy": "file:../packages/in-percy",
     "@percy-io/react-percy": "^0.1.1",
     "@percy-io/react-percy-storybook": "^0.1.8",
+    "@storybook/addon-actions": "^3.1.9",
+    "@storybook/addon-info": "^3.1.9",
+    "@storybook/addon-knobs": "^3.1.9",
+    "@storybook/addon-links": "^3.1.6",
+    "@storybook/addon-options": "^3.1.6",
+    "@storybook/react": "3.1.9",
     "babel-core": "^6.24.0",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
