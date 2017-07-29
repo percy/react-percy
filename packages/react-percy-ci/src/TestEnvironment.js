@@ -12,12 +12,11 @@ const GLOBALS = [
 ];
 
 export default class TestEnvironment {
-
   constructor() {
     this.context = vm.createContext();
     this.global = vm.runInContext('this', this.context);
     this.global.global = this.global;
-    GLOBALS.forEach((key) => {
+    GLOBALS.forEach(key => {
       this.global[key] = global[key];
     });
     this.suite = createSuite(this.global);
@@ -36,5 +35,4 @@ export default class TestEnvironment {
       displayErrors: true
     });
   }
-
 }

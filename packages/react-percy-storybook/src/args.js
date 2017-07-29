@@ -17,15 +17,18 @@ export const options = {
   },
   build_dir: {
     alias: 'b',
-    description: 'Directory to load the static storybook built by build-storybook from',
+    description:
+      'Directory to load the static storybook built by build-storybook from',
     requiresArg: true
   },
   rtl: {
-    description: 'Runs stories a second time with a direction parameter set to rtl',
+    description:
+      'Runs stories a second time with a direction parameter set to rtl',
     requiresArg: false
   },
   rtl_regex: {
-    description: 'Runs stories with matching names a second time with direction param of rtl',
+    description:
+      'Runs stories with matching names a second time with direction param of rtl',
     requiresArg: true
   }
 };

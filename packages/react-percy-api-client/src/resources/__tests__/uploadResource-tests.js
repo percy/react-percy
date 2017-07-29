@@ -19,7 +19,10 @@ it('uploads the specified resource', async () => {
 
   await uploadResource(percyClient, build, resource);
 
-  expect(percyClient.uploadResource).toHaveBeenCalledWith('build123', 'resource contents');
+  expect(percyClient.uploadResource).toHaveBeenCalledWith(
+    'build123',
+    'resource contents'
+  );
 });
 
 it('rejects the error response on failure', async () => {
@@ -29,11 +32,13 @@ it('rejects the error response on failure', async () => {
   const resource = {
     content: 'resource contents'
   };
-  percyClient.uploadResource.mockImplementation(() => Promise.reject({
-    response: {
-      body: '501 Error'
-    }
-  }));
+  percyClient.uploadResource.mockImplementation(() =>
+    Promise.reject({
+      response: {
+        body: '501 Error'
+      }
+    })
+  );
 
   try {
     await uploadResource(percyClient, build, resource);

@@ -32,19 +32,19 @@ it('returns missing resource shas given missing resources', () => {
   const build = {
     relationships: {
       'missing-resources': {
-        data: [{
-          id: '35hh645u456u'
-        }, {
-          id: '65r56745yt45'
-        }]
+        data: [
+          {
+            id: '35hh645u456u'
+          },
+          {
+            id: '65r56745yt45'
+          }
+        ]
       }
     }
   };
 
   const shas = getMissingResourceShas(build);
 
-  expect(shas).toEqual([
-    '35hh645u456u',
-    '65r56745yt45'
-  ]);
+  expect(shas).toEqual(['35hh645u456u', '65r56745yt45']);
 });

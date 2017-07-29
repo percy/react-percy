@@ -4,12 +4,12 @@ import {
   getMissingResourceShas,
   makeResources,
   makeRootResource,
-  uploadResources } from './resources';
+  uploadResources
+} from './resources';
 import PercyClient from 'percy-client';
 import { createSnapshot, finalizeSnapshot, runSnapshots } from './snapshot';
 
 export default class PercyApiClient {
-
   constructor(token, apiUrl, clientInfo = '', environmentInfo = '') {
     this._client = new PercyClient({
       token,
@@ -58,5 +58,4 @@ export default class PercyApiClient {
   uploadResources(build, resources) {
     return uploadResources(this._client, build, resources);
   }
-
 }

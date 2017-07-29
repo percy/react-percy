@@ -23,11 +23,13 @@ it('rejects the error response on failure', async () => {
   const build = {
     id: 'buildid'
   };
-  percyClient.finalizeBuild.mockImplementation(() => Promise.reject({
-    response: {
-      body: '501 Error'
-    }
-  }));
+  percyClient.finalizeBuild.mockImplementation(() =>
+    Promise.reject({
+      response: {
+        body: '501 Error'
+      }
+    })
+  );
 
   try {
     await finalizeBuild(percyClient, build);

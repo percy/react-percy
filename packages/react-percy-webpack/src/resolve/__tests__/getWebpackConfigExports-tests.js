@@ -5,11 +5,16 @@ it('throws given no config', () => {
 });
 
 it('throws given array', () => {
-  expect(() => getWebpackConfigExports([{
-    config1: true
-  }, {
-    config2: true
-  }])).toThrow();
+  expect(() =>
+    getWebpackConfigExports([
+      {
+        config1: true
+      },
+      {
+        config2: true
+      }
+    ])
+  ).toThrow();
 });
 
 it('returns ES5 config object', () => {

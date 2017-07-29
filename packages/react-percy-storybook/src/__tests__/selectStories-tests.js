@@ -8,17 +8,11 @@ it('returns expected selected stories for a stories array', () => {
   const stories = [
     {
       kind: 'ImagePost',
-      stories: [
-                 { name: 'a' },
-                 { name: 'b' }
-      ]
+      stories: [{ name: 'a' }, { name: 'b' }]
     },
     {
       kind: 'LinkPost',
-      stories: [
-               { name: 'a' },
-               { name: 'b' }
-      ]
+      stories: [{ name: 'a' }, { name: 'b' }]
     }
   ];
 
@@ -48,10 +42,7 @@ it('ads rtl stories when requested', () => {
   const stories = [
     {
       kind: 'ImagePost',
-      stories: [
-                 { name: 'a' },
-                 { name: 'b' }
-      ]
+      stories: [{ name: 'a' }, { name: 'b' }]
     }
   ];
 

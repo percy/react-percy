@@ -15,5 +15,7 @@ export default function getMissingResourceShas(build) {
     return [];
   }
 
-  return build.relationships['missing-resources'].data.map(resource => resource.id);
+  return build.relationships['missing-resources'].data.map(
+    resource => resource.id
+  );
 }

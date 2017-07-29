@@ -2,10 +2,11 @@ import normalizeSizes from './normalizeSizes';
 import { each, mapSeries, reduce } from 'bluebird';
 
 export default class Suite {
-
   constructor(title, sizes = []) {
     if (typeof title !== 'string') {
-      throw new Error(`\`title\` should be a "string", but "${typeof title}" was given`);
+      throw new Error(
+        `\`title\` should be a "string", but "${typeof title}" was given`
+      );
     }
 
     this.title = title;
@@ -39,9 +40,13 @@ export default class Suite {
   addSuite(suite) {
     if (this.suites[suite.title]) {
       if (!this.parent) {
-        throw new Error(`A test suite with name ${suite.title} has already been added`);
+        throw new Error(
+          `A test suite with name ${suite.title} has already been added`
+        );
       } else {
-        throw new Error(`A test suite with title ${suite.title} has already been added to suite ${this.fullTitle()}`);
+        throw new Error(
+          `A test suite with title ${suite.title} has already been added to suite ${this.fullTitle()}`
+        );
       }
     }
     suite.parent = this;
@@ -50,7 +55,9 @@ export default class Suite {
 
   addTest(test) {
     if (this.tests[test.title]) {
-      throw new Error(`A test with name ${test.title} has already been added to suite ${this.fullTitle()}`);
+      throw new Error(
+        `A test with name ${test.title} has already been added to suite ${this.fullTitle()}`
+      );
     }
     test.parent = this;
     this.tests[test.title] = test;
@@ -78,12 +85,12 @@ export default class Suite {
     await each(this.beforeAll, fn => fn());
 
     const nestedTestCases = await reduce(
-            mapSeries(Object.values(this.suites), suite => suite.getTestCases()),
-            (accumulated, testCases) => [...accumulated, ...testCases],
-            []
-        );
+      mapSeries(Object.values(this.suites), suite => suite.getTestCases()),
+      (accumulated, testCases) => [...accumulated, ...testCases],
+      []
+    );
 
-    const testCases = await mapSeries(Object.values(this.tests), async (test) => {
+    const testCases = await mapSeries(Object.values(this.tests), async test => {
       await this.runBeforeEach();
       const testCase = await test.getTestCase();
       await this.runAfterEach();
@@ -110,5 +117,4 @@ export default class Suite {
       await this.parent.runAfterEach();
     }
   }
-
 }

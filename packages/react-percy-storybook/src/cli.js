@@ -21,14 +21,13 @@ const VERSION = require('../package.json').version;
 // eslint-disable-next-line import/prefer-default-export
 export async function run(argv) {
   argv = yargs(argv)
-        .usage(args.usage)
-        .help()
-        .alias('help', 'h')
-        .options(args.options)
-        .epilogue(args.docs)
-        .default('build_dir', 'storybook-static')
-        .default('minimum_height', '800')
-        .argv;
+    .usage(args.usage)
+    .help()
+    .alias('help', 'h')
+    .options(args.options)
+    .epilogue(args.docs)
+    .default('build_dir', 'storybook-static')
+    .default('minimum_height', '800').argv;
 
   if (argv.help) {
     yargs.showHelp();
@@ -50,7 +49,7 @@ export async function run(argv) {
   };
 
   if (process.env.PERCY_ENABLE === '0') {
-        // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console
     console.log('The PERCY_ENABLE environment variable is set to 0. Exiting.');
     return;
   }
@@ -63,8 +62,10 @@ export async function run(argv) {
     throw new Error('The PERCY_PROJECT environment variable is missing.');
   }
 
-  const { storyHtml, assets, storybookJavascriptPath } = getStaticAssets(options);
-    // debug('assets %o', assets);
+  const { storyHtml, assets, storybookJavascriptPath } = getStaticAssets(
+    options
+  );
+  // debug('assets %o', assets);
 
   const stories = await getStories(assets[storybookJavascriptPath], options);
   debug('stories %o', stories);
@@ -78,11 +79,18 @@ export async function run(argv) {
   }
 
   const client = new ApiClient(
-      process.env.PERCY_TOKEN,
-      process.env.PERCY_API,
-      `react-percy-storybook/${VERSION}`,
-      `storybook/${storybookVersion()} react/${reactVersion()}`,
-    );
+    process.env.PERCY_TOKEN,
+    process.env.PERCY_API,
+    `react-percy-storybook/${VERSION}`,
+    `storybook/${storybookVersion()} react/${reactVersion()}`
+  );
 
-  return uploadStorybook(client, selectedStories, widths, minimumHeight, storyHtml, assets);
+  return uploadStorybook(
+    client,
+    selectedStories,
+    widths,
+    minimumHeight,
+    storyHtml,
+    assets
+  );
 }

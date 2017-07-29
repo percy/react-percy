@@ -29,7 +29,9 @@ it('registers the necessary compilers before loading the config', () => {
 
   requireWebpackConfig(configPath);
 
-  expect(registerCompiler).toHaveBeenCalledWith(interpret.extensions['.foo.js']);
+  expect(registerCompiler).toHaveBeenCalledWith(
+    interpret.extensions['.foo.js']
+  );
 });
 
 it('returns webpack config', () => {

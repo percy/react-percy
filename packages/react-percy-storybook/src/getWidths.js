@@ -3,9 +3,9 @@ export default function getWidths(optionalWidthString) {
     return [];
   }
 
-  if (!(/^[0-9,]*$/.test(optionalWidthString))) {
+  if (!/^[0-9,]*$/.test(optionalWidthString)) {
     throw new Error(
-      `Widths must be comma seperated integers. Received: ${optionalWidthString}`,
+      `Widths must be comma seperated integers. Received: ${optionalWidthString}`
     );
   }
 

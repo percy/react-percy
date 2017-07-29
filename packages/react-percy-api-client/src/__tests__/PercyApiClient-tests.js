@@ -1,5 +1,9 @@
 import { createBuild, finalizeBuild } from '../build';
-import { getMissingResources, makeResources, uploadResources } from '../resources';
+import {
+  getMissingResources,
+  makeResources,
+  uploadResources
+} from '../resources';
 import PercyApiClient from '../';
 import PercyClient from 'percy-client';
 import { runSnapshots } from '../snapshot';
@@ -66,7 +70,13 @@ it('runSnapshots injects percy client arg', () => {
 
   apiClient.runSnapshots(build, testCases, assets, renderer);
 
-  expect(runSnapshots).toHaveBeenCalledWith(expect.any(PercyClient), build, testCases, assets, renderer);
+  expect(runSnapshots).toHaveBeenCalledWith(
+    expect.any(PercyClient),
+    build,
+    testCases,
+    assets,
+    renderer
+  );
 });
 
 it('uploadResources injects percy client arg', () => {
@@ -75,5 +85,9 @@ it('uploadResources injects percy client arg', () => {
 
   apiClient.uploadResources(build, resources);
 
-  expect(uploadResources).toHaveBeenCalledWith(expect.any(PercyClient), build, resources);
+  expect(uploadResources).toHaveBeenCalledWith(
+    expect.any(PercyClient),
+    build,
+    resources
+  );
 });

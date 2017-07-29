@@ -1,14 +1,17 @@
 import normalizeSizes from './normalizeSizes';
 
 export default class Test {
-
   constructor(title, fn, sizes = []) {
     if (typeof title !== 'string') {
-      throw new Error(`\`title\` should be a "string", but "${typeof title}" was given`);
+      throw new Error(
+        `\`title\` should be a "string", but "${typeof title}" was given`
+      );
     }
 
     if (typeof fn !== 'function') {
-      throw new Error(`\`fn\` should be a "function", but "${typeof fn}" was given`);
+      throw new Error(
+        `\`fn\` should be a "function", but "${typeof fn}" was given`
+      );
     }
 
     this.title = title;
@@ -42,5 +45,4 @@ export default class Test {
       sizes: this.getSizes()
     };
   }
-
 }

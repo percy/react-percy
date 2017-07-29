@@ -1,8 +1,18 @@
-import { getMissingResourceShas, makeRootResource, uploadResources } from '../resources';
+import {
+  getMissingResourceShas,
+  makeRootResource,
+  uploadResources
+} from '../resources';
 import createSnapshot from './createSnapshot';
 import finalizeSnapshot from './finalizeSnapshot';
 
-export default async function runSnapshot(percyClient, build, testCase, assets, renderer) {
+export default async function runSnapshot(
+  percyClient,
+  build,
+  testCase,
+  assets,
+  renderer
+) {
   try {
     const html = renderer(testCase.markup, assets);
     const resource = makeRootResource(percyClient, testCase.name, html);
@@ -17,7 +27,12 @@ export default async function runSnapshot(percyClient, build, testCase, assets, 
       widths
     };
 
-    const snapshot = await createSnapshot(percyClient, build, [resource], snapshotOptions);
+    const snapshot = await createSnapshot(
+      percyClient,
+      build,
+      [resource],
+      snapshotOptions
+    );
 
     const missingResources = getMissingResourceShas(snapshot);
     if (missingResources.length > 0) {
@@ -31,5 +46,4 @@ export default async function runSnapshot(percyClient, build, testCase, assets, 
     };
     throw e;
   }
-
 }

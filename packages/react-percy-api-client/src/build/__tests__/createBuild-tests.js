@@ -9,16 +9,18 @@ beforeEach(() => {
 });
 
 it('returns data when creating the build succeeds', async () => {
-  percyClient.createBuild.mockImplementation(() => Promise.resolve({
-    body: {
-      data: {
-        attributes: {
-          'web-url': 'http://foo.bar'
-        },
-        foo: 'bar'
+  percyClient.createBuild.mockImplementation(() =>
+    Promise.resolve({
+      body: {
+        data: {
+          attributes: {
+            'web-url': 'http://foo.bar'
+          },
+          foo: 'bar'
+        }
       }
-    }
-  }));
+    })
+  );
 
   const build = await createBuild(percyClient, [{}, {}]);
 
@@ -31,11 +33,13 @@ it('returns data when creating the build succeeds', async () => {
 });
 
 it('rejects the error response on failure', async () => {
-  percyClient.createBuild.mockImplementation(() => Promise.reject({
-    response: {
-      body: '501 Error'
-    }
-  }));
+  percyClient.createBuild.mockImplementation(() =>
+    Promise.reject({
+      response: {
+        body: '501 Error'
+      }
+    })
+  );
 
   try {
     await createBuild(percyClient, [{}, {}]);

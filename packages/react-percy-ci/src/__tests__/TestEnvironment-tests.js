@@ -1,8 +1,8 @@
 import TestEnvironment from '../TestEnvironment';
 
 let mockTestFramework;
-jest.mock('@percy-io/react-percy-test-framework', () => (context) => {
-  Object.keys(mockTestFramework).forEach((key) => {
+jest.mock('@percy-io/react-percy-test-framework', () => context => {
+  Object.keys(mockTestFramework).forEach(key => {
     context[key] = mockTestFramework[key];
   });
 });
@@ -18,55 +18,65 @@ beforeEach(() => {
 });
 
 it('can parse basic files', () => {
-  expect(() => environment.runScript({
-    path: '/foo/bar.js',
-    src: `
+  expect(() =>
+    environment.runScript({
+      path: '/foo/bar.js',
+      src: `
             const a = 1;
         `
-  })).not.toThrow();
+    })
+  ).not.toThrow();
 });
 
 it('references to global work', () => {
-  expect(() => environment.runScript({
-    path: '/foo/bar.js',
-    src: `
+  expect(() =>
+    environment.runScript({
+      path: '/foo/bar.js',
+      src: `
             global.foo = 'bar';
         `
-  })).not.toThrow();
+    })
+  ).not.toThrow();
 });
 
 it('immediate works', () => {
-  expect(() => environment.runScript({
-    path: '/foo/bar.js',
-    src: `
+  expect(() =>
+    environment.runScript({
+      path: '/foo/bar.js',
+      src: `
             const x = setImmediate(() => {});
             clearImmediate(x);
         `
-  })).not.toThrow();
+    })
+  ).not.toThrow();
 });
 
 it('intervals work', () => {
-  expect(() => environment.runScript({
-    path: '/foo/bar.js',
-    src: `
+  expect(() =>
+    environment.runScript({
+      path: '/foo/bar.js',
+      src: `
             const x = setInterval(() => {}, 10);
             clearInterval(x);
         `
-  })).not.toThrow();
+    })
+  ).not.toThrow();
 });
 
 it('timeouts work', () => {
-  expect(() => environment.runScript({
-    path: '/foo/bar.js',
-    src: `
+  expect(() =>
+    environment.runScript({
+      path: '/foo/bar.js',
+      src: `
             const x = setTimeout(() => {}, 10);
             clearTimeout(x);
         `
-  })).not.toThrow();
+    })
+  ).not.toThrow();
 });
 
 it('console works', () => {
-    // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
   console.log = jest.fn();
 
   environment.runScript({
@@ -76,7 +86,7 @@ it('console works', () => {
         `
   });
 
-    // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console
   expect(console.log).toHaveBeenCalledWith('foo');
 });
 
@@ -89,5 +99,8 @@ it('test framework globals work', () => {
         `
   });
 
-  expect(mockTestFramework.describe).toHaveBeenCalledWith('suite', expect.any(Function));
+  expect(mockTestFramework.describe).toHaveBeenCalledWith(
+    'suite',
+    expect.any(Function)
+  );
 });

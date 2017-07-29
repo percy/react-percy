@@ -9,7 +9,9 @@ const extensions = [
 export default function getExtension(configPath) {
   for (let i = 0; i < extensions.length; i++) {
     const extension = extensions[i];
-    if (configPath.indexOf(extension, configPath.length - extension.length) > -1) {
+    if (
+      configPath.indexOf(extension, configPath.length - extension.length) > -1
+    ) {
       return extension;
     }
   }
