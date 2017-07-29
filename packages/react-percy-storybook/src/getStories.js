@@ -57,12 +57,7 @@ function getStoriesFromDom(previewJavascriptCode, options) {
     const jsDomConfig = {
       html: '',
       url: 'https://example.com/iframe.js?selectedKind=none&selectedStory=none',
-      src: [
-        workerMock,
-        localStorageMock,
-        matchMediaMock,
-        previewJavascriptCode
-      ],
+      src: [workerMock, localStorageMock, matchMediaMock, previewJavascriptCode],
       done: (err, window) => {
         if (err) return reject(err.response.body);
         if (!window || !window.__storybook_stories__) {
@@ -72,7 +67,7 @@ function getStoriesFromDom(previewJavascriptCode, options) {
           reject(new Error(message));
         }
         resolve(window.__storybook_stories__);
-      }
+      },
     };
     if (options.debug) {
       jsDomConfig.virtualConsole = jsdom.createVirtualConsole().sendTo(console);
@@ -82,8 +77,7 @@ function getStoriesFromDom(previewJavascriptCode, options) {
 }
 
 export default async function getStories(storybookCode, options = {}) {
-  if (!storybookCode || storybookCode === '')
-    throw new Error('Storybook code was not received.');
+  if (!storybookCode || storybookCode === '') throw new Error('Storybook code was not received.');
   const stories = await getStoriesFromDom(storybookCode, options);
   return stories;
 }

@@ -4,7 +4,7 @@ const escapePathForWindows = path => path.replace(/\\/g, '\\\\');
 
 const getEntry = percyConfig => `
     const context = require.context('${escapePathForWindows(
-      percyConfig.rootDir
+      percyConfig.rootDir,
     )}', true, ${percyConfig.testRegex});
     context.keys().forEach(function loadFile(key) {
         context(key);

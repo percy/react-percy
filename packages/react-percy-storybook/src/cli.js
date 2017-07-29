@@ -45,7 +45,7 @@ export async function run(argv) {
 
   const options = {
     debug: argv.debug,
-    buildDir: argv.build_dir
+    buildDir: argv.build_dir,
   };
 
   if (process.env.PERCY_ENABLE === '0') {
@@ -62,9 +62,7 @@ export async function run(argv) {
     throw new Error('The PERCY_PROJECT environment variable is missing.');
   }
 
-  const { storyHtml, assets, storybookJavascriptPath } = getStaticAssets(
-    options
-  );
+  const { storyHtml, assets, storybookJavascriptPath } = getStaticAssets(options);
   // debug('assets %o', assets);
 
   const stories = await getStories(assets[storybookJavascriptPath], options);
@@ -82,15 +80,8 @@ export async function run(argv) {
     process.env.PERCY_TOKEN,
     process.env.PERCY_API,
     `react-percy-storybook/${VERSION}`,
-    `storybook/${storybookVersion()} react/${reactVersion()}`
+    `storybook/${storybookVersion()} react/${reactVersion()}`,
   );
 
-  return uploadStorybook(
-    client,
-    selectedStories,
-    widths,
-    minimumHeight,
-    storyHtml,
-    assets
-  );
+  return uploadStorybook(client, selectedStories, widths, minimumHeight, storyHtml, assets);
 }

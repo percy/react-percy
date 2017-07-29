@@ -9,7 +9,7 @@ export default function selectStories(stories, rtlRegex) {
 
       selectedStories.push({
         name,
-        encodedParams
+        encodedParams,
       });
     }
   }
@@ -20,7 +20,7 @@ export default function selectStories(stories, rtlRegex) {
       if (story.name.match(rtlRegex)) {
         rtlStories.push({
           name: `${story.name} [RTL]`,
-          encodedParams: `${story.encodedParams}&direction=rtl`
+          encodedParams: `${story.encodedParams}&direction=rtl`,
         });
       }
     }

@@ -8,7 +8,7 @@ const GLOBALS = [
   'console',
   'setImmediate',
   'setInterval',
-  'setTimeout'
+  'setTimeout',
 ];
 
 export default class TestEnvironment {
@@ -29,10 +29,10 @@ export default class TestEnvironment {
   runScript(file) {
     const script = new vm.Script(file.src, {
       filename: file.path,
-      displayErrors: true
+      displayErrors: true,
     });
     return script.runInContext(this.context, {
-      displayErrors: true
+      displayErrors: true,
     });
   }
 }

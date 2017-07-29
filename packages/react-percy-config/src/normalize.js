@@ -17,9 +17,7 @@ export default function normalize(config, packageRoot) {
 
   normalizedConfig.includeFiles = config.includeFiles || [];
 
-  normalizedConfig.rootDir = config.rootDir
-    ? path.normalize(config.rootDir)
-    : packageRoot;
+  normalizedConfig.rootDir = config.rootDir ? path.normalize(config.rootDir) : packageRoot;
 
   normalizedConfig.testRegex = config.testRegex
     ? convertToRegex(config.testRegex)

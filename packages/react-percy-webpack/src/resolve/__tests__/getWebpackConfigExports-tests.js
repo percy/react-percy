@@ -8,33 +8,33 @@ it('throws given array', () => {
   expect(() =>
     getWebpackConfigExports([
       {
-        config1: true
+        config1: true,
       },
       {
-        config2: true
-      }
-    ])
+        config2: true,
+      },
+    ]),
   ).toThrow();
 });
 
 it('returns ES5 config object', () => {
   const config = getWebpackConfigExports({
-    config: true
+    config: true,
   });
 
   expect(config).toEqual({
-    config: true
+    config: true,
   });
 });
 
 it('returns ES6 config object', () => {
   const config = getWebpackConfigExports({
     default: {
-      config: true
-    }
+      config: true,
+    },
   });
 
   expect(config).toEqual({
-    config: true
+    config: true,
   });
 });

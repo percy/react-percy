@@ -11,7 +11,7 @@ const SKIPPED_ASSETS = [
   'static/',
   /\.map$/,
   /\.log$/,
-  /\.DS_Store$/
+  /\.DS_Store$/,
 ];
 const MAX_FILE_SIZE_BYTES = 15728640; // 15MB.
 
@@ -57,8 +57,8 @@ function gatherBuildResources(buildDir) {
 
         hashToResource[encodeURI(resourceUrl)] = content;
         next();
-      }
-    }
+      },
+    },
   };
   walk.walkSync(buildDir, walkOptions);
 
@@ -68,18 +68,15 @@ function gatherBuildResources(buildDir) {
 export default function getStaticAssets(options = {}) {
   // Load iframe.html that is used for every snapshot asset
   const storybookStaticPath = path.resolve(options.buildDir);
-  const storyHtml = fs.readFileSync(
-    path.join(storybookStaticPath, 'iframe.html'),
-    'utf8'
-  );
+  const storyHtml = fs.readFileSync(path.join(storybookStaticPath, 'iframe.html'), 'utf8');
 
   // Load the special static/preview.js that contains all stories
   const storybookJavascriptPath = storyHtml.match(
-    /<script src="(.*?static\/preview.*?)"><\/script>/
+    /<script src="(.*?static\/preview.*?)"><\/script>/,
   )[1];
   const storyJavascript = fs.readFileSync(
     path.join(storybookStaticPath, storybookJavascriptPath),
-    'utf8'
+    'utf8',
   );
 
   // Load other build assets

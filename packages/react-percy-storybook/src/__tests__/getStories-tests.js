@@ -26,8 +26,7 @@ it('returns an empty array when no stories loaded', async () => {
 });
 
 it('returns the value __storybook_stories__ is set to', async () => {
-  const code =
-    "if (typeof window === 'object') window.__storybook_stories__ = 'hi';";
+  const code = "if (typeof window === 'object') window.__storybook_stories__ = 'hi';";
 
   const stories = await getStories(code);
   expect(stories).toEqual('hi');

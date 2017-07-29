@@ -16,23 +16,19 @@ const executeAsync = (name, delay) =>
     }, delay);
   });
 
-const givenSyncBeforeAll = (targetSuite, name) =>
-  targetSuite.addBeforeAll(() => execute(name));
+const givenSyncBeforeAll = (targetSuite, name) => targetSuite.addBeforeAll(() => execute(name));
 const givenAsyncBeforeAll = (targetSuite, name, delay = 1) =>
   targetSuite.addBeforeAll(() => executeAsync(name, delay));
 
-const givenSyncBeforeEach = (targetSuite, name) =>
-  targetSuite.addBeforeEach(() => execute(name));
+const givenSyncBeforeEach = (targetSuite, name) => targetSuite.addBeforeEach(() => execute(name));
 const givenAsyncBeforeEach = (targetSuite, name, delay = 1) =>
   targetSuite.addBeforeEach(() => executeAsync(name, delay));
 
-const givenSyncAfterEach = (targetSuite, name) =>
-  targetSuite.addAfterEach(() => execute(name));
+const givenSyncAfterEach = (targetSuite, name) => targetSuite.addAfterEach(() => execute(name));
 const givenAsyncAfterEach = (targetSuite, name, delay = 1) =>
   targetSuite.addAfterEach(() => executeAsync(name, delay));
 
-const givenSyncAfterAll = (targetSuite, name) =>
-  targetSuite.addAfterAll(() => execute(name));
+const givenSyncAfterAll = (targetSuite, name) => targetSuite.addAfterAll(() => execute(name));
 const givenAsyncAfterAll = (targetSuite, name, delay = 1) =>
   targetSuite.addAfterAll(() => executeAsync(name, delay));
 
@@ -42,7 +38,7 @@ const givenSyncTest = (targetSuite, name) =>
     getTestCase: () => {
       execute(name);
       return {};
-    }
+    },
   });
 const givenAsyncTest = (targetSuite, name, delay = 1) =>
   targetSuite.addTest({
@@ -50,7 +46,7 @@ const givenAsyncTest = (targetSuite, name, delay = 1) =>
     getTestCase: async () => {
       await executeAsync(name, delay);
       return {};
-    }
+    },
   });
 
 beforeEach(() => {
@@ -89,13 +85,7 @@ describe('beforeAll hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes asynchronous beforeAll hook before other hooks in suite', async () => {
@@ -107,13 +97,7 @@ describe('beforeAll hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes synchronous beforeAll hook before nested test suites', async () => {
@@ -223,13 +207,7 @@ describe('beforeEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes asynchronous beforeEach hook before test and after hooks', async () => {
@@ -241,13 +219,7 @@ describe('beforeEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes synchronous beforeEach hook before each test', async () => {
@@ -277,12 +249,7 @@ describe('beforeEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'parent beforeEach',
-      'test 1',
-      'parent beforeEach',
-      'test 2'
-    ]);
+    expect(executed).toEqual(['parent beforeEach', 'test 1', 'parent beforeEach', 'test 2']);
   });
 
   it('executes asynchronous parent beforeEach hook before each test', async () => {
@@ -292,12 +259,7 @@ describe('beforeEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'parent beforeEach',
-      'test 1',
-      'parent beforeEach',
-      'test 2'
-    ]);
+    expect(executed).toEqual(['parent beforeEach', 'test 1', 'parent beforeEach', 'test 2']);
   });
 
   it('executes synchronous parent beforeEach hook before suite beforeEach hook', async () => {
@@ -351,13 +313,7 @@ describe('afterEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes asynchronous afterEach hook after test and before afterAll hooks', async () => {
@@ -369,13 +325,7 @@ describe('afterEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes synchronous afterEach hook after each test', async () => {
@@ -405,12 +355,7 @@ describe('afterEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'test 1',
-      'parent afterEach',
-      'test 2',
-      'parent afterEach'
-    ]);
+    expect(executed).toEqual(['test 1', 'parent afterEach', 'test 2', 'parent afterEach']);
   });
 
   it('executes asynchronous parent afterEach hook after each test', async () => {
@@ -420,12 +365,7 @@ describe('afterEach hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'test 1',
-      'parent afterEach',
-      'test 2',
-      'parent afterEach'
-    ]);
+    expect(executed).toEqual(['test 1', 'parent afterEach', 'test 2', 'parent afterEach']);
   });
 
   it('executes synchronous parent afterEach hook after suite afterEach hook', async () => {
@@ -479,13 +419,7 @@ describe('afterAll hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes asynchronous afterAll hook after other hooks in suite', async () => {
@@ -497,13 +431,7 @@ describe('afterAll hooks', () => {
 
     await suite.getTestCases();
 
-    expect(executed).toEqual([
-      'beforeAll',
-      'beforeEach',
-      'test',
-      'afterEach',
-      'afterAll'
-    ]);
+    expect(executed).toEqual(['beforeAll', 'beforeEach', 'test', 'afterEach', 'afterAll']);
   });
 
   it('executes synchronous afterAll hook after nested test suites', async () => {
@@ -625,19 +553,19 @@ describe('tests', () => {
   it('returns test cases', async () => {
     const testCase1 = {
       title: 'test 1',
-      markup: <div>Test 1</div>
+      markup: <div>Test 1</div>,
     };
     suite.addTest({
       title: 'test 1',
-      getTestCase: () => testCase1
+      getTestCase: () => testCase1,
     });
     const testCase2 = {
       title: 'test 2',
-      markup: <div>Test 2</div>
+      markup: <div>Test 2</div>,
     };
     suite.addTest({
       title: 'test 2',
-      getTestCase: () => testCase2
+      getTestCase: () => testCase2,
     });
 
     const testCases = await suite.getTestCases();
@@ -650,29 +578,29 @@ it('nested suites', () => {
   it('returns test cases from nested suites', async () => {
     const testCase = {
       title: 'test',
-      markup: <div>Test</div>
+      markup: <div>Test</div>,
     };
     suite.addTest({
       title: 'test 1',
-      getTestCase: () => testCase
+      getTestCase: () => testCase,
     });
     const nestedSuite = new Suite('nested');
     suite.addSuite(nestedSuite);
     const nestedTestCase1 = {
       title: 'nested test 1',
-      markup: <div>Nested Test 1</div>
+      markup: <div>Nested Test 1</div>,
     };
     nestedSuite.addTest({
       title: 'nested test 1',
-      getTestCase: () => nestedTestCase1
+      getTestCase: () => nestedTestCase1,
     });
     const nestedTestCase2 = {
       title: 'nested test 2',
-      markup: <div>Nested Test 2</div>
+      markup: <div>Nested Test 2</div>,
     };
     nestedSuite.addTest({
       title: 'nested test 2',
-      getTestCase: () => nestedTestCase2
+      getTestCase: () => nestedTestCase2,
     });
 
     const testCases = await suite.getTestCases();

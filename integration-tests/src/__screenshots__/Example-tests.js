@@ -11,6 +11,6 @@ describe('Example', () => {
     () => {
       return <Example>This is some text</Example>;
     },
-    [320, 768]
+    [320, 768],
   );
 });

@@ -7,7 +7,7 @@ const Example = ({ children }) =>
   </div>;
 
 Example.propTypes = {
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
 };
 
 export default Example;

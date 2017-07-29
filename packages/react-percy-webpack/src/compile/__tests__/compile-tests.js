@@ -18,9 +18,9 @@ beforeEach(() => {
       fn(webpackError, {
         compilation: {
           assets,
-          errors
-        }
-      })
+          errors,
+        },
+      }),
   };
 });
 
@@ -65,6 +65,6 @@ it('resolves with compiled files when webpack succeeds', async () => {
 
   expect(files).toEqual({
     '/file1.js': 'const x = 1;',
-    '/file2.css': '.foo { background: red; }'
+    '/file2.css': '.foo { background: red; }',
   });
 });

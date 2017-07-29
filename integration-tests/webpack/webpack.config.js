@@ -7,15 +7,15 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader'
-        })
+          use: 'css-loader',
+        }),
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
+        loader: 'babel-loader',
+      },
+    ],
   },
-  plugins: [new ExtractTextPlugin('styles.css')]
+  plugins: [new ExtractTextPlugin('styles.css')],
 };

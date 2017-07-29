@@ -12,8 +12,8 @@ const mockCompiler = (mockModule, options = {}) => {
     wasRequired: false,
     shouldThrow: options.shouldThrow,
     exports: {
-      [mockModule]: 'mock'
-    }
+      [mockModule]: 'mock',
+    },
   };
   jest.mock(
     mockModule,
@@ -24,7 +24,7 @@ const mockCompiler = (mockModule, options = {}) => {
       }
       return mockCompilers[mockModule].exports;
     },
-    { virtual: true }
+    { virtual: true },
   );
 };
 
@@ -58,7 +58,7 @@ it('requires compiler module and registers it given object', () => {
 
   registerCompiler({
     module: 'foo-register',
-    register
+    register,
   });
 
   expectCompilerToHaveBeenRegistered('foo-register', register);
@@ -93,12 +93,12 @@ it('only requires first compiler module and registers it given array of objects 
   registerCompiler([
     {
       module: 'foo-1-register',
-      register: registerFoo1
+      register: registerFoo1,
     },
     {
       module: 'foo-2-register',
-      register: registerFoo2
-    }
+      register: registerFoo2,
+    },
   ]);
 
   expectCompilerToHaveBeenRegistered('foo-1-register', registerFoo1);
@@ -116,12 +116,12 @@ it('requires multiple compiler modules and registers them given array of objects
   registerCompiler([
     {
       module: 'foo-1-register',
-      register: registerFoo1
+      register: registerFoo1,
     },
     {
       module: 'foo-2-register',
-      register: registerFoo2
-    }
+      register: registerFoo2,
+    },
   ]);
 
   expectCompilerToHaveBeenRegistered('foo-1-register', registerFoo1);

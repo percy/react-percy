@@ -1,26 +1,22 @@
 import { createBuild, finalizeBuild } from '../build';
-import {
-  getMissingResources,
-  makeResources,
-  uploadResources
-} from '../resources';
+import { getMissingResources, makeResources, uploadResources } from '../resources';
 import PercyApiClient from '../';
 import PercyClient from 'percy-client';
 import { runSnapshots } from '../snapshot';
 
 jest.mock('../build', () => ({
   createBuild: jest.fn(),
-  finalizeBuild: jest.fn()
+  finalizeBuild: jest.fn(),
 }));
 
 jest.mock('../resources', () => ({
   getMissingResources: jest.fn(),
   makeResources: jest.fn(),
-  uploadResources: jest.fn()
+  uploadResources: jest.fn(),
 }));
 
 jest.mock('../snapshot', () => ({
-  runSnapshots: jest.fn()
+  runSnapshots: jest.fn(),
 }));
 
 let apiClient;
@@ -75,7 +71,7 @@ it('runSnapshots injects percy client arg', () => {
     build,
     testCases,
     assets,
-    renderer
+    renderer,
   );
 });
 
@@ -85,9 +81,5 @@ it('uploadResources injects percy client arg', () => {
 
   apiClient.uploadResources(build, resources);
 
-  expect(uploadResources).toHaveBeenCalledWith(
-    expect.any(PercyClient),
-    build,
-    resources
-  );
+  expect(uploadResources).toHaveBeenCalledWith(expect.any(PercyClient), build, resources);
 });

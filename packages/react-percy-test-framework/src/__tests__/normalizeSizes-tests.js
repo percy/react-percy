@@ -24,7 +24,7 @@ it('returns array of specified heights and widths given array of `width x height
   expect(sizes).toEqual([
     { width: 320, height: 480 },
     { width: 480, height: 640 },
-    { width: 1024, height: 768 }
+    { width: 1024, height: 768 },
   ]);
 });
 
@@ -32,12 +32,12 @@ it('returns array of specified height and widths given array of objects', () => 
   const sizes = normalizeSizes([
     { width: 320, height: 480 },
     { width: 480, height: 640 },
-    { width: 1024, height: 768 }
+    { width: 1024, height: 768 },
   ]);
 
   expect(sizes).toEqual([
     { width: 320, height: 480 },
     { width: 480, height: 640 },
-    { width: 1024, height: 768 }
+    { width: 1024, height: 768 },
   ]);
 });

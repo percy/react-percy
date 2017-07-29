@@ -1,5 +1,4 @@
-const splitDimensions = size =>
-  size.toLowerCase().split('x').map(n => n.trim()).splice(0, 2);
+const splitDimensions = size => size.toLowerCase().split('x').map(n => n.trim()).splice(0, 2);
 
 const toNumber = num => {
   if (typeof num === 'undefined') {
@@ -31,7 +30,7 @@ export default function normalizeSizes(sizes = []) {
       } else {
         return {
           width: toNumber(width),
-          height: toNumber(height)
+          height: toNumber(height),
         };
       }
     })

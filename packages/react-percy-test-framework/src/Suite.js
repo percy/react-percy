@@ -4,9 +4,7 @@ import { each, mapSeries, reduce } from 'bluebird';
 export default class Suite {
   constructor(title, sizes = []) {
     if (typeof title !== 'string') {
-      throw new Error(
-        `\`title\` should be a "string", but "${typeof title}" was given`
-      );
+      throw new Error(`\`title\` should be a "string", but "${typeof title}" was given`);
     }
 
     this.title = title;
@@ -40,12 +38,10 @@ export default class Suite {
   addSuite(suite) {
     if (this.suites[suite.title]) {
       if (!this.parent) {
-        throw new Error(
-          `A test suite with name ${suite.title} has already been added`
-        );
+        throw new Error(`A test suite with name ${suite.title} has already been added`);
       } else {
         throw new Error(
-          `A test suite with title ${suite.title} has already been added to suite ${this.fullTitle()}`
+          `A test suite with title ${suite.title} has already been added to suite ${this.fullTitle()}`,
         );
       }
     }
@@ -56,7 +52,7 @@ export default class Suite {
   addTest(test) {
     if (this.tests[test.title]) {
       throw new Error(
-        `A test with name ${test.title} has already been added to suite ${this.fullTitle()}`
+        `A test with name ${test.title} has already been added to suite ${this.fullTitle()}`,
       );
     }
     test.parent = this;
@@ -87,7 +83,7 @@ export default class Suite {
     const nestedTestCases = await reduce(
       mapSeries(Object.values(this.suites), suite => suite.getTestCases()),
       (accumulated, testCases) => [...accumulated, ...testCases],
-      []
+      [],
     );
 
     const testCases = await mapSeries(Object.values(this.tests), async test => {

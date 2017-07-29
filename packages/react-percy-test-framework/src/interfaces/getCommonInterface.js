@@ -22,9 +22,7 @@ export default function getCommonInterface(suites) {
       if (typeof fn === 'function') {
         await fn.call(suite);
       } else {
-        throw new Error(
-          `Suite "${suite.fullTitle()}" was defined but no callback was supplied.`
-        );
+        throw new Error(`Suite "${suite.fullTitle()}" was defined but no callback was supplied.`);
       }
       suites.shift();
       return suite;
@@ -33,6 +31,6 @@ export default function getCommonInterface(suites) {
       const test = new Test(title, fn, sizes);
       suites[0].addTest(test);
       return test;
-    }
+    },
   };
 }

@@ -11,7 +11,7 @@ let environment;
 
 beforeEach(() => {
   mockTestFramework = {
-    describe: jest.fn()
+    describe: jest.fn(),
   };
 
   environment = new TestEnvironment();
@@ -23,8 +23,8 @@ it('can parse basic files', () => {
       path: '/foo/bar.js',
       src: `
             const a = 1;
-        `
-    })
+        `,
+    }),
   ).not.toThrow();
 });
 
@@ -34,8 +34,8 @@ it('references to global work', () => {
       path: '/foo/bar.js',
       src: `
             global.foo = 'bar';
-        `
-    })
+        `,
+    }),
   ).not.toThrow();
 });
 
@@ -46,8 +46,8 @@ it('immediate works', () => {
       src: `
             const x = setImmediate(() => {});
             clearImmediate(x);
-        `
-    })
+        `,
+    }),
   ).not.toThrow();
 });
 
@@ -58,8 +58,8 @@ it('intervals work', () => {
       src: `
             const x = setInterval(() => {}, 10);
             clearInterval(x);
-        `
-    })
+        `,
+    }),
   ).not.toThrow();
 });
 
@@ -70,8 +70,8 @@ it('timeouts work', () => {
       src: `
             const x = setTimeout(() => {}, 10);
             clearTimeout(x);
-        `
-    })
+        `,
+    }),
   ).not.toThrow();
 });
 
@@ -83,7 +83,7 @@ it('console works', () => {
     path: '/foo/bar.js',
     src: `
             console.log('foo');
-        `
+        `,
   });
 
   // eslint-disable-next-line no-console
@@ -96,11 +96,8 @@ it('test framework globals work', () => {
     src: `
             describe('suite', () => {
             });
-        `
+        `,
   });
 
-  expect(mockTestFramework.describe).toHaveBeenCalledWith(
-    'suite',
-    expect.any(Function)
-  );
+  expect(mockTestFramework.describe).toHaveBeenCalledWith('suite', expect.any(Function));
 });

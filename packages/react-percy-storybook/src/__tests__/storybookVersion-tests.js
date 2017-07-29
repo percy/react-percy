@@ -4,19 +4,13 @@ let existingStorybookVersion;
 let existingKadiraStorybookVersion;
 
 beforeEach(() => {
-  existingStorybookVersion =
-    process.env['npm_package_dependencies_@storybook/react'];
-  existingKadiraStorybookVersion =
-    process.env['npm_package_dependencies_@kadira/storybook'];
+  existingStorybookVersion = process.env['npm_package_dependencies_@storybook/react'];
+  existingKadiraStorybookVersion = process.env['npm_package_dependencies_@kadira/storybook'];
 });
 
 afterEach(() => {
-  process.env[
-    'npm_package_dependencies_@storybook/react'
-  ] = existingStorybookVersion;
-  process.env[
-    'npm_package_dependencies_@kadira/storybook'
-  ] = existingKadiraStorybookVersion;
+  process.env['npm_package_dependencies_@storybook/react'] = existingStorybookVersion;
+  process.env['npm_package_dependencies_@kadira/storybook'] = existingKadiraStorybookVersion;
 });
 
 it('returns unknown when storybook is not found', () => {

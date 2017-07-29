@@ -10,15 +10,7 @@ it('uploads stories for each test case', async () => {
   const stories = [{ name: 'story 1' }, { name: 'story 2' }];
   const storyHtml = '<html></html>';
 
-  await uploadStories(
-    percyClient,
-    build,
-    stories,
-    [328, 768],
-    100,
-    assets,
-    storyHtml
-  );
+  await uploadStories(percyClient, build, stories, [328, 768], 100, assets, storyHtml);
 
   stories.forEach(story =>
     expect(uploadStory).toHaveBeenCalledWith(
@@ -28,7 +20,7 @@ it('uploads stories for each test case', async () => {
       [328, 768],
       100,
       assets,
-      storyHtml
-    )
+      storyHtml,
+    ),
   );
 });

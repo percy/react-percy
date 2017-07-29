@@ -4,7 +4,7 @@ import {
   getMissingResourceShas,
   makeResources,
   makeRootResource,
-  uploadResources
+  uploadResources,
 } from './resources';
 import PercyClient from 'percy-client';
 import { createSnapshot, finalizeSnapshot, runSnapshots } from './snapshot';
@@ -15,7 +15,7 @@ export default class PercyApiClient {
       token,
       apiUrl,
       clientInfo,
-      environmentInfo
+      environmentInfo,
     });
   }
 

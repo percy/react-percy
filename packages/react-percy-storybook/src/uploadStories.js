@@ -10,19 +10,11 @@ export default function uploadStories(
   widths,
   minimumHeight,
   assets,
-  storyHtml
+  storyHtml,
 ) {
   function* generatePromises() {
     for (const story of stories) {
-      yield uploadStory(
-        percyClient,
-        build,
-        story,
-        widths,
-        minimumHeight,
-        assets,
-        storyHtml
-      );
+      yield uploadStory(percyClient, build, story, widths, minimumHeight, assets, storyHtml);
     }
   }
 

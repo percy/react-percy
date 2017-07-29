@@ -1,10 +1,15 @@
 {
-  "extends": "prettier",
+  "extends": [
+    "prettier"
+  ],
+
   "plugins": [
     "import",
     "prettier"
   ],
+
   "parser": "babel-eslint",
+
   "rules": {
     "import/first": "off",
     "import/no-extraneous-dependencies": ["error", {
@@ -14,13 +19,17 @@
     }],
 
     "prettier/prettier": ["error", {
-      "singleQuote": true
+      "printWidth": 100,
+      "singleQuote": true,
+      "trailingComma": "all"
     }]
   },
+
   "overrides": [
     {
       "files": [
-        "**/__tests__/**/*.js"
+        "**/{__mocks__,__tests__}/**/*.js",
+        "integration-tests/jest.setup.js"
       ],
       "plugins": [
         "jest"

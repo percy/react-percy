@@ -20,7 +20,7 @@ export default function makeResources(percyClient, assets) {
     percyClient.makeResource({
       resourceUrl: `/${assetPath}`,
       mimetype: lookup(assetPath),
-      content: assets[assetPath]
-    })
+      content: assets[assetPath],
+    }),
   );
 }

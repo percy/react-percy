@@ -14,21 +14,21 @@ it('uploads the specified resources', async () => {
   const resources = [
     {
       resourceUrl: '/a',
-      content: 'a'
+      content: 'a',
     },
     {
       resourceUrl: '/b',
-      content: 'b'
+      content: 'b',
     },
     {
       resourceUrl: '/c',
-      content: 'c'
-    }
+      content: 'c',
+    },
   ];
 
   await uploadResources(percyClient, build, resources);
 
   resources.forEach(resource =>
-    expect(uploadResource).toHaveBeenCalledWith(percyClient, build, resource)
+    expect(uploadResource).toHaveBeenCalledWith(percyClient, build, resource),
   );
 });

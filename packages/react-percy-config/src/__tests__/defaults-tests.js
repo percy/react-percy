@@ -10,9 +10,7 @@ describe('testRegex', () => {
   });
 
   it('does not match non-JS files in `__screenshots__` directories', () => {
-    expect('/package/src/__screenshots__/foo.json').not.toMatch(
-      defaults.testRegex
-    );
+    expect('/package/src/__screenshots__/foo.json').not.toMatch(defaults.testRegex);
   });
 
   it('matches JS files with `.screenshot` suffix', () => {
@@ -24,9 +22,7 @@ describe('testRegex', () => {
   });
 
   it('does not match non-JS files with `.screenshot` suffix', () => {
-    expect('/package/src/foo/foo.screenshot.json').not.toMatch(
-      defaults.testRegex
-    );
+    expect('/package/src/foo/foo.screenshot.json').not.toMatch(defaults.testRegex);
   });
 
   it('matches JS files with `.screenshots` suffix', () => {
@@ -38,9 +34,7 @@ describe('testRegex', () => {
   });
 
   it('does not match non-JS files with `.screenshots` suffix', () => {
-    expect('/package/src/foo/foo.screenshots.json').not.toMatch(
-      defaults.testRegex
-    );
+    expect('/package/src/foo/foo.screenshots.json').not.toMatch(defaults.testRegex);
   });
 
   it('does not match other JS files', () => {

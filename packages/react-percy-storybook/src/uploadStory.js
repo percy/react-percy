@@ -5,27 +5,19 @@ export default async function uploadStory(
   widths,
   minimumHeight,
   assets,
-  storyHtml
+  storyHtml,
 ) {
   try {
-    const resource = percyClient.makeRootResource(
-      story.name,
-      storyHtml,
-      story.encodedParams
-    );
+    const resource = percyClient.makeRootResource(story.name, storyHtml, story.encodedParams);
 
     const snapshotOptions = {
       name: story.name,
       widths,
       minimumHeight,
-      enableJavaScript: true
+      enableJavaScript: true,
     };
 
-    const snapshot = await percyClient.createSnapshot(
-      build,
-      [resource],
-      snapshotOptions
-    );
+    const snapshot = await percyClient.createSnapshot(build, [resource], snapshotOptions);
 
     const missingResources = percyClient.getMissingResourceShas(snapshot);
     if (missingResources.length > 0) {
@@ -35,7 +27,7 @@ export default async function uploadStory(
     await percyClient.finalizeSnapshot(snapshot, story.name);
   } catch (e) {
     e._percy = {
-      story
+      story,
     };
     throw e;
   }
