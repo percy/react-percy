@@ -1,36 +1,11 @@
 {
-  "extends": "airbnb",
+  "extends": "prettier",
   "plugins": [
-    "jest"
+    "import",
+    "prettier"
   ],
   "parser": "babel-eslint",
-  "env": {
-    "jest/globals": true
-  },
   "rules": {
-    "arrow-body-style": "off",
-    "class-methods-use-this": "off",
-    "comma-dangle": ["error", "never"],
-    "consistent-return": "off",
-    "indent": ["error", 2],
-    "max-len": ["error", {
-      "code": 120,
-      "ignoreComments": true,
-      "ignoreTrailingComments": true,
-      "ignoreUrls": true,
-      "ignoreStrings": true,
-      "ignoreTemplateLiterals": true,
-      "ignoreRegExpLiterals": true
-    }],
-    "no-else-return": "off",
-    "no-multi-assign": "off",
-    "no-param-reassign": "off",
-    "no-plusplus": "off",
-    "no-restricted-syntax": "off",
-    "no-trailing-spaces": "off",
-    "no-underscore-dangle": "off",
-    "padded-blocks": "off",
-
     "import/first": "off",
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": true,
@@ -38,11 +13,26 @@
       "peerDependencies": true
     }],
 
-    "jest/no-disabled-tests": "warn",
-    "jest/no-focused-tests": "error",
-    "jest/no-identical-title": "error",
-
-    "react/jsx-filename-extension": "off",
-    "react/jsx-indent": ["error", 2]
-  }
+    "prettier/prettier": ["error", {
+      "singleQuote": true
+    }]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/__tests__/**/*.js"
+      ],
+      "plugins": [
+        "jest"
+      ],
+      "env": {
+        "jest/globals": true
+      },
+      "rules": {
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error"
+      }
+    }
+  ]
 }
