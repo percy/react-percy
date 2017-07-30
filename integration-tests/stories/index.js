@@ -16,7 +16,7 @@ storiesOf('Static CSS', module)
     <p className="blue">Hi there! This text should be blue.</p>,
   );
 
-storiesOf('Frozen Time', module).add('Show the current date', () =>
+storiesOf('Managing Dynamic Data/Frozen Time', module).add('Show the current date', () =>
   <div>
     <p>In Percy&apos;s screenshot the current date should be frozen to 2015 thanks to mockdate.</p>
     <p>
@@ -33,7 +33,7 @@ storiesOf('Frozen Time', module).add('Show the current date', () =>
 const name = faker.name.findName();
 const email = faker.internet.email();
 
-storiesOf('Faker', module).add('Show a fake name and email', () =>
+storiesOf('Managing Dynamic Data/Faker', module).add('Show a fake name and email', () =>
   <div>
     <p>In Percy&apos;s screenshot the fake data should be the same thanks to faker&apos;s seed.</p>
     <p>
