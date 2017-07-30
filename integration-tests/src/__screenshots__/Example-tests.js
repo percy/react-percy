@@ -1,12 +1,12 @@
 import Example from '../Example';
 import React from 'react';
 
-describe('Example', () => {
-  it('basic components work', () => {
+suite('Example', () => {
+  snapshot('basic components work', () => {
     return <Example>This is some text</Example>;
   });
 
-  it(
+  snapshot(
     'components with custom dimensions work',
     () => {
       return <Example>This is some text</Example>;

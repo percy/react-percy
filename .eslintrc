@@ -69,9 +69,8 @@
         "before": false,
         "beforeAll": false,
         "beforeEach": false,
-        "describe": false,
-        "it": false,
-        "test": false
+        "snapshot": false,
+        "suite": false
       }
     }
   ]
