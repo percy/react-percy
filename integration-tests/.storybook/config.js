@@ -24,6 +24,12 @@ setDefaults({
   source: false,
 });
 setAddon(infoAddon);
+
+
+configure(loadStories, module);
+
+if (typeof window === 'object') window.__storybook_stories__ = getStorybook();
+
 setOptions({
   name: 'Shared Components',
   url: '',
@@ -34,8 +40,3 @@ setOptions({
   downPanelInRight: true,
   sortStoriesByKind: false,
 });
-
-
-configure(loadStories, module);
-
-if (typeof window === 'object') window.__storybook_stories__ = getStorybook();
