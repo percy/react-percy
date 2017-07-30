@@ -60,7 +60,7 @@
     },
     {
       "files": [
-        "**/__screenshots__/**/*.js"
+        "**/__percy__/**/*.js"
       ],
       "globals": {
         "after": false,
