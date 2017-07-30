@@ -1,4 +1,4 @@
-import { configure, getStorybook } from '@kadira/storybook';
+import { configure, getStorybook } from '@storybook/react';
 import inPercy from '@percy-io/in-percy';
 import faker from 'faker';
 import mockdate from 'mockdate';
