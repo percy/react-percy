@@ -8,7 +8,7 @@ module.exports = {
         before: false,
         beforeAll: false,
         beforeEach: false,
-        snapshot: false,
+        percySnapshot: false,
         suite: false,
       },
     },

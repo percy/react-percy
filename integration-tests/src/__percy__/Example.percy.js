@@ -2,11 +2,11 @@ import Example from '../Example';
 import React from 'react';
 
 suite('Example', () => {
-  snapshot('basic components work', () => {
+  percySnapshot('basic components work', () => {
     return <Example>This is some text</Example>;
   });
 
-  snapshot(
+  percySnapshot(
     'components with custom dimensions work',
     () => {
       return <Example>This is some text</Example>;

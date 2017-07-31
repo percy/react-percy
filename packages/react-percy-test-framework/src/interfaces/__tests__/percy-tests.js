@@ -83,15 +83,15 @@ it('`afterAll` adds afterAll hook', () => {
   expect(__common.afterAll).toHaveBeenCalledWith(hook);
 });
 
-it('adds `snapshot` to context', () => {
-  expect(context.snapshot).toBeDefined();
+it('adds `percySnapshot` to context', () => {
+  expect(context.percySnapshot).toBeDefined();
 });
 
-it('`snapshot` creates a new test', () => {
+it('`percySnapshot` creates a new test', () => {
   const title = 'test';
   const test = jest.fn();
 
-  context.snapshot(title, test);
+  context.percySnapshot(title, test);
 
   expect(__common.test).toHaveBeenCalledWith(title, test);
 });
