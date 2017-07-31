@@ -1,4 +1,4 @@
-import { configure, getStorybook, setAddon} from '@storybook/react';
+import { configure, getStorybook, setAddon } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import infoAddon, { setDefaults } from '@storybook/addon-info';
 
