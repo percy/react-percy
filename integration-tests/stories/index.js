@@ -82,3 +82,7 @@ storiesOf('Direction Demo', module).add('Show the direction', () =>
     <p>This happens because the name matches the rtl_regex command line argument.</p>
   </div>,
 );
+
+storiesOf('Hierarchy.separator.is.supported', module).add('story', () =>
+  <span>Hello hierarchySeparator</span>,
+);
