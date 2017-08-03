@@ -1,7 +1,5 @@
 import Suite from '../Suite';
 
-jest.mock('../normalizeSizes');
-
 describe('constructor', () => {
   it('throws when no title is specified', () => {
     expect(() => new Suite()).toThrow();
@@ -78,28 +76,37 @@ describe('fullTitle', () => {
   });
 });
 
-describe('getSizes', () => {
-  it('returns an empty array given no sizes specified and no parent', () => {
+describe('getOptions', () => {
+  it('returns an empty object given no options specified and no parent', () => {
     const suite = new Suite('title');
 
-    expect(suite.getSizes()).toEqual([]);
+    expect(suite.getOptions()).toEqual({});
   });
 
-  it('returns parent sizes given no sizes specified', () => {
+  it('returns parent options given no options specified', () => {
     const suite = new Suite('title');
     suite.parent = {
-      getSizes: () => [320, 768],
+      getOptions: () => ({ widths: [320, 768] }),
     };
 
-    expect(suite.getSizes()).toEqual([320, 768]);
+    expect(suite.getOptions()).toEqual({ widths: [320, 768] });
   });
 
-  it('returns sizes specified on suite, ignoring parent sizes', () => {
-    const suite = new Suite('title', [500, 1024]);
+  it('options specified on suite override options on parent', () => {
+    const suite = new Suite('title', { widths: [500, 1024] });
     suite.parent = {
-      getSizes: () => [320, 768],
+      getOptions: () => ({ widths: [320, 768] }),
     };
 
-    expect(suite.getSizes()).toEqual([500, 1024]);
+    expect(suite.getOptions()).toEqual({ widths: [500, 1024] });
+  });
+
+  it('merges options on suite with options on parent', () => {
+    const suite = new Suite('title', { minimumHeight: 300 });
+    suite.parent = {
+      getOptions: () => ({ widths: [320, 768] }),
+    };
+
+    expect(suite.getOptions()).toEqual({ minimumHeight: 300, widths: [320, 768] });
   });
 });

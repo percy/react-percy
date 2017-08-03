@@ -1,8 +1,6 @@
 import React from 'react';
 import Test from '../Test';
 
-jest.mock('../normalizeSizes', () => sizes => sizes);
-
 describe('constructor', () => {
   it('throws when no title or function is specified', () => {
     expect(() => new Test()).toThrow();
@@ -10,6 +8,10 @@ describe('constructor', () => {
 
   it('throws when no title is specified', () => {
     expect(() => new Test(() => {})).toThrow();
+  });
+
+  it('throws when title and options, but no function is specified', () => {
+    expect(() => new Test('test', { widths: [320, 1024] })).toThrow();
   });
 });
 
@@ -26,7 +28,7 @@ describe('getTestCase', () => {
     const test = new Test('title', () => {});
     test.parent = {
       fullTitle: () => '',
-      getSizes: () => [],
+      getOptions: () => [],
     };
 
     const testCase = await test.getTestCase();
@@ -38,7 +40,7 @@ describe('getTestCase', () => {
     const test = new Test('title', () => {});
     test.parent = {
       fullTitle: () => 'parent title',
-      getSizes: () => [],
+      getOptions: () => [],
     };
 
     const testCase = await test.getTestCase();
@@ -70,35 +72,56 @@ describe('getTestCase', () => {
     expect(testCase.markup).toEqual(markup);
   });
 
-  it('sets sizes to an empty array given no sizes specified and no parent', async () => {
+  it('sets markup to the result of the test function when options are also specified', async () => {
+    const markup = <div>Test</div>;
+    const test = new Test('title', { widths: [320, 768] }, () => markup);
+
+    const testCase = await test.getTestCase();
+
+    expect(testCase.markup).toEqual(markup);
+  });
+
+  it('sets options to an empty empty given no options specified and no parent', async () => {
     const test = new Test('title', () => {});
 
     const testCase = await test.getTestCase();
 
-    expect(testCase.sizes).toEqual([]);
+    expect(testCase.options).toEqual({});
   });
 
-  it('sets sizes to parent sizes given no sizes specified', async () => {
+  it('sets options to parent options given no options specified', async () => {
     const test = new Test('title', () => {});
     test.parent = {
       fullTitle: () => '',
-      getSizes: () => [320, 768],
+      getOptions: () => ({ widths: [320, 768] }),
     };
 
     const testCase = await test.getTestCase();
 
-    expect(testCase.sizes).toEqual([320, 768]);
+    expect(testCase.options).toEqual({ widths: [320, 768] });
   });
 
-  it('sets sizes to sizes specified on test, ignoring parent sizes', async () => {
-    const test = new Test('title', () => {}, [500, 1024]);
+  it('options on test override same options specified on parent', async () => {
+    const test = new Test('title', { widths: [375, 1024] }, () => {});
     test.parent = {
       fullTitle: () => '',
-      getSizes: () => [320, 768],
+      getOptions: () => ({ widths: [320, 768] }),
     };
 
     const testCase = await test.getTestCase();
 
-    expect(testCase.sizes).toEqual([500, 1024]);
+    expect(testCase.options).toEqual({ widths: [375, 1024] });
+  });
+
+  it('options on test are merged with parent options', async () => {
+    const test = new Test('title', { minimumHeight: 300 }, () => {});
+    test.parent = {
+      fullTitle: () => '',
+      getOptions: () => ({ widths: [320, 768] }),
+    };
+
+    const testCase = await test.getTestCase();
+
+    expect(testCase.options).toEqual({ minimumHeight: 300, widths: [320, 768] });
   });
 });

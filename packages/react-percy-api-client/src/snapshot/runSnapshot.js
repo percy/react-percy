@@ -7,14 +7,9 @@ export default async function runSnapshot(percyClient, build, testCase, assets, 
     const html = renderer(testCase.markup, assets);
     const resource = makeRootResource(percyClient, testCase.name, html);
 
-    let widths = [];
-    if (testCase.sizes) {
-      widths = testCase.sizes.map(size => size.width);
-    }
-
     const snapshotOptions = {
       name: testCase.name,
-      widths,
+      ...testCase.options,
     };
 
     const snapshot = await createSnapshot(percyClient, build, [resource], snapshotOptions);

@@ -33,7 +33,7 @@ it('creates a snapshot for the given test case', async () => {
   const testCase = {
     name: 'test case',
     markup: '<div>test</div>',
-    sizes: [{ width: 320 }, { width: 768 }],
+    options: { widths: [320, 768] },
   };
 
   await runSnapshot(percyClient, build, testCase, assets, renderer);
@@ -48,6 +48,7 @@ it('does not re-upload resource given nothing has changed', async () => {
   const testCase = {
     name: 'test case',
     markup: '<div>test</div>',
+    options: {},
   };
   mockMissingResources = [];
 
@@ -60,6 +61,7 @@ it('re-uploads resource given changes', async () => {
   const testCase = {
     name: 'test case',
     markup: '<div>test</div>',
+    options: {},
   };
   mockMissingResources = ['foo'];
 
@@ -72,6 +74,7 @@ it('finalizes the snapshot', async () => {
   const testCase = {
     name: 'test case',
     markup: '<div>test</div>',
+    options: {},
   };
 
   await runSnapshot(percyClient, build, testCase, assets, renderer);

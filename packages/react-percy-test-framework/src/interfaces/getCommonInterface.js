@@ -15,8 +15,12 @@ export default function getCommonInterface(suites) {
     afterAll(fn) {
       suites[0].addAfterAll(fn);
     },
-    async suite(title, fn, sizes) {
-      const suite = new Suite(title, sizes);
+    async suite(title, options, fn) {
+      if (typeof fn === 'undefined') {
+        fn = options;
+        options = undefined;
+      }
+      const suite = new Suite(title, options);
       suites[0].addSuite(suite);
       suites.unshift(suite);
       if (typeof fn === 'function') {
@@ -27,8 +31,8 @@ export default function getCommonInterface(suites) {
       suites.shift();
       return suite;
     },
-    test(title, fn, sizes) {
-      const test = new Test(title, fn, sizes);
+    test(title, options, fn) {
+      const test = new Test(title, options, fn);
       suites[0].addTest(test);
       return test;
     },

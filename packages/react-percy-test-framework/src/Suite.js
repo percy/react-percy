@@ -1,14 +1,13 @@
-import normalizeSizes from './normalizeSizes';
 import { each, mapSeries, reduce } from 'bluebird';
 
 export default class Suite {
-  constructor(title, sizes = []) {
+  constructor(title, options = {}) {
     if (typeof title !== 'string') {
       throw new Error(`\`title\` should be a "string", but "${typeof title}" was given`);
     }
 
     this.title = title;
-    this.sizes = normalizeSizes(sizes);
+    this.options = options;
 
     this.suites = {};
     this.tests = {};
@@ -70,11 +69,15 @@ export default class Suite {
     return this.title;
   }
 
-  getSizes() {
-    if (this.sizes.length === 0 && this.parent) {
-      return this.parent.getSizes();
+  getOptions() {
+    if (this.parent) {
+      return {
+        ...this.parent.getOptions(),
+        ...this.options,
+      };
     }
-    return this.sizes;
+
+    return this.options;
   }
 
   async getTestCases() {

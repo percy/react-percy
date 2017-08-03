@@ -1,8 +1,6 @@
 import React from 'react';
 import Suite from '../Suite';
 
-jest.mock('../normalizeSizes');
-
 let executed;
 let suite;
 let parent;
@@ -554,6 +552,7 @@ describe('tests', () => {
     const testCase1 = {
       title: 'test 1',
       markup: <div>Test 1</div>,
+      options: {},
     };
     suite.addTest({
       title: 'test 1',
@@ -562,6 +561,7 @@ describe('tests', () => {
     const testCase2 = {
       title: 'test 2',
       markup: <div>Test 2</div>,
+      options: {},
     };
     suite.addTest({
       title: 'test 2',
@@ -579,6 +579,7 @@ it('nested suites', () => {
     const testCase = {
       title: 'test',
       markup: <div>Test</div>,
+      options: {},
     };
     suite.addTest({
       title: 'test 1',
@@ -589,6 +590,7 @@ it('nested suites', () => {
     const nestedTestCase1 = {
       title: 'nested test 1',
       markup: <div>Nested Test 1</div>,
+      options: {},
     };
     nestedSuite.addTest({
       title: 'nested test 1',
@@ -597,6 +599,7 @@ it('nested suites', () => {
     const nestedTestCase2 = {
       title: 'nested test 2',
       markup: <div>Nested Test 2</div>,
+      options: {},
     };
     nestedSuite.addTest({
       title: 'nested test 2',
