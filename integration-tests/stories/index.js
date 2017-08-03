@@ -86,3 +86,8 @@ storiesOf('Direction Demo', module).add('Show the direction', () =>
 storiesOf('Hierarchy.separator.is.supported', module).add('story', () =>
   <span>Hello hierarchySeparator</span>,
 );
+
+storiesOf('Multiple widths', module)
+  .addWithPercyWidths('multiple', () => <span>Renders in multiple widths</span>, 222, 333)
+  .addWithPercyWidths('single', () => <span>Renders in one width</span>, 444)
+  .addWithPercyWidths('default', () => <span>Renders with the fallback width(s)</span>);

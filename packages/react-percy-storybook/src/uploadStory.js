@@ -12,7 +12,7 @@ export default async function uploadStory(
 
     const snapshotOptions = {
       name: story.name,
-      widths,
+      widths: story.widths || widths,
       minimumHeight,
       enableJavaScript: true,
     };

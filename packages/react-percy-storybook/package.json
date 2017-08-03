@@ -13,6 +13,7 @@
   "bin": {
     "percy-storybook": "./bin/percy-storybook.js"
   },
+  "main": "lib/index.js",
   "files": [
     "bin",
     "lib"
@@ -33,5 +34,10 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "eslintConfig": {
+    "globals": {
+      "window": true
+    }
   }
 }

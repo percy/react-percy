@@ -10,6 +10,7 @@ export default function selectStories(stories, rtlRegex) {
       selectedStories.push({
         name,
         encodedParams,
+        widths: story.widths,
       });
     }
   }
@@ -21,6 +22,7 @@ export default function selectStories(stories, rtlRegex) {
         rtlStories.push({
           name: `${story.name} [RTL]`,
           encodedParams: `${story.encodedParams}&direction=rtl`,
+          widths: story.widths,
         });
       }
     }

@@ -1,6 +1,7 @@
 import { configure, getStorybook, setAddon } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import infoAddon, { setDefaults } from '@storybook/addon-info';
+import { percyAddon, serializeStories } from '@percy-io/react-percy-storybook';
 
 import inPercy from '@percy-io/in-percy';
 import faker from 'faker';
@@ -25,10 +26,15 @@ setDefaults({
 });
 setAddon(infoAddon);
 
+// You will only need this, if you plan on assigning custom render widths for single stories
+// When relying on the default render witdh and/or custom render widths for all stories,
+// You won't need this add-on
+setAddon(percyAddon);
+
 configure(loadStories, module);
 
 // NOTE: Place this *BEFORE* any setOptions call
-if (typeof window === 'object') window.__storybook_stories__ = getStorybook();
+serializeStories(getStorybook);
 
 // NOTE: This call has to come *AFTER* exposing the stories on the window object.
 setOptions({
