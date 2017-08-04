@@ -2,10 +2,10 @@ import { storiesKey } from './constants';
 
 /**
  * This map contains a mapping from stories for a kind to
- * widths the respective story should be rendered in,
+ * options of the respective story,
  * looking like this:
  * {
- *   kindA: { story1: [widthX, widthY], storyX: [widthZ] },
+ *   kindA: { story1: options, storyX: options },
  *   kindB: { story...}
  *   ...
  * }
@@ -13,6 +13,9 @@ import { storiesKey } from './constants';
 const contextWidthsTuples = new Map();
 
 function assertWidths(widths) {
+  if (!widths.length) {
+    throw new Error('Need at least one valid width');
+  }
   widths.forEach(width => {
     if (isNaN(width) || width !== ~~width) {
       throw new Error("Given width '" + width + "' is invalid");
@@ -21,12 +24,16 @@ function assertWidths(widths) {
 }
 
 export const percyAddon = {
-  addWithPercyWidths: function(storyName, storyFn, ...widths) {
-    assertWidths(widths);
+  addWithPercyOptions: function(storyName, storyFn, options) {
+    if (options) {
+      if (options.widths) {
+        assertWidths(options.widths);
+      }
 
-    contextWidthsTuples.set(this.kind, contextWidthsTuples.get(this.kind) || new Map());
-    const tuplesForKind = contextWidthsTuples.get(this.kind);
-    tuplesForKind.set(storyName, widths);
+      contextWidthsTuples.set(this.kind, contextWidthsTuples.get(this.kind) || new Map());
+      const tuplesForKind = contextWidthsTuples.get(this.kind);
+      tuplesForKind.set(storyName, options);
+    }
     this.add(storyName, context => storyFn(context));
   },
 };
@@ -40,10 +47,7 @@ export const serializeStories = getStorybook => {
     const tuplesForKind = contextWidthsTuples.get(storyBucket.kind);
     storyBucket.stories.forEach(story => {
       if (tuplesForKind.has(story.name)) {
-        const customWidths = tuplesForKind.get(story.name);
-        if (customWidths.length) {
-          story.widths = customWidths;
-        }
+        story.options = tuplesForKind.get(story.name);
       }
     });
   });

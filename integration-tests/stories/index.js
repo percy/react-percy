@@ -88,6 +88,8 @@ storiesOf('Hierarchy.separator.is.supported', module).add('story', () =>
 );
 
 storiesOf('Multiple widths', module)
-  .addWithPercyWidths('multiple', () => <span>Renders in multiple widths</span>, 222, 333)
-  .addWithPercyWidths('single', () => <span>Renders in one width</span>, 444)
-  .addWithPercyWidths('default', () => <span>Renders with the fallback width(s)</span>);
+  .addWithPercyOptions('multiple', () => <span>Renders in multiple widths</span>, {
+    widths: [222, 333],
+  })
+  .addWithPercyOptions('single', () => <span>Renders in one width</span>, { widths: [444] })
+  .addWithPercyOptions('default', () => <span>Renders with the fallback width(s)</span>);
