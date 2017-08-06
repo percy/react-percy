@@ -19,6 +19,7 @@
     "@percy-io/react-percy-server-render": "^0.1.2",
     "@percy-io/react-percy-test-framework": "^0.1.2",
     "@percy-io/react-percy-webpack": "^0.1.2",
+    "bluebird": "^3.5.0",
     "debug": "^2.6.3"
   },
   "publishConfig": {
