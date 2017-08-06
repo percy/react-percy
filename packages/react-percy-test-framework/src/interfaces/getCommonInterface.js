@@ -1,5 +1,5 @@
+import Snapshot from '../Snapshot';
 import Suite from '../Suite';
-import Test from '../Test';
 
 export default function getCommonInterface(suites) {
   return {
@@ -31,10 +31,10 @@ export default function getCommonInterface(suites) {
       suites.shift();
       return suite;
     },
-    test(title, options, fn) {
-      const test = new Test(title, options, fn);
-      suites[0].addTest(test);
-      return test;
+    snapshot(title, options, fn) {
+      const snapshot = new Snapshot(title, options, fn);
+      suites[0].addSnapshot(snapshot);
+      return snapshot;
     },
   };
 }

@@ -1,4 +1,4 @@
-export default class Test {
+export default class Snapshot {
   constructor(title, options, fn) {
     if (typeof title !== 'string') {
       throw new Error(`\`title\` should be a "string", but "${typeof title}" was given`);
@@ -44,7 +44,7 @@ export default class Test {
     return this.options;
   }
 
-  async getTestCase() {
+  async getSnapshot() {
     return {
       name: this.fullTitle(),
       markup: await this.fn(),

@@ -27,26 +27,26 @@ describe('addSuite', () => {
   });
 });
 
-describe('addTest', () => {
-  it('throws when test with the same title has already been added', () => {
+describe('addSnapshot', () => {
+  it('throws when snapshot with the same title has already been added', () => {
     const suite = new Suite('title');
     suite.parent = new Suite('parent');
 
-    const test1 = { title: 'test' };
-    suite.addTest(test1);
+    const snapshot1 = { title: 'snapshot' };
+    suite.addSnapshot(snapshot1);
 
-    const test2 = { title: 'test' };
-    expect(() => suite.addTest(test2)).toThrow();
+    const snapshot2 = { title: 'snapshot' };
+    expect(() => suite.addSnapshot(snapshot2)).toThrow();
   });
 
-  it('sets parent on test being added', () => {
+  it('sets parent on snapshot being added', () => {
     const suite = new Suite('title');
     suite.parent = new Suite('parent');
-    const test = { title: 'test' };
+    const snapshot = { title: 'snapshot' };
 
-    suite.addTest(test);
+    suite.addSnapshot(snapshot);
 
-    expect(test.parent).toEqual(suite);
+    expect(snapshot.parent).toEqual(suite);
   });
 });
 
