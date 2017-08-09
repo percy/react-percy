@@ -19,5 +19,5 @@ before_install:
   - yarn --version
 script:
   - yarn run test
-  - scripts/run-react-percy-storybook-integration-tests.sh
-  - cd integration-tests/react-percy && yarn run test
+  - yarn run test:integration react-percy
+  - yarn run test:integration react-percy-storybook

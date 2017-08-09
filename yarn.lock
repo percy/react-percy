@@ -1392,8 +1392,8 @@ bluebird@^3.5.0:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
-  version "4.11.7"
-  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.7.tgz#ddb048e50d9482790094c13eb3fcfc833ce7ab46"
+  version "4.11.8"
+  resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
 
 boom@2.x.x:
   version "2.10.1"
@@ -4739,8 +4739,8 @@ node-dir@^0.1.10:
     minimatch "^3.0.2"
 
 node-fetch@^1.0.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.1.tgz#899cb3d0a3c92f952c47f1b876f4c8aeabd400d5"
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.2.tgz#c54e9aac57e432875233525f3c891c4159ffefd7"
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
@@ -5721,8 +5721,8 @@ react-icons@^2.2.5:
     react-icon-base "2.0.7"
 
 react-inspector@^2.1.1:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-2.1.3.tgz#61fc4c6b6b29b5262af3aad781a12138cd181a32"
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-2.1.4.tgz#2123fab74f68ae3136fbd02392fadb764326d04d"
   dependencies:
     babel-runtime "^6.23.0"
     is-dom "^1.0.9"
@@ -7004,8 +7004,8 @@ webpack-sources@^1.0.1:
     source-map "~0.5.3"
 
 "webpack@^2.5.1 || ^3.0.0":
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.4.1.tgz#4c3f4f3fb318155a4db0cb6a36ff05c5697418f4"
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.5.1.tgz#b749ee3d2b5a118dad53e8e41585b3f71e75499a"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"

@@ -4,10 +4,10 @@
     "build": "vitruvius build --src src --dest lib --ignore-packages \"**/integration-tests/**\"",
     "clean": "rimraf ./packages/*/lib",
     "lint": "eslint . --cache",
-    "postinstall": "yarn run clean && yarn run build",
+    "postinstall": "yarn run clean --silent && yarn run build --silent",
     "precommit": "lint-staged",
     "test": "jest",
-    "test:integration": "sh ./scripts/run-integration-tests.sh"
+    "test:integration": "./scripts/run-integration-tests.sh"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
