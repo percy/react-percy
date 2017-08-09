@@ -14,7 +14,9 @@
     "mockdate": "^2.0.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "optionalDependencies": {
     "react-match-media": "^2.0.1"
   },
   "devDependencies": {
