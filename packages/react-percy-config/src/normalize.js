@@ -19,6 +19,11 @@ export default function normalize(config, packageRoot) {
 
   normalizedConfig.rootDir = config.rootDir ? path.normalize(config.rootDir) : packageRoot;
 
+  normalizedConfig.snapshotIgnorePatterns =
+    config.snapshotIgnorePatterns || defaults.snapshotIgnorePatterns;
+
+  normalizedConfig.snapshotPatterns = config.snapshotPatterns || defaults.snapshotPatterns;
+
   normalizedConfig.snapshotRegex = config.snapshotRegex
     ? convertToRegex(config.snapshotRegex)
     : defaults.snapshotRegex;

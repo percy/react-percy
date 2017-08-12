@@ -72,6 +72,46 @@ it('sets `rootDir` to normalized `rootDir` from config', () => {
   expect(normalizedConfig.rootDir).toEqual('/config/root');
 });
 
+it('sets default `snapshotIgnorePatterns` given none specified in config', () => {
+  const config = {};
+  const packageRoot = '/package/root';
+
+  const normalizedConfig = normalize(config, packageRoot);
+
+  expect(normalizedConfig.snapshotIgnorePatterns).toEqual(defaults.snapshotIgnorePatterns);
+});
+
+it('sets `snapshotIgnorePatterns` to `snapshotIgnorePatterns` from config', () => {
+  const config = {
+    snapshotIgnorePatterns: ['**/__percy__/**/*.ignore.js'],
+  };
+  const packageRoot = '/package/root';
+
+  const normalizedConfig = normalize(config, packageRoot);
+
+  expect(normalizedConfig.snapshotIgnorePatterns).toEqual(['**/__percy__/**/*.ignore.js']);
+});
+
+it('sets default `snapshotPatterns` given none specified in config', () => {
+  const config = {};
+  const packageRoot = '/package/root';
+
+  const normalizedConfig = normalize(config, packageRoot);
+
+  expect(normalizedConfig.snapshotPatterns).toEqual(defaults.snapshotPatterns);
+});
+
+it('sets `snapshotPatterns` to `snapshotPatterns` from config', () => {
+  const config = {
+    snapshotPatterns: ['**/*.snapshot.js'],
+  };
+  const packageRoot = '/package/root';
+
+  const normalizedConfig = normalize(config, packageRoot);
+
+  expect(normalizedConfig.snapshotPatterns).toEqual(['**/*.snapshot.js']);
+});
+
 it('sets default `snapshotRegex` given none specified in config', () => {
   const config = {};
   const packageRoot = '/package/root';
