@@ -18,6 +18,7 @@ matrix:
 before_install:
   - yarn --version
 script:
+  - yarn run lint
   - yarn run test
   - yarn run test:integration react-percy
   - yarn run test:integration react-percy-storybook
