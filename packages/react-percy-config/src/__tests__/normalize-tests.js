@@ -1,37 +1,6 @@
 import defaults from '../defaults';
 import normalize from '../normalize';
 
-it('sets `ignoreRegexes` to exclude node_modules given no `ignoreRegexes` in config', () => {
-  const config = {};
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.ignoreRegexes).toEqual([/node_modules/]);
-});
-
-it('sets `ignoreRegexes` to `ignoreRegexes` from config', () => {
-  const config = {
-    ignoreRegexes: [/foo/],
-  };
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.ignoreRegexes).toEqual([/foo/]);
-});
-
-it('converts string `ignoreRegexes` from config to regexes', () => {
-  const config = {
-    ignoreRegexes: ['foo$'],
-  };
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.ignoreRegexes).toEqual([/foo$/]);
-});
-
 it('sets `includeFiles` to an empty array given no `includeFiles` in config', () => {
   const config = {};
   const packageRoot = '/package/root';
@@ -110,35 +79,4 @@ it('sets `snapshotPatterns` to `snapshotPatterns` from config', () => {
   const normalizedConfig = normalize(config, packageRoot);
 
   expect(normalizedConfig.snapshotPatterns).toEqual(['**/*.snapshot.js']);
-});
-
-it('sets default `snapshotRegex` given none specified in config', () => {
-  const config = {};
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.snapshotRegex).toEqual(defaults.snapshotRegex);
-});
-
-it('sets `snapshotRegex` to `snapshotRegex` from config', () => {
-  const config = {
-    snapshotRegex: /\.screenshots$/,
-  };
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.snapshotRegex).toEqual(/\.screenshots$/);
-});
-
-it('converts string `snapshotRegex` from config to regex', () => {
-  const config = {
-    snapshotRegex: '\\.screenshots$',
-  };
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.snapshotRegex).toEqual(/\.screenshots$/);
 });
