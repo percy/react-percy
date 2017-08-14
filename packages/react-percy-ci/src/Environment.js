@@ -11,7 +11,7 @@ const GLOBALS = [
   'setTimeout',
 ];
 
-export default class TestEnvironment {
+export default class Environment {
   constructor() {
     this.context = vm.createContext();
     this.global = vm.runInContext('this', this.context);
@@ -22,17 +22,19 @@ export default class TestEnvironment {
     this.suite = createSuite(this.global);
   }
 
-  getTestCases() {
-    return this.suite.getTestCases();
+  getSnapshots() {
+    return this.suite.getSnapshots();
   }
 
-  runScript(file) {
+  async runScript(file) {
     const script = new vm.Script(file.src, {
       filename: file.path,
       displayErrors: true,
     });
-    return script.runInContext(this.context, {
-      displayErrors: true,
+    await this.global.suite('', () => {
+      script.runInContext(this.context, {
+        displayErrors: true,
+      });
     });
   }
 }

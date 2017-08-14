@@ -1,26 +1,29 @@
-import TestEnvironment from '../TestEnvironment';
+import Environment from '../Environment';
 
-let mockTestFramework;
+let mockFrameworkGlobals;
 jest.mock('@percy-io/react-percy-test-framework', () => context => {
-  Object.keys(mockTestFramework).forEach(key => {
-    context[key] = mockTestFramework[key];
+  Object.keys(mockFrameworkGlobals).forEach(key => {
+    context[key] = mockFrameworkGlobals[key];
   });
 });
 
 let environment;
+let suiteSnapshots;
 
 beforeEach(() => {
-  mockTestFramework = {
-    describe: jest.fn(),
+  suiteSnapshots = [];
+  mockFrameworkGlobals = {
+    percySnapshot: jest.fn(name => suiteSnapshots.push(name)),
+    suite: jest.fn((name, fn) => fn()),
   };
 
-  environment = new TestEnvironment();
+  environment = new Environment();
 });
 
 it('can parse basic files', () => {
   expect(() =>
     environment.runScript({
-      path: '/foo/bar.js',
+      path: '/foo/bar.percy.js',
       src: `
             const a = 1;
         `,
@@ -31,7 +34,7 @@ it('can parse basic files', () => {
 it('references to global work', () => {
   expect(() =>
     environment.runScript({
-      path: '/foo/bar.js',
+      path: '/foo/bar.percy.js',
       src: `
             global.foo = 'bar';
         `,
@@ -42,7 +45,7 @@ it('references to global work', () => {
 it('immediate works', () => {
   expect(() =>
     environment.runScript({
-      path: '/foo/bar.js',
+      path: '/foo/bar.percy.js',
       src: `
             const x = setImmediate(() => {});
             clearImmediate(x);
@@ -54,7 +57,7 @@ it('immediate works', () => {
 it('intervals work', () => {
   expect(() =>
     environment.runScript({
-      path: '/foo/bar.js',
+      path: '/foo/bar.percy.js',
       src: `
             const x = setInterval(() => {}, 10);
             clearInterval(x);
@@ -66,7 +69,7 @@ it('intervals work', () => {
 it('timeouts work', () => {
   expect(() =>
     environment.runScript({
-      path: '/foo/bar.js',
+      path: '/foo/bar.percy.js',
       src: `
             const x = setTimeout(() => {}, 10);
             clearTimeout(x);
@@ -75,12 +78,12 @@ it('timeouts work', () => {
   ).not.toThrow();
 });
 
-it('console works', () => {
+it('console works', async () => {
   // eslint-disable-next-line no-console
   console.log = jest.fn();
 
-  environment.runScript({
-    path: '/foo/bar.js',
+  await environment.runScript({
+    path: '/foo/bar.percy.js',
     src: `
             console.log('foo');
         `,
@@ -90,14 +93,27 @@ it('console works', () => {
   expect(console.log).toHaveBeenCalledWith('foo');
 });
 
-it('test framework globals work', () => {
-  environment.runScript({
-    path: '/foo/bar.js',
+it('framework globals work', async () => {
+  await environment.runScript({
+    path: '/foo/bar.percy.js',
     src: `
-            describe('suite', () => {
+            percySnapshot('snapshot', () => {
             });
         `,
   });
 
-  expect(mockTestFramework.describe).toHaveBeenCalledWith('suite', expect.any(Function));
+  expect(mockFrameworkGlobals.percySnapshot).toHaveBeenCalledWith('snapshot', expect.any(Function));
+});
+
+it('wraps script in a suite', async () => {
+  await environment.runScript({
+    path: '/foo/bar.percy.js',
+    src: `
+            percySnapshot('snapshot', () => {
+            });
+        `,
+  });
+
+  expect(mockFrameworkGlobals.suite).toHaveBeenCalledWith('', expect.any(Function));
+  expect(suiteSnapshots).toEqual(['snapshot']);
 });
