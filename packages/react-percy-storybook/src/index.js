@@ -27,7 +27,7 @@ function assertWidths(widths) {
 }
 
 function assertRtl(rtl) {
-  if (typeof widths === 'undefined') {
+  if (typeof rtl === 'undefined') {
     return;
   }
   if (typeof rtl !== 'boolean') {
