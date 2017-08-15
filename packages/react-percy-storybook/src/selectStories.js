@@ -1,3 +1,7 @@
+function storyMatchesRtlRegexAndIsNotExcluded(rtlRegex, storyName, options) {
+  return rtlRegex && rtlRegex.test(storyName) && options.rtl !== false;
+}
+
 export default function selectStories(stories, rtlRegex) {
   let selectedStories = [];
   for (const group of stories) {
@@ -15,19 +19,17 @@ export default function selectStories(stories, rtlRegex) {
     }
   }
 
-  if (rtlRegex) {
-    const rtlStories = [];
-    for (const story of selectedStories) {
-      if (story.name.match(rtlRegex)) {
-        rtlStories.push({
-          name: `${story.name} [RTL]`,
-          encodedParams: `${story.encodedParams}&direction=rtl`,
-          options: story.options,
-        });
-      }
+  const rtlStories = [];
+  for (const story of selectedStories) {
+    const options = story.options || {};
+    if (options.rtl || storyMatchesRtlRegexAndIsNotExcluded(rtlRegex, story.name, options)) {
+      rtlStories.push({
+        name: `${story.name} [RTL]`,
+        encodedParams: `${story.encodedParams}&direction=rtl`,
+        options: story.options,
+      });
     }
-    selectedStories = selectedStories.concat(rtlStories);
   }
 
-  return selectedStories;
+  return selectedStories.concat(rtlStories);
 }

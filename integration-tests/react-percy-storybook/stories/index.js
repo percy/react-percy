@@ -1,5 +1,6 @@
 import React from 'react';
 import { storiesOf, action } from '@storybook/react';
+import { withInfo } from '@storybook/addon-info';
 import faker from 'faker';
 import { MatchMediaHOC } from 'react-match-media';
 import Example from '../src/Example';
@@ -88,8 +89,29 @@ storiesOf('Hierarchy.separator.is.supported', module).add('story', () =>
 );
 
 storiesOf('Multiple widths', module)
-  .addWithPercyOptions('multiple', () => <span>Renders in multiple widths</span>, {
-    widths: [222, 333],
-  })
-  .addWithPercyOptions('single', () => <span>Renders in one width</span>, { widths: [444] })
-  .addWithPercyOptions('default', () => <span>Renders with the fallback width(s)</span>);
+  .addWithPercyOptions('multiple', { widths: [222, 333] }, () =>
+    <span>Renders in multiple widths</span>,
+  )
+  .addWithPercyOptions('single', { widths: [444] }, () => <span>Renders in one width</span>)
+  .addWithPercyOptions('default', () => <span>Renders with the fallback width(s)</span>)
+  .addWithPercyOptions('with RTL for a single story', { rtl: true }, () =>
+    <span>
+      The direction is {direction}.
+    </span>,
+  )
+  .addWithPercyOptions(
+    'Direction: with RTL override even though the RTL regex matches',
+    { rtl: false },
+    () =>
+      <span>
+        This story will only render in one direction. The direction is {direction} == ltr.
+      </span>,
+  );
+
+storiesOf('With info addon', module)
+  .add('some story', withInfo('doc string about my component')(() => <span>info story</span>))
+  .addWithPercyOptions(
+    'another with info',
+    { widths: [555] },
+    withInfo('doc string about my component')(() => <span>info 555px width</span>),
+  );

@@ -13,6 +13,9 @@ import { storiesKey } from './constants';
 const contextWidthsTuples = new Map();
 
 function assertWidths(widths) {
+  if (typeof widths === 'undefined') {
+    return;
+  }
   if (!widths.length) {
     throw new Error('Need at least one valid width');
   }
@@ -23,12 +26,25 @@ function assertWidths(widths) {
   });
 }
 
+function assertRtl(rtl) {
+  if (typeof widths === 'undefined') {
+    return;
+  }
+  if (typeof rtl !== 'boolean') {
+    throw new Error("Given rtl setting '" + rtl + "' is invalid");
+  }
+}
+
 export const percyAddon = {
-  addWithPercyOptions: function(storyName, storyFn, options) {
+  addWithPercyOptions: function(storyName, options, storyFn) {
+    if (typeof options === 'function') {
+      storyFn = options;
+      options = undefined;
+    }
+
     if (options) {
-      if (options.widths) {
-        assertWidths(options.widths);
-      }
+      assertWidths(options.widths);
+      assertRtl(options.rtl);
 
       contextWidthsTuples.set(this.kind, contextWidthsTuples.get(this.kind) || new Map());
       const tuplesForKind = contextWidthsTuples.get(this.kind);

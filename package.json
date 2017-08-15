@@ -2,10 +2,11 @@
   "private": true,
   "scripts": {
     "build": "vitruvius build --src src --dest lib --ignore-packages \"**/integration-tests/**\"",
-    "clean": "rimraf ./packages/*/lib",
+    "prebuild": "rimraf ./packages/*/lib",
     "lint": "eslint . --cache",
-    "postinstall": "yarn run clean --silent && yarn run build --silent",
+    "postinstall": "yarn build --silent",
     "precommit": "lint-staged",
+    "setup": "lerna clean --yes && lerna bootstrap",
     "test": "jest",
     "test:integration": "./scripts/run-integration-tests.sh"
   },
