@@ -22,7 +22,7 @@ if [ "$SUITE" = "react-percy-storybook" ]; then
   if [[ "$PERCY_ENABLE" != "0" && -n "$PERCY_TOKEN" ]] ; then
     cd integration-tests/react-percy-storybook
     yarn storybook:percy
-  elif [[ "$PERCY_ENABLE" != "0" ]] ; then
+  elif [[ "$PERCY_ENABLE" != "0" && "$TRAVIS" != true ]] ; then
     # This is local, when invoking yarn test:integration react-percy-storybook w/o PERCY_TOKEN
     error "No PERCY_TOKEN given"
   fi
