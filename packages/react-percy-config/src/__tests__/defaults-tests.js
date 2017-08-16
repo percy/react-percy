@@ -12,133 +12,32 @@ const expectFileNotToMatchPatterns = (file, patterns) => {
 };
 
 describe('snapshotIgnorePatterns', () => {
-  it('matches JS files in top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/foo.js', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches JSX files in top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/foo.jsx', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches non-JS files in top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/foo.json', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches JS files nested within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/package/foo.js', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches JSX files nested within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/package/foo.jsx', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches non-JS files nested within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns('/node_modules/package/foo.json', defaults.snapshotIgnorePatterns);
-  });
-
-  it('matches JS files nested within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.js',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JSX files nested within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.jsx',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches non-JS files nested within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.json',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JS files in `__percy__` directories within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/__percy__/foo.js',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JSX files in `__percy__` directories within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/__percy__/foo.jsx',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches non-JS files in `__percy__` directories within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/__percy__/foo.json',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JS files in `__percy__` directories within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      'packages/foo/node_modules/package/__percy__/foo.js',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JSX files in `__percy__` directories within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/__percy__/foo.jsx',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches non-JS files in `__percy__` directories within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/__percy__/foo.json',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JS files with `.percy` suffix within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/foo.percy.js',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JSX files with `.percy` suffix within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/foo.percy.jsx',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches non-JS files with `.percy` suffix within top-level `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/node_modules/package/foo.percy.json',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JS files with `.percy` suffix within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.percy.js',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches JSX files with `.percy` suffix within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.percy.jsx',
-      defaults.snapshotIgnorePatterns,
-    );
-  });
-
-  it('matches non-JS files with `.percy` suffix within nested `node_modules` directory', () => {
-    expectFileToMatchPatterns(
-      '/packages/foo/node_modules/package/foo.percy.json',
-      defaults.snapshotIgnorePatterns,
-    );
+  [
+    '/node_modules/foo.js',
+    '/node_modules/foo.jsx',
+    '/node_modules/foo.json',
+    '/node_modules/package/foo.js',
+    '/node_modules/package/foo.jsx',
+    '/node_modules/package/foo.json',
+    '/node_modules/package/foo.percy.js',
+    '/node_modules/package/foo.percy.jsx',
+    '/node_modules/package/foo.percy.json',
+    '/node_modules/package/__percy__/foo.js',
+    '/node_modules/package/__percy__/foo.jsx',
+    '/node_modules/package/__percy__/foo.json',
+    '/packages/foo/node_modules/package/foo.js',
+    '/packages/foo/node_modules/package/foo.jsx',
+    '/packages/foo/node_modules/package/foo.json',
+    '/packages/foo/node_modules/package/foo.percy.js',
+    '/packages/foo/node_modules/package/foo.percy.jsx',
+    '/packages/foo/node_modules/package/foo.percy.json',
+    '/packages/foo/node_modules/package/__percy__/foo.js',
+    '/packages/foo/node_modules/package/__percy__/foo.jsx',
+    '/packages/foo/node_modules/package/__percy__/foo.json',
+  ].forEach(file => {
+    it(`matches file in \`node_modules\` directory: ${file}`, () => {
+      expectFileToMatchPatterns(file, defaults.snapshotIgnorePatterns);
+    });
   });
 });
 
