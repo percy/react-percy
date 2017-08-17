@@ -55,13 +55,10 @@ describe('afterAll', () => {
 });
 
 describe('suite', () => {
-  it('rejects when no callback is specified', () => {
-    return common
-      .suite('suite')
-      .then(() => {
-        throw new Error('should have rejected');
-      })
-      .catch(e => expect(e).toBeInstanceOf(TypeError));
+  it('adds the suite as a child of the current suite given no callback', async () => {
+    await common.suite('suite');
+
+    expect(suites[0].addSuite).toHaveBeenCalledWith(expect.any(Suite));
   });
 
   it('adds the suite as a child of the current suite given synchronous callback', async () => {
@@ -75,6 +72,12 @@ describe('suite', () => {
     await common.suite('suite', fn);
 
     expect(suites[0].addSuite).toHaveBeenCalledWith(expect.any(Suite));
+  });
+
+  it('returns the new suite given no callback', async () => {
+    const newSuite = await common.suite('suite');
+
+    expect(newSuite).toEqual(expect.any(Suite));
   });
 
   it('returns the new suite given synchronous callback', async () => {
