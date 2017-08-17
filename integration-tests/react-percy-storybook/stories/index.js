@@ -110,7 +110,7 @@ storiesOf('addWithPercyOptions', module)
       </span>,
   )
   .addWithPercyOptions(
-    'another with info',
+    'with withInfo instead of addWithInfo',
     { widths: [555] },
     withInfo('doc string about my component')(() => <span>info 555px width</span>),
   );
