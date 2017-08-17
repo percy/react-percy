@@ -26,9 +26,8 @@ setDefaults({
 });
 setAddon(infoAddon);
 
-// You will only need this, if you plan on assigning custom render widths for single stories
-// When relying on the default render witdh and/or custom render widths for all stories,
-// You won't need this add-on
+// You will only need this if you plan on using addWithPercyOptions 
+// addWithPercyOptions can be used to set options for individual stories (i.e. custom widths or RTL settings)
 setAddon(percyAddon);
 
 configure(loadStories, module);
