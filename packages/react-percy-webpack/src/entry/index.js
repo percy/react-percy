@@ -1,21 +1,27 @@
+import findSnapshotFiles from './findSnapshotFiles';
 import merge from 'webpack-merge';
 import path from 'path';
-import VirtualModulePlugin from 'virtual-module-webpack-plugin';
 
-export default function configureVirtualEntry(webpackConfig, percyConfig, entry) {
-  const virtualEntryPath = path.join(__dirname, 'percy-virtual-entry.js');
+export default function configureEntry(webpackConfig, percyConfig) {
+  const snapshotFiles = findSnapshotFiles(percyConfig);
+
+  const entry = snapshotFiles.reduce((prev, file) => {
+    const entryName = path
+      .relative(percyConfig.rootDir, file)
+      .replace(new RegExp(`${path.extname(file)}$`), '');
+    return {
+      ...prev,
+      [entryName]: file,
+    };
+  }, {});
+
+  if (percyConfig.includeFiles && percyConfig.includeFiles.length) {
+    entry['__percy_include__'] = percyConfig.includeFiles;
+  }
 
   return merge.strategy({
     entry: 'replace',
   })(webpackConfig, {
-    entry: {
-      percy: [...percyConfig.includeFiles, virtualEntryPath],
-    },
-    plugins: [
-      new VirtualModulePlugin({
-        moduleName: virtualEntryPath,
-        contents: entry,
-      }),
-    ],
+    entry,
   });
 }
