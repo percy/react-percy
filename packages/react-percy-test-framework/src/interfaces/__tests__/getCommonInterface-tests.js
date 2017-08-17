@@ -175,7 +175,7 @@ describe('snapshot', () => {
     throw new Error('adding second snapshot should have thrown');
   });
 
-  it('does not throw if a snapshot with the same name has already been added to a different suite with the different name', async () => {
+  it('does not throw if a snapshot with the same name has already been added to a different suite with a different name', async () => {
     await common.suite('Suite 1', () => {
       common.snapshot('snapshot', jest.fn());
     });
