@@ -10,7 +10,7 @@ import { storiesKey } from './constants';
  *   ...
  * }
  */
-const contextWidthsTuples = new Map();
+const optionsTuples = new Map();
 
 function assertWidths(widths) {
   if (typeof widths === 'undefined') {
@@ -46,8 +46,8 @@ export const percyAddon = {
       assertWidths(options.widths);
       assertRtl(options.rtl);
 
-      contextWidthsTuples.set(this.kind, contextWidthsTuples.get(this.kind) || new Map());
-      const tuplesForKind = contextWidthsTuples.get(this.kind);
+      optionsTuples.set(this.kind, optionsTuples.get(this.kind) || new Map());
+      const tuplesForKind = optionsTuples.get(this.kind);
       tuplesForKind.set(storyName, options);
     }
     this.add(storyName, context => storyFn(context));
@@ -57,10 +57,10 @@ export const percyAddon = {
 export const serializeStories = getStorybook => {
   const storybook = getStorybook();
   storybook.forEach(storyBucket => {
-    if (!contextWidthsTuples.has(storyBucket.kind)) {
+    if (!optionsTuples.has(storyBucket.kind)) {
       return;
     }
-    const tuplesForKind = contextWidthsTuples.get(storyBucket.kind);
+    const tuplesForKind = optionsTuples.get(storyBucket.kind);
     storyBucket.stories.forEach(story => {
       if (tuplesForKind.has(story.name)) {
         story.options = tuplesForKind.get(story.name);
