@@ -95,9 +95,11 @@ storiesOf('addWithPercyOptions', module)
   .addWithPercyOptions('single width', { widths: [444] }, () => <span>Renders in one width</span>)
   .addWithPercyOptions('without options', () => <span>Renders with the fallback width(s)</span>)
   .addWithPercyOptions('with RTL of true for a single story', { rtl: true }, () =>
-    <span>
-      The direction is {direction}.
-    </span>,
+    <div className={direction}>
+      <span>
+        The direction is {direction}.
+      </span>
+    </div>,
   )
   .addWithPercyOptions(
     'with RTL override of false even though the RTL regex matches',
