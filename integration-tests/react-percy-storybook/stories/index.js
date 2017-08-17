@@ -88,30 +88,31 @@ storiesOf('Hierarchy.separator.is.supported', module).add('story', () =>
   <span>Hello hierarchySeparator</span>,
 );
 
-storiesOf('Multiple widths', module)
-  .addWithPercyOptions('multiple', { widths: [222, 333] }, () =>
+storiesOf('addWithPercyOptions', module)
+  .addWithPercyOptions('multiple widths', { widths: [222, 333] }, () =>
     <span>Renders in multiple widths</span>,
   )
-  .addWithPercyOptions('single', { widths: [444] }, () => <span>Renders in one width</span>)
-  .addWithPercyOptions('default', () => <span>Renders with the fallback width(s)</span>)
-  .addWithPercyOptions('with RTL for a single story', { rtl: true }, () =>
+  .addWithPercyOptions('single width', { widths: [444] }, () => <span>Renders in one width</span>)
+  .addWithPercyOptions('without options', () => <span>Renders with the fallback width(s)</span>)
+  .addWithPercyOptions('with RTL of true for a single story', { rtl: true }, () =>
     <span>
       The direction is {direction}.
     </span>,
   )
   .addWithPercyOptions(
-    'Direction: with RTL override even though the RTL regex matches',
+    'with RTL override of false even though the RTL regex matches',
     { rtl: false },
     () =>
       <span>
         This story will only render in one direction. The direction is {direction} == ltr.
       </span>,
-  );
-
-storiesOf('With info addon', module)
-  .add('some story', withInfo('doc string about my component')(() => <span>info story</span>))
+  )
   .addWithPercyOptions(
     'another with info',
     { widths: [555] },
     withInfo('doc string about my component')(() => <span>info 555px width</span>),
   );
+
+
+storiesOf('With info addon', module)
+  .add('some story', withInfo('doc string about my component')(() => <span>info story</span>));
