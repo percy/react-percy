@@ -82,10 +82,11 @@ export default class Suite {
       await this.runAfterEach();
       return snapshotResult;
     });
+    const nonEmptySnapshots = snapshots.filter(snapshot => snapshot !== undefined);
 
     await each(fn => fn())(this.afterAll);
 
-    return [...nestedSnapshots, ...snapshots];
+    return [...nestedSnapshots, ...nonEmptySnapshots];
   }
 
   async runBeforeEach() {
