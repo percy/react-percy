@@ -1,7 +1,7 @@
 import { configure, getStorybook, setAddon } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 import infoAddon, { setDefaults } from '@storybook/addon-info';
-import { percyAddon, serializeStories } from '@percy-io/react-percy-storybook';
+import createPercyAddon from '@percy-io/react-percy-storybook';
 
 import inPercy from '@percy-io/in-percy';
 import faker from 'faker';
@@ -26,7 +26,9 @@ setDefaults({
 });
 setAddon(infoAddon);
 
-// You will only need this if you plan on using addWithPercyOptions 
+const { percyAddon, serializeStories } = createPercyAddon();
+
+// You will only need this if you plan on using addWithPercyOptions
 // addWithPercyOptions can be used to set options for individual stories (i.e. custom widths or RTL settings)
 setAddon(percyAddon);
 
