@@ -8,7 +8,8 @@
     "precommit": "lint-staged",
     "setup": "lerna clean --yes && lerna bootstrap",
     "storybook": "lerna run --scope=react-percy-storybook-integration-tests storybook --stream",
-    "test": "jest",
+    "test": "jest --ci --no-cache --coverage",
+    "test:watch": "jest --watch --notify",
     "test:integration": "./scripts/run-integration-tests.sh"
   },
   "devDependencies": {

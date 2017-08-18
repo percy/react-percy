@@ -74,7 +74,10 @@ if (window && window.location && window.location.search.indexOf('direction=rtl')
   direction = 'rtl';
 }
 
-storiesOf('Direction Demo', module).add('Show the direction', () =>
+// --rtl_regex=Direction is used, so we create some stories that get matched
+const rtlRegex = 'Direction';
+
+storiesOf(`${rtlRegex} Demo`, module).add('Show the direction', () =>
   <div className={direction}>
     <p>
       The direction is {direction}.
@@ -102,19 +105,19 @@ storiesOf('addWithPercyOptions', module)
     </div>,
   )
   .addWithPercyOptions(
-    'with RTL override of false even though the RTL regex matches',
+    `${rtlRegex}: with RTL override of false even though the RTL regex matches`,
+    // rtl: false trumps a positive rtl_regex match
     { rtl: false },
     () =>
       <span>
         This story will only render in one direction. The direction is {direction} == ltr.
       </span>,
-  )
+  );
+
+storiesOf('With info addon', module)
+  .add('some story', withInfo('doc string about my component')(() => <span>info story</span>))
   .addWithPercyOptions(
     'with withInfo instead of addWithInfo',
     { widths: [555] },
     withInfo('doc string about my component')(() => <span>info 555px width</span>),
   );
-
-
-storiesOf('With info addon', module)
-  .add('some story', withInfo('doc string about my component')(() => <span>info story</span>));

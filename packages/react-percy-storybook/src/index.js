@@ -1,3 +1,4 @@
+import ExtendableError from 'es6-error';
 import { storiesKey } from './constants';
 
 /**
@@ -12,16 +13,18 @@ import { storiesKey } from './constants';
  */
 const optionsTuples = new Map();
 
+export class InvalidOptionError extends ExtendableError {}
+
 function assertWidths(widths) {
   if (typeof widths === 'undefined') {
     return;
   }
   if (!widths.length) {
-    throw new Error('Need at least one valid width');
+    throw new InvalidOptionError('Need at least one valid width');
   }
   widths.forEach(width => {
     if (isNaN(width) || width !== ~~width) {
-      throw new Error("Given width '" + width + "' is invalid");
+      throw new InvalidOptionError("Given width '" + width + "' is invalid");
     }
   });
 }
@@ -31,7 +34,7 @@ function assertRtl(rtl) {
     return;
   }
   if (typeof rtl !== 'boolean') {
-    throw new Error("Given rtl setting '" + rtl + "' is invalid");
+    throw new InvalidOptionError("Given rtl setting '" + rtl + "' is invalid");
   }
 }
 
@@ -68,4 +71,5 @@ export const serializeStories = getStorybook => {
     });
   });
   if (typeof window === 'object') window[storiesKey] = storybook;
+  return storybook;
 };
