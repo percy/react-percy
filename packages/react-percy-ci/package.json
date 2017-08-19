@@ -20,6 +20,7 @@
     "@percy-io/react-percy-test-framework": "^0.1.2",
     "@percy-io/react-percy-webpack": "^0.1.2",
     "debug": "^2.6.3",
+    "jsdom": "^11.1.0",
     "promise-each": "^2.2.0"
   },
   "publishConfig": {

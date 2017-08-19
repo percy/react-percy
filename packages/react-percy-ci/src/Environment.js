@@ -1,41 +1,23 @@
 import createSuite from '@percy-io/react-percy-test-framework';
-import vm from 'vm';
-
-const GLOBALS = [
-  'clearImmediate',
-  'clearInterval',
-  'clearTimeout',
-  'console',
-  'setImmediate',
-  'setInterval',
-  'setTimeout',
-];
+import { JSDOM } from 'jsdom';
 
 export default class Environment {
-  constructor(percyConfig) {
-    this.percyConfig = percyConfig;
-    this.context = vm.createContext();
-    this.global = vm.runInContext('this', this.context);
-    this.global.global = this.global;
-    GLOBALS.forEach(key => {
-      this.global[key] = global[key];
-    });
-    this.suite = createSuite(this.global);
+  constructor() {
+    this.context = {};
+    this.rootSuite = createSuite(this.context);
   }
 
   getSnapshots() {
-    return this.suite.getSnapshots();
+    return this.rootSuite.getSnapshots();
   }
 
   async runScript(file) {
-    const script = new vm.Script(file.src, {
-      filename: file.path,
-      displayErrors: true,
+    const window = new JSDOM('', { runScripts: 'outside-only' }).window;
+    Object.keys(this.context).forEach(key => {
+      window[key] = this.context[key];
     });
-    await this.global.suite('', () => {
-      script.runInContext(this.context, {
-        displayErrors: true,
-      });
+    await this.context.suite('', () => {
+      window.eval(file.src);
     });
   }
 }
