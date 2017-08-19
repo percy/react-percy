@@ -3,7 +3,7 @@ import compileAssets from './compileAssets';
 import createDebug from 'debug';
 import each from 'promise-each';
 import Environment from './Environment';
-import getJsFiles from './getJsFiles';
+import getSnapshotFiles from './getSnapshotFiles';
 import render from '@percy-io/react-percy-server-render';
 
 const debug = createDebug('react-percy:ci');
@@ -15,21 +15,22 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
   const assets = await compileAssets(percyConfig, webpackConfig);
 
   const environment = new Environment(percyConfig);
-  const jsFiles = getJsFiles(assets);
-  await each(async jsFile => {
-    debug('executing %s', jsFile.path);
-    await environment.runScript(jsFile);
-  })(jsFiles);
+  const snapshotFiles = getSnapshotFiles(assets);
+  await each(async snapshotFiles => {
+    debug('executing %s', snapshotFiles.path);
+    await environment.runScript(snapshotFiles);
+  })(snapshotFiles);
 
   debug('getting snapshots');
   const snapshots = await environment.getSnapshots();
   debug('found %d snapshots', snapshots.length);
 
-  const resources = client.makeResources(assets);
-  const build = await client.createBuild(resources);
+  const staticResources = client.makeResources(assets);
+  const allResources = [...staticResources];
+  const build = await client.createBuild(allResources);
 
   try {
-    const missingResources = client.getMissingResources(build, resources);
+    const missingResources = client.getMissingResources(build, allResources);
     debug('found missing resources %o', missingResources);
     await client.uploadResources(build, missingResources);
     await client.runSnapshots(build, snapshots, assets, render);
