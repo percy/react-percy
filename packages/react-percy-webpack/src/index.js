@@ -1,3 +1,3 @@
 export compile from './compile';
-export configureEntry from './entry';
+export configureEntry, { SpecialFiles } from './entry';
 export resolve from './resolve';

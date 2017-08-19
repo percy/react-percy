@@ -2,6 +2,11 @@ import findSnapshotFiles from './findSnapshotFiles';
 import merge from 'webpack-merge';
 import path from 'path';
 
+export const SpecialFiles = {
+  include: '$$percy_include$$',
+  render: '$$percy_render$$',
+};
+
 export default function configureEntry(webpackConfig, percyConfig) {
   const snapshotFiles = findSnapshotFiles(percyConfig);
 
@@ -15,8 +20,10 @@ export default function configureEntry(webpackConfig, percyConfig) {
     };
   }, {});
 
+  entry[SpecialFiles.render] = percyConfig.renderer;
+
   if (percyConfig.includeFiles && percyConfig.includeFiles.length) {
-    entry['__percy_include__'] = percyConfig.includeFiles;
+    entry[SpecialFiles.include] = percyConfig.includeFiles;
   }
 
   return merge.strategy({
