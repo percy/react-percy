@@ -2,10 +2,13 @@ import { getMissingResourceShas, makeRootResource, uploadResources } from '../re
 import createSnapshot from './createSnapshot';
 import finalizeSnapshot from './finalizeSnapshot';
 
-export default async function runSnapshot(percyClient, build, snapshot, assets, renderer) {
+export default async function runSnapshot(percyClient, build, snapshot, html, getQueryParams) {
   try {
-    const html = renderer(snapshot.markup, assets);
-    const resource = makeRootResource(percyClient, snapshot.name, html);
+    const queryParams = getQueryParams ? getQueryParams(snapshot) : {};
+    const encodedQueryParams = Object.keys(queryParams)
+      .map(param => `${param}=${encodeURIComponent(queryParams[param])}`)
+      .join('&');
+    const resource = makeRootResource(percyClient, snapshot.name, html, encodedQueryParams);
 
     const percySnapshotOptions = {
       name: snapshot.name,
