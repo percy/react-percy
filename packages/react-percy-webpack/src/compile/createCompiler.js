@@ -7,6 +7,8 @@ export default function createCompiler(percyConfig, webpackConfig) {
   return webpack(
     merge(webpackConfig, {
       output: {
+        chunkFilename: '[name].chunk.js',
+        filename: '[name].js',
         path: path.join(percyConfig.rootDir, 'static'),
         publicPath: '/static/',
       },
