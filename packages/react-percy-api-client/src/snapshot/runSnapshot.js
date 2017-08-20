@@ -1,6 +1,9 @@
 import { getMissingResourceShas, makeRootResource, uploadResources } from '../resources';
+import createDebug from 'debug';
 import createSnapshot from './createSnapshot';
 import finalizeSnapshot from './finalizeSnapshot';
+
+const debug = createDebug('react-percy:api');
 
 export default async function runSnapshot(percyClient, build, snapshot, html, getQueryParams) {
   try {
@@ -16,6 +19,7 @@ export default async function runSnapshot(percyClient, build, snapshot, html, ge
       enableJavaScript: true,
     };
 
+    debug('creating snapshot %s', snapshot.name);
     const percySnapshot = await createSnapshot(
       percyClient,
       build,
@@ -28,6 +32,7 @@ export default async function runSnapshot(percyClient, build, snapshot, html, ge
       await uploadResources(percyClient, build, [resource]);
     }
 
+    debug('finalizing snapshot %s', snapshot.name);
     await finalizeSnapshot(percyClient, percySnapshot, snapshot.name);
   } catch (e) {
     e._percy = {
