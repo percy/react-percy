@@ -38,6 +38,7 @@ it('creates a percy snapshot for the given snapshot', async () => {
   expect(createSnapshot).toHaveBeenCalledWith(percyClient, build, [mockResource], {
     name: 'snapshot',
     widths: [320, 768],
+    enableJavaScript: true,
   });
 });
 

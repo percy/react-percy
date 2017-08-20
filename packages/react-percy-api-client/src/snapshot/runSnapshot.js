@@ -11,8 +11,9 @@ export default async function runSnapshot(percyClient, build, snapshot, html, ge
     const resource = makeRootResource(percyClient, snapshot.name, html, encodedQueryParams);
 
     const percySnapshotOptions = {
-      name: snapshot.name,
       ...snapshot.options,
+      name: snapshot.name,
+      enableJavaScript: true,
     };
 
     const percySnapshot = await createSnapshot(
