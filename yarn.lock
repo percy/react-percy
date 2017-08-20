@@ -5972,12 +5972,6 @@ promise-each@^2.2.0:
   dependencies:
     any-promise "^0.1.0"
 
-promise-map-series@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/promise-map-series/-/promise-map-series-0.2.3.tgz#c2d377afc93253f6bd03dbb77755eb88ab20a847"
-  dependencies:
-    rsvp "^3.0.14"
-
 promise.prototype.finally@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/promise.prototype.finally/-/promise.prototype.finally-3.0.0.tgz#afb1710ff2068562966f6d006d12c3107c7a4f39"
@@ -6591,10 +6585,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^2.0.0"
     inherits "^2.0.1"
-
-rsvp@^3.0.14:
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
 
 run-async@^2.2.0:
   version "2.3.0"
