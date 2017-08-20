@@ -1,10 +1,13 @@
 import * as args from './args';
 import chalk from 'chalk';
+import createDebug from 'debug';
 import pkgDir from 'pkg-dir';
 import readPercyConfig from '@percy-io/react-percy-config';
 import { resolve as readWebpackConfig } from '@percy-io/react-percy-webpack';
-import runPercy from './runPercy';
+import runPercy from '@percy-io/react-percy-ci';
 import yargs from 'yargs';
+
+const debug = createDebug('react-percy');
 
 const VERSION = require('../package.json').version;
 
@@ -35,8 +38,12 @@ export function run(argv) {
   const webpackConfig = readWebpackConfig(argv.config);
 
   return runPercy(percyConfig, webpackConfig, process.env.PERCY_TOKEN)
-    .then(() => process.on('exit', () => process.exit(0)))
+    .then(() => {
+      debug('exiting successfully');
+      process.on('exit', () => process.exit(0));
+    })
     .catch(err => {
+      debug('exiting with error %o', err);
       // eslint-disable-next-line no-console
       console.log(chalk.bold.red(err.stack || err));
       process.on('exit', () => process.exit(1));
