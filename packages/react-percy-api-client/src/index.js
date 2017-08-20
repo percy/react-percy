@@ -40,7 +40,7 @@ export default class PercyApiClient {
   }
 
   finalizeSnapshot(snapshot) {
-    finalizeSnapshot(this._client, snapshot);
+    return finalizeSnapshot(this._client, snapshot);
   }
 
   makeResources(assets) {
