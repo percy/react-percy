@@ -28,7 +28,15 @@ const givenRenderer = mockRenderer => {
 };
 
 const givenSnapshot = (name, markup) => {
-  window[GlobalVariables.snapshotName] = name;
+  const href = `http://percy.test?snapshot=${encodeURIComponent(name)}`;
+  Object.defineProperty(window.location, 'href', {
+    get() {
+      return href;
+    },
+    configurable: true,
+    writeable: true,
+  });
+
   window[GlobalVariables.rootSuite] = {
     getSnapshotMarkup(snapshotName) {
       const snapshotMarkup = snapshotName === name ? markup : undefined;
