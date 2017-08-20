@@ -4,6 +4,11 @@ set -e
 
 SUITE=$1
 
+error() {
+  echo "error: $*" >&2
+  exit 1
+}
+
 link () {
   pushd ../../packages/$1
   yarn link
@@ -17,10 +22,20 @@ if [ "$SUITE" = "react-percy-storybook" ]; then
   if [[ "$PERCY_ENABLE" != "0" && -n "$PERCY_TOKEN" ]] ; then
     cd integration-tests/react-percy-storybook
     link react-percy-storybook
-    yarn run storybook:percy
+    yarn storybook:percy
+  elif [[ "$PERCY_ENABLE" != "0" && "$TRAVIS" != true ]] ; then
+    # This is local, when invoking yarn test:integration react-percy-storybook w/o PERCY_TOKEN
+    error "No PERCY_TOKEN given"
   fi
 elif [ "$SUITE" = "react-percy" ]; then
   cd integration-tests/react-percy
   link react-percy
-  yarn run test
+  link react-percy-webpack
+  yarn test
+else
+  cat <<EOF
+Valid targets are:
+* react-percy-storybook
+* react-percy
+EOF
 fi
