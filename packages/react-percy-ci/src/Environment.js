@@ -1,5 +1,6 @@
+import { evalVMScript, jsdom } from 'jsdom';
 import createSuite from '@percy-io/react-percy-test-framework';
-import { JSDOM } from 'jsdom';
+import vm from 'vm';
 
 export default class Environment {
   constructor() {
@@ -12,10 +13,14 @@ export default class Environment {
   }
 
   runScript(src) {
-    const window = new JSDOM('', { runScripts: 'outside-only' }).window;
+    const document = jsdom();
+    const window = document.defaultView;
     Object.keys(this.context).forEach(key => {
       window[key] = this.context[key];
     });
-    window.eval(src);
+    const script = new vm.Script(src, {
+      displayErrors: true,
+    });
+    evalVMScript(window, script);
   }
 }
