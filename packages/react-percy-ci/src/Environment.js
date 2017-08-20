@@ -7,17 +7,15 @@ export default class Environment {
     this.rootSuite = createSuite(this.context);
   }
 
-  getSnapshots() {
-    return this.rootSuite.getSnapshots();
+  getSnapshotDefinitions() {
+    return this.rootSuite.getSnapshotDefinitions();
   }
 
-  async runScript(file) {
+  runScript(src) {
     const window = new JSDOM('', { runScripts: 'outside-only' }).window;
     Object.keys(this.context).forEach(key => {
       window[key] = this.context[key];
     });
-    await this.context.suite('', () => {
-      window.eval(file.src);
-    });
+    window.eval(src);
   }
 }
