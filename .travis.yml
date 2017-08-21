@@ -32,7 +32,7 @@ script:
       fi
   - |
       if [ "$UNIT_TEST" = "true" ]; then
-        yarn test -- --ci --coverage=$COVERAGE --color
+        yarn test -- --ci --coverage=$COVERAGE --maxWorkers=4 --color
       fi
   - |
       if [ "$INTEGRATION_TEST" != "" ]; then
