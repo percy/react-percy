@@ -28,11 +28,11 @@ before_install:
 script:
   - |
       if [ "$LINT" = "true" ]; then
-        yarn lint
+        yarn lint -- --color
       fi
   - |
       if [ "$UNIT_TEST" = "true" ]; then
-        yarn test -- --ci --coverage=$COVERAGE
+        yarn test -- --ci --coverage=$COVERAGE --color
       fi
   - |
       if [ "$INTEGRATION_TEST" != "" ]; then
