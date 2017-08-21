@@ -4,7 +4,7 @@ declare module '@percy-io/react-percy-storybook' {
 
   export interface PercyOptions {
     rtl?: boolean;
-    widths: number[];
+    widths?: number[];
   }
 
   export interface PercyAddon {
