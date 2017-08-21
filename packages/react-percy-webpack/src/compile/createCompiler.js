@@ -10,7 +10,7 @@ export default function createCompiler(percyConfig, webpackConfig) {
         chunkFilename: '[name].chunk.js',
         filename: '[name].js',
         path: path.join(percyConfig.rootDir, 'static'),
-        publicPath: '/static/',
+        publicPath: '/',
       },
       plugins: [new MemoryOutputPlugin('/static/')],
     }),
