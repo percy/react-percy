@@ -8,7 +8,7 @@ declare module '@percy-io/react-percy-storybook' {
   }
 
   export interface PercyAddon {
-    addWithVisreg(storyName: string, options: PercyOptions | RenderFunction, storyFn: RenderFunction): this;
+    addWithVisreg(storyName: string, options: PercyOptions | RenderFunction, storyFn?: RenderFunction): this;
   }
 
   export interface PercyAddonContext {
