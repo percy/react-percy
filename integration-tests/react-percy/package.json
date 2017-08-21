@@ -3,6 +3,7 @@
   "name": "react-percy-integration-tests",
   "version": "1.0.1",
   "scripts": {
+    "percy": "react-percy --config webpack/webpack.config.js",
     "test": "jest"
   },
   "dependencies": {

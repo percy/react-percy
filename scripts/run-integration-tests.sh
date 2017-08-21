@@ -31,7 +31,7 @@ elif [ "$SUITE" = "react-percy" ]; then
   cd integration-tests/react-percy
   link react-percy
   link react-percy-webpack
-  yarn test
+  yarn percy
 else
   cat <<EOF
 Valid targets are:
