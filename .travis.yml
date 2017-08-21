@@ -18,11 +18,9 @@ matrix:
     - node_js: "8"
       env: UNIT_TEST=true COVERAGE=true
     - node_js: "8"
-      env: INTEGRATION_TEST=react-percy-storybook PERCY_PROJECT=percy/react-percy-storybook
-      secure: "bKFo+miXkGpQw5hj1LvYGLvwXetg43zZIp5PO+LKaLy8VUkJHkAi9qlJXorNXM9001rQn1vmsu8ATTh3rhDLbWhUbFp/B9/Tj6CLIZB3nmVmhTTGdLwiCbcUootIzcONxek6ZZ/4LJ+EGzwTtuu3hjHPH0diklKF3b5xCHdYnm7FJkRP9kOnbJfTwbveaNEBNozuqmEJ7ktlXyOPDP61//7qe1HfXo/nAbC9SeEYXbHHnpet/G/TNnQliM7Ciw4cUk9HndT+1fIuwUNEYCejoL4iantRGkFRLXFBuPvRMXWFTWOeuagq0Z+lgLDYZYL7tLbpldyYuOrxM5dKQSB/6Yu9bbmioMWLhLA4Pa4v8nnTnBySnlw6fShEfQZZ2rvYJu9mc2zBABUw/NuXzVwDW+uxA48K5u+710n1SEAgzKHy13vWT5uO+7Z2jaejiCZXFgWX96a4QvQ+EaFTGukFgfEZmGgI3KmoIarHod8yUgrhKnvsnsUwgs6Qe++yM9ra6pT1AJVjWZ/SHKPgzYFHt3aHN35ASuRzKpEPO6LA4ywr104lcOqq2s8jeXJeJp9qHWMU3TxLGhlpEF8qE3R2yZ7ii0/SNEyXcVGfpPOKmYiqH9yho6G3DX58MsKoUQ6mlD7Lr64jR+WQy8sKwMyRRqUWLxXbwdNrmoeVBVkpl2E="
+      env: INTEGRATION_TEST=react-percy-storybook PERCY_PROJECT=percy/react-percy-storybook PERCY_TOKEN="$STORYBOOK_PERCY_TOKEN"
     - node_js: "8"
-      env: INTEGRATION_TEST=react-percy PERCY_PROJECT=percy/react-percy
-      secure: "Z7wtNdIkPDqK4BfyL21ERU3D7ee3vHmqRW4r+D+A8MFgY9JsdWNSQ/S98mgHMpHRlJGyEjp4/HRI7fDtd/4UDIwi1qQ/t9rZeXbX9gqbu0Nt3n5pGEB7YmcacFDH4HFjKAXhQH09PkDsGay4IHLYVoi0vSsFiqlL+ngAnCqHgD//zqFrskDXfCyPu1xE9HXSJ8+89KW4eYfMtH0WtDY2xWSFalsrZsQQOHhGT7EuezvefbHdCL50Z8SzGodNmwYPkrs2lRe6rngZ08ItXVuo4DmkOiqGEMcEPgRIuwOxile0YfyXVsvo6pd8hqYJvSxV4OQSCNkdKtVsCDTjwPpYzBINLr2QKkRrogzaq8hKHFCTf1zlV54obT8dzhqp8J+ts9maAjxhDYKhgoHm15MFKMfyinNKOluEo+gItisbD6ddoYICiaWzi/XRmhWtkRAIoXfu9JnKKpHait6kQfLC4roUvF1QIbvZXZqigAcCl8RYLWWdT8FmL7UPQLt8KG0/C8VAHwkWZueYBTWMPrQHS6KMeCGyk+Jy1MeOqmStUk9hB8Ke79NvJgFiVJ8UmhZDqZZvFfNs2fE941QMUecHI/ZPhTuSTAI5RAT8C1vltwH9MygkigiOy5V58V4mLTbfmAiG5S0zypNOUumD/uyFjT2tVnx0ZHWDOkR2ymyrZ/0="
+      env: INTEGRATION_TEST=react-percy PERCY_PROJECT=percy/react-percy PERCY_TOKEN="$REACT_PERCY_TOKEN"
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.27.5
   - export PATH="$HOME/.yarn/bin:$PATH"
