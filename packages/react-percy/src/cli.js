@@ -5,6 +5,8 @@ import { resolve as readWebpackConfig } from '@percy-io/react-percy-webpack';
 import runPercy from '@percy-io/react-percy-ci';
 import yargs from 'yargs';
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 const VERSION = require('../package.json').version;
 
 // eslint-disable-next-line import/prefer-default-export
