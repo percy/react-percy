@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "build": "vitruvius build --src src --dest lib --ignore-packages \"**/integration-tests/**\"",
-    "lint": "eslint . --cache",
+    "lint": "eslint . --cache --ignore-pattern '!.*'",
     "postinstall": "yarn build --silent",
     "prebuild": "rimraf ./packages/*/lib",
     "precommit": "lint-staged",
@@ -52,7 +52,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix --color",
+      "eslint --fix --color --ignore-pattern '!.*'",
       "git add",
       "jest --bail --findRelatedTests --color"
     ]
