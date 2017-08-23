@@ -12,6 +12,16 @@ export default function createCompiler(percyConfig, webpackConfig) {
         path: path.join(percyConfig.rootDir, 'static'),
         publicPath: '/',
       },
+      module: {
+        rules: [
+          {
+            test: /\.percy\.(js|jsx)/,
+            exclude: /node_modules/,
+            enforce: 'pre',
+            loader: require.resolve('./percySnapshotLoader'),
+          },
+        ],
+      },
       plugins: [new MemoryOutputPlugin('/static/')],
     }),
   );
