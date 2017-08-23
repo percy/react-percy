@@ -33,7 +33,7 @@ export function run(argv, rootDir) {
   const packageRoot = rootDir || process.cwd();
 
   const percyConfig = readPercyConfig(packageRoot);
-  const webpackConfig = readWebpackConfig(argv.config);
+  const webpackConfig = readWebpackConfig(packageRoot, argv.config);
 
   return runPercy(percyConfig, webpackConfig, process.env.PERCY_TOKEN)
     .then(() => {
