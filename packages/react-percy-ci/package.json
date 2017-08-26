@@ -15,6 +15,7 @@
     "lib"
   ],
   "dependencies": {
+    "@percy-io/percy-snapshot-render-react": "^0.2.0",
     "@percy-io/react-percy-api-client": "^0.2.0",
     "@percy-io/react-percy-test-framework": "^0.2.0",
     "@percy-io/react-percy-webpack": "^0.2.0",
