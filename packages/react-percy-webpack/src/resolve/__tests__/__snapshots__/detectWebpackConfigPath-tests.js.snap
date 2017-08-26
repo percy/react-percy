@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`throws when there is no webpack config in the package root and it is not a create-react-app project 1`] = `"[31mNo webpack config file found. Use [39m[31m[1m\`react-percy --config <path>\`[22m[39m[31m to specify the path of your webpack config.[39m"`;

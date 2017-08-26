@@ -64,5 +64,5 @@ it('returns path of react-scripts dev webpack.config.js when react-scripts is in
 });
 
 it('throws when there is no webpack config in the package root and it is not a create-react-app project', () => {
-  expect(() => detectWebpackConfigPath(packageRoot, resolve)).toThrow();
+  expect(() => detectWebpackConfigPath(packageRoot, resolve)).toThrowErrorMatchingSnapshot();
 });
