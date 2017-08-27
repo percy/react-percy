@@ -9,5 +9,9 @@ export default function getExtension(configPath) {
       return extension;
     }
   }
+
+  // Treat .js files as .babel.js files so interpret loads babel-register.
+  // This allows webpack configs to use ES6 syntax even if they don't end
+  // with a .babel.js extension.
   return '.babel.js';
 }
