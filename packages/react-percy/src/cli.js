@@ -30,6 +30,22 @@ export function run(argv, rootDir) {
     return;
   }
 
+  if (!process.env.PERCY_TOKEN) {
+    process.stdout.write(
+      chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.'),
+    );
+    process.on('exit', () => process.exit(1));
+    return;
+  }
+
+  if (!process.env.PERCY_PROJECT) {
+    process.stdout.write(
+      chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.'),
+    );
+    process.on('exit', () => process.exit(1));
+    return;
+  }
+
   const packageRoot = rootDir || process.cwd();
 
   const percyConfig = readPercyConfig(packageRoot);
