@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`throws when the webpack config cannot be found on disk 1`] = `"[31mWebpack config file [39m[31m[1mwebpack.config.foo.js[22m[39m[31m could not be found.[39m"`;

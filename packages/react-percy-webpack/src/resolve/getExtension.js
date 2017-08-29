@@ -1,7 +1,6 @@
-import * as path from 'path';
 import interpret from 'interpret';
 
-const extensions = [...Object.keys(interpret.extensions).filter(ext => ext !== '.js'), '.js'];
+const extensions = Object.keys(interpret.extensions).filter(ext => ext !== '.js');
 
 export default function getExtension(configPath) {
   for (let i = 0; i < extensions.length; i++) {
@@ -10,5 +9,9 @@ export default function getExtension(configPath) {
       return extension;
     }
   }
-  return path.extname(configPath);
+
+  // Treat .js files as .babel.js files so interpret loads babel-register.
+  // This allows webpack configs to use ES6 syntax even if they don't end
+  // with a .babel.js extension.
+  return '.babel.js';
 }

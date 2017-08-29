@@ -1,9 +1,34 @@
+import detectWebpackVersion from './detectWebpackVersion';
 import MemoryOutputPlugin from './MemoryOutputPlugin';
 import merge from 'webpack-merge';
 import path from 'path';
 import webpack from 'webpack';
 
 export default function createCompiler(percyConfig, webpackConfig) {
+  const webpackVersion = detectWebpackVersion();
+
+  const module =
+    webpackVersion === 1
+      ? {
+          preLoaders: [
+            {
+              test: /\.percy\.(js|jsx)/,
+              exclude: /node_modules/,
+              loader: require.resolve('./percySnapshotLoader'),
+            },
+          ],
+        }
+      : {
+          rules: [
+            {
+              test: /\.percy\.(js|jsx)/,
+              exclude: /node_modules/,
+              enforce: 'pre',
+              loader: require.resolve('./percySnapshotLoader'),
+            },
+          ],
+        };
+
   return webpack(
     merge(webpackConfig, {
       output: {
@@ -12,16 +37,7 @@ export default function createCompiler(percyConfig, webpackConfig) {
         path: path.join(percyConfig.rootDir, 'static'),
         publicPath: '/',
       },
-      module: {
-        rules: [
-          {
-            test: /\.percy\.(js|jsx)/,
-            exclude: /node_modules/,
-            enforce: 'pre',
-            loader: require.resolve('./percySnapshotLoader'),
-          },
-        ],
-      },
+      module,
       plugins: [new MemoryOutputPlugin('/static/')],
     }),
   );
