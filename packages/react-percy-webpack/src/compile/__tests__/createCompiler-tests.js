@@ -4,7 +4,15 @@ import webpack from 'webpack';
 
 class WebpackCompiler {}
 const mockCompiler = () => new WebpackCompiler();
-jest.mock('webpack', () => jest.fn(() => mockCompiler()));
+jest.mock('webpack', () => {
+  const webpack = jest.fn(() => mockCompiler());
+  webpack.optimize = {
+    CommonsChunkPlugin: class MockCommonsChunkPlugin {
+      mock = 'CommonsChunkPlugin';
+    },
+  };
+  return webpack;
+});
 
 jest.mock('../detectWebpackVersion', () => jest.fn());
 
@@ -91,6 +99,33 @@ it('adds percy snapshot loader as a pre-enforced rule given webpack 3', () => {
       }),
     }),
   );
+});
+
+it('removes commons chunk plugins', () => {
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const commonsChunkPlugin = new webpack.optimize.CommonsChunkPlugin();
+  const webpackConfig = {
+    plugins: [commonsChunkPlugin, 'foo'],
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack.mock.calls[0][0].plugins).not.toContain(commonsChunkPlugin);
+});
+
+it('does not remove other plugins', () => {
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const webpackConfig = {
+    plugins: [new webpack.optimize.CommonsChunkPlugin(), 'foo'],
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack.mock.calls[0][0].plugins).toContain('foo');
 });
 
 it('returns a webpack compiler', () => {

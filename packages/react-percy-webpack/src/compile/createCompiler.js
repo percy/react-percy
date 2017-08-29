@@ -29,16 +29,20 @@ export default function createCompiler(percyConfig, webpackConfig) {
           ],
         };
 
-  return webpack(
-    merge(webpackConfig, {
-      output: {
-        chunkFilename: '[name].chunk.js',
-        filename: '[name].js',
-        path: path.join(percyConfig.rootDir, 'static'),
-        publicPath: '/',
-      },
-      module,
-      plugins: [new MemoryOutputPlugin('/static/')],
-    }),
+  const mergedWebpackConfig = merge(webpackConfig, {
+    output: {
+      chunkFilename: '[name].chunk.js',
+      filename: '[name].js',
+      path: path.join(percyConfig.rootDir, 'static'),
+      publicPath: '/',
+    },
+    module,
+    plugins: [new MemoryOutputPlugin('/static/')],
+  });
+
+  mergedWebpackConfig.plugins = mergedWebpackConfig.plugins.filter(
+    plugin => !(plugin instanceof webpack.optimize.CommonsChunkPlugin),
   );
+
+  return webpack(mergedWebpackConfig);
 }
