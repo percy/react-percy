@@ -32,7 +32,7 @@ export function run(argv, rootDir) {
 
   if (!process.env.PERCY_TOKEN) {
     process.stdout.write(
-      chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.'),
+      chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.\n'),
     );
     process.on('exit', () => process.exit(1));
     return;
@@ -40,7 +40,7 @@ export function run(argv, rootDir) {
 
   if (!process.env.PERCY_PROJECT) {
     process.stdout.write(
-      chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.'),
+      chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.\n'),
     );
     process.on('exit', () => process.exit(1));
     return;
