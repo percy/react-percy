@@ -57,7 +57,8 @@ export function run(argv, rootDir) {
     })
     .catch(err => {
       // eslint-disable-next-line no-console
-      console.log(chalk.bold.red(err.stack || err));
+      console.log(chalk.bold.red(err.stack || err.message || err));
+
       process.on('exit', () => process.exit(1));
     });
 }
