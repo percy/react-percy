@@ -40,14 +40,8 @@ export function run(argv, rootDir) {
       process.on('exit', () => process.exit(0));
     })
     .catch(err => {
-      let formattedError;
-      try {
-        formattedError = err.stack || JSON.stringify(err);
-      } catch (e) {
-        formattedError = err;
-      }
       // eslint-disable-next-line no-console
-      console.log(chalk.bold.red(formattedError));
+      console.log(chalk.bold.red(err.stack || err));
       process.on('exit', () => process.exit(1));
     });
 }
