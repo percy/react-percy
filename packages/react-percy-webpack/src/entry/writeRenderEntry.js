@@ -18,7 +18,9 @@ export default function writeRenderEntry(percyConfig, filePath, resolver = requi
     const rootEl = document.getElementById("${RootElementId}");
 
     rootSuite.getSnapshotMarkup(snapshotName)
-      .then(markup => render(markup, rootEl));
+      .then(function(markup) {
+        return render(markup, rootEl);
+      });
   `,
   );
 }

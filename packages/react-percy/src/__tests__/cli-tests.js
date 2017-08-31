@@ -43,6 +43,10 @@ beforeEach(() => {
 
   stdout = [];
   process.stdout.write = message => stdout.push(message);
+
+  delete process.env.PERCY_ENABLE;
+  process.env.PERCY_TOKEN = 'token';
+  process.env.PERCY_PROJECT = 'project';
 });
 
 it('shows help text given help arg', async () => {
@@ -75,6 +79,30 @@ it('exits with success code given version arg', async () => {
   await run();
 
   expect(process.exit).toHaveBeenCalledWith(0);
+});
+
+it('exits with success code given PERCY_ENABLE environment variable is set to 0', async () => {
+  process.env.PERCY_ENABLE = 0;
+
+  await run();
+
+  expect(process.exit).toHaveBeenCalledWith(0);
+});
+
+it('exits with error code given no PERCY_TOKEN environment variable', async () => {
+  delete process.env.PERCY_TOKEN;
+
+  await run();
+
+  expect(process.exit).toHaveBeenCalledWith(1);
+});
+
+it('exits with error code given no PERCY_PROJECT environment variable', async () => {
+  delete process.env.PERCY_PROJECT;
+
+  await run();
+
+  expect(process.exit).toHaveBeenCalledWith(1);
 });
 
 it('exits with success code given running succeeds', async () => {

@@ -1,4 +1,5 @@
 import ApiClient from '@percy-io/react-percy-api-client';
+import chalk from 'chalk';
 import compileAssets from './compileAssets';
 import createDebug from 'debug';
 import { EntryNames } from '@percy-io/react-percy-webpack';
@@ -6,12 +7,14 @@ import Environment from './Environment';
 import findEntryPath from './findEntryPath';
 import getHTML from './getHTML';
 import getQueryParamsForSnapshot from './getQueryParamsForSnapshot';
+import reporter from './reporter';
 
 const debug = createDebug('react-percy:ci');
 
 export default async function run(percyConfig, webpackConfig, percyToken) {
   const client = new ApiClient(percyToken);
 
+  reporter.log('Compiling...');
   debug('compiling assets');
   const assets = await compileAssets(percyConfig, webpackConfig);
 
@@ -23,7 +26,16 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
   debug('getting snapshots');
   const snapshots = environment.getSnapshotDefinitions();
   debug('found snapshots %o', snapshots.map(snapshot => snapshot.name));
+  if (!snapshots.length) {
+    reporter.log(chalk.yellow.bold('No snapshots found'));
+    return;
+  }
 
+  reporter.log(
+    'Uploading %d snapshot%s to Percy',
+    snapshots.length,
+    snapshots.length > 1 ? 's' : '',
+  );
   const resources = client.makeResources(assets);
   const build = await client.createBuild(resources);
 
@@ -37,4 +49,6 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
   } finally {
     await client.finalizeBuild(build);
   }
+
+  reporter.log('Visual diffs are now processing at %s', build.attributes['web-url']);
 }

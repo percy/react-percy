@@ -30,6 +30,28 @@ export function run(argv, rootDir) {
     return;
   }
 
+  if (process.env.PERCY_ENABLE === '0') {
+    process.stdout.write('Percy is disabled by PERCY_ENABLE=0 environment variable. Skipping.\n');
+    process.on('exit', () => process.exit(0));
+    return;
+  }
+
+  if (!process.env.PERCY_TOKEN) {
+    process.stdout.write(
+      chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.\n'),
+    );
+    process.on('exit', () => process.exit(1));
+    return;
+  }
+
+  if (!process.env.PERCY_PROJECT) {
+    process.stdout.write(
+      chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.\n'),
+    );
+    process.on('exit', () => process.exit(1));
+    return;
+  }
+
   const packageRoot = rootDir || process.cwd();
 
   const percyConfig = readPercyConfig(packageRoot);
@@ -40,14 +62,9 @@ export function run(argv, rootDir) {
       process.on('exit', () => process.exit(0));
     })
     .catch(err => {
-      let formattedError;
-      try {
-        formattedError = err.stack || JSON.stringify(err);
-      } catch (e) {
-        formattedError = err;
-      }
       // eslint-disable-next-line no-console
-      console.log(chalk.bold.red(formattedError));
+      console.log(chalk.bold.red(err.stack || err.message || err));
+
       process.on('exit', () => process.exit(1));
     });
 }
