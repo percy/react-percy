@@ -30,6 +30,12 @@ export function run(argv, rootDir) {
     return;
   }
 
+  if (process.env.PERCY_ENABLE === '0') {
+    process.stdout.write('Percy is disabled by PERCY_ENABLE=0 environment variable. Skipping.\n');
+    process.on('exit', () => process.exit(0));
+    return;
+  }
+
   if (!process.env.PERCY_TOKEN) {
     process.stdout.write(
       chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.\n'),
