@@ -18,6 +18,9 @@
   "keywords": [
     "percy"
   ],
+  "dependencies": {
+    "babel-runtime": "^6.26.0"
+  },
   "publishConfig": {
     "access": "public"
   },
