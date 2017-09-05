@@ -33,18 +33,13 @@ it('returns data when creating the build succeeds', async () => {
 });
 
 it('rejects the error response on failure', async () => {
-  percyClient.createBuild.mockImplementation(() =>
-    Promise.reject({
-      response: {
-        body: '501 Error',
-      },
-    }),
-  );
+  const error = new Error('there was an error');
+  percyClient.createBuild.mockImplementation(() => Promise.reject(error));
 
   try {
     await createBuild(percyClient, [{}, {}]);
   } catch (e) {
-    expect(e).toBe('501 Error');
+    expect(e).toBe(error);
   }
 
   expect.assertions(1);

@@ -113,8 +113,41 @@ it('exits with success code given running succeeds', async () => {
   expect(process.exit).toHaveBeenCalledWith(0);
 });
 
+it('exits with success code given Percy outage', async () => {
+  runPercy.mockImplementation(() =>
+    Promise.reject({
+      name: 'StatusCodeError',
+      statusCode: 500,
+      error: { errors: [{ detail: 'Percy is down' }] },
+    }),
+  );
+
+  await run();
+
+  expect(process.exit).toHaveBeenCalledWith(0);
+});
+
+it('exits with error code given other Percy error', async () => {
+  runPercy.mockImplementation(() =>
+    Promise.reject({
+      name: 'StatusCodeError',
+      statusCode: 401,
+      error: { errors: [{ detail: 'Invalid token' }] },
+    }),
+  );
+
+  await run();
+
+  expect(process.exit).toHaveBeenCalledWith(1);
+});
+
 it('exits with error code given running fails', async () => {
-  runPercy.mockImplementation(() => Promise.reject('error!'));
+  runPercy.mockImplementation(() =>
+    Promise.reject({
+      name: 'Error',
+      message: 'Some other sort of error',
+    }),
+  );
 
   await run();
 
