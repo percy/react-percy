@@ -29,18 +29,13 @@ it('rejects the error response on failure', async () => {
   const resource = {
     content: 'resource contents',
   };
-  percyClient.uploadResource.mockImplementation(() =>
-    Promise.reject({
-      response: {
-        body: '501 Error',
-      },
-    }),
-  );
+  const error = new Error('there was an error');
+  percyClient.uploadResource.mockImplementation(() => Promise.reject(error));
 
   try {
     await uploadResource(percyClient, build, resource);
   } catch (e) {
-    expect(e).toBe('501 Error');
+    expect(e).toBe(error);
   }
 
   expect.assertions(1);

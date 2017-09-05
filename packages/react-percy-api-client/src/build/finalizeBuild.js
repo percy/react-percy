@@ -11,8 +11,8 @@ export default function finalizeBuild(percyClient, build) {
         resolve();
       },
       err => {
-        debug('error finalizing build %s', err.response.body);
-        reject(err.response.body);
+        debug('error finalizing build: %s (%s)', err.error, err.statusCode);
+        reject(err);
       },
     );
   });
