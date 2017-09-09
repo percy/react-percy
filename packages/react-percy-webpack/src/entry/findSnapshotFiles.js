@@ -1,4 +1,5 @@
 import glob from 'glob';
+import path from 'path';
 
 export default function findSnapshotFiles(percyConfig) {
   const snapshotFiles = new Set();
@@ -9,7 +10,7 @@ export default function findSnapshotFiles(percyConfig) {
         cwd: percyConfig.rootDir,
         ignore: percyConfig.snapshotIgnorePatterns,
       })
-      .forEach(file => snapshotFiles.add(file));
+      .forEach(file => snapshotFiles.add(path.normalize(file)));
   });
   return Array.from(snapshotFiles);
 }
