@@ -1,14 +1,17 @@
 import detectWebpackConfigPath from '../detectWebpackConfigPath';
 import fs from 'fs';
+import path from 'path';
 
 jest.mock('fs', () => ({
   existsSync: jest.fn(),
 }));
 
-const packageRoot = '/some/package/root';
+const packageRoot = path.normalize('/some/package/root');
 
 let mockPackage;
-jest.mock('/some/package/root/package.json', () => mockPackage, { virtual: true });
+jest.mock(require('path').normalize('/some/package/root/package.json'), () => mockPackage, {
+  virtual: true,
+});
 
 let exists;
 let resolve;
@@ -28,24 +31,25 @@ beforeEach(() => {
 });
 
 it('returns path of webpack.config.js in package root when found', () => {
-  exists.add('/some/package/root/webpack.config.js');
+  exists.add(path.normalize('/some/package/root/webpack.config.js'));
 
   const configPath = detectWebpackConfigPath(packageRoot, resolve);
 
-  expect(configPath).toBe('/some/package/root/webpack.config.js');
+  expect(configPath).toBe(path.normalize('/some/package/root/webpack.config.js'));
 });
 
 it('returns path of react-scripts dev webpack.config.js when react-scripts is installed as a dependency', () => {
   mockPackage.dependencies = {
     'react-scripts': '^1.1.0',
   };
-  resolvePaths['react-scripts/config/webpack.config.dev'] =
-    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js';
+  resolvePaths['react-scripts/config/webpack.config.dev'] = path.normalize(
+    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js',
+  );
 
   const configPath = detectWebpackConfigPath(packageRoot, resolve);
 
   expect(configPath).toBe(
-    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js',
+    path.normalize('/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js'),
   );
 });
 
@@ -53,16 +57,17 @@ it('returns path of react-scripts dev webpack.config.js when react-scripts is in
   mockPackage.devDependencies = {
     'react-scripts': '^1.1.0',
   };
-  resolvePaths['react-scripts/config/webpack.config.dev'] =
-    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js';
+  resolvePaths['react-scripts/config/webpack.config.dev'] = path.normalize(
+    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js',
+  );
 
   const configPath = detectWebpackConfigPath(packageRoot, resolve);
 
   expect(configPath).toBe(
-    '/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js',
+    path.normalize('/some/package/root/node_modules/react-scripts/config/webpack.config.dev.js'),
   );
 });
 
 it('throws when there is no webpack config in the package root and it is not a create-react-app project', () => {
-  expect(() => detectWebpackConfigPath(packageRoot, resolve)).toThrowErrorMatchingSnapshot();
+  expect(() => detectWebpackConfigPath(packageRoot, resolve)).toThrow();
 });

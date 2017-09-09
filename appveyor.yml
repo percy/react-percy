@@ -27,7 +27,7 @@ test_script:
   # run tests
   - yarn lint
   - yarn build
-  - yarn test
+  - yarn test --ci
 
 build:
   off
