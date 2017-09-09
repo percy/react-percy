@@ -34,7 +34,7 @@ const givenWebpackConfig = (mockConfig = {}) => {
 it('throws when the webpack config cannot be found on disk', () => {
   fs.existsSync.mockReturnValue(false);
 
-  expect(() => requireWebpackConfig(configPath)).toThrowErrorMatchingSnapshot();
+  expect(() => requireWebpackConfig(configPath)).toThrow();
 });
 
 it('registers the necessary compilers before loading the config', () => {

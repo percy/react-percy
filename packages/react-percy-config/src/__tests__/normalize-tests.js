@@ -1,5 +1,6 @@
 import defaults from '../defaults';
 import normalize from '../normalize';
+import path from 'path';
 
 it('sets `includeFiles` to an empty array given no `includeFiles` in config', () => {
   const config = {};
@@ -58,7 +59,7 @@ it('sets `rootDir` to normalized `rootDir` from config', () => {
 
   const normalizedConfig = normalize(config, packageRoot);
 
-  expect(normalizedConfig.rootDir).toEqual('/config/root');
+  expect(normalizedConfig.rootDir).toEqual(path.normalize('/config/root'));
 });
 
 it('sets default `snapshotIgnorePatterns` given none specified in config', () => {

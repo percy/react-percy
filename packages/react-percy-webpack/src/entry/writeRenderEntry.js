@@ -1,12 +1,13 @@
-import fs from 'fs';
 import { GlobalVariables, RootElementId } from './constants';
+import escapePathForWindows from './escapePathForWindows';
+import fs from 'fs';
 
 export default function writeRenderEntry(percyConfig, filePath, resolver = require.resolve) {
   fs.writeFileSync(
     filePath,
     `
     const url = require("url");
-    const renderer = require("${resolver(percyConfig.renderer)}");
+    const renderer = require("${escapePathForWindows(resolver(percyConfig.renderer))}");
 
     const render = renderer.default || renderer;
 
