@@ -1,5 +1,6 @@
 import createCompiler from '../createCompiler';
 import detectWebpackVersion from '../detectWebpackVersion';
+import path from 'path';
 import webpack from 'webpack';
 
 class WebpackCompiler {}
@@ -122,7 +123,7 @@ it('outputs to static folder given debug mode is off', () => {
   expect(webpack).toHaveBeenCalledWith(
     expect.objectContaining({
       output: expect.objectContaining({
-        path: '/foo/bar/static',
+        path: path.normalize('/foo/bar/static'),
       }),
     }),
   );
@@ -142,7 +143,7 @@ it('outputs to .percy-debug folder given debug mode is on', () => {
   expect(webpack).toHaveBeenCalledWith(
     expect.objectContaining({
       output: expect.objectContaining({
-        path: '/foo/bar/.percy-debug',
+        path: path.normalize('/foo/bar/.percy-debug'),
       }),
     }),
   );
