@@ -5,8 +5,10 @@ import createDebug from 'debug';
 import { EntryNames } from '@percy-io/react-percy-webpack';
 import Environment from './Environment';
 import findEntryPath from './findEntryPath';
+import fs from 'fs';
 import getHTML from './getHTML';
 import getQueryParamsForSnapshot from './getQueryParamsForSnapshot';
+import path from 'path';
 import reporter from './reporter';
 
 const debug = createDebug('react-percy:ci');
@@ -28,6 +30,24 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
   debug('found snapshots %o', snapshots.map(snapshot => snapshot.name));
   if (!snapshots.length) {
     reporter.log(chalk.yellow.bold('No snapshots found'));
+    return;
+  }
+
+  if (percyConfig.debug) {
+    const html = getHTML(assets);
+    const htmlPath = path.join(percyConfig.rootDir, '.percy-debug', 'index.html');
+    fs.writeFileSync(htmlPath, html);
+    reporter.log(
+      'Debug snapshots by opening %s in your browser and using the following query strings:',
+      chalk.blue(htmlPath),
+    );
+    snapshots.sort().forEach(snapshot => {
+      reporter.log(
+        `  %s    ${chalk.green('?snapshot=%s')}`,
+        snapshot.name,
+        encodeURIComponent(snapshot.name),
+      );
+    });
     return;
   }
 

@@ -33,11 +33,13 @@ export default function createCompiler(percyConfig, webpackConfig) {
     output: {
       chunkFilename: '[name].chunk.js',
       filename: '[name].js',
-      path: path.join(percyConfig.rootDir, 'static'),
+      path: percyConfig.debug
+        ? path.join(percyConfig.rootDir, '.percy-debug')
+        : path.join(percyConfig.rootDir, 'static'),
       publicPath: '/',
     },
     module,
-    plugins: [new MemoryOutputPlugin('/static/')],
+    plugins: percyConfig.debug ? [] : [new MemoryOutputPlugin('/static/')],
   });
 
   mergedWebpackConfig.plugins = mergedWebpackConfig.plugins.filter(

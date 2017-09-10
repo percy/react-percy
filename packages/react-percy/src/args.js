@@ -5,6 +5,11 @@ export const options = {
     alias: 'c',
     description: 'Path to the webpack config file',
   },
+  debug: {
+    description: 'Output Percy snapshots to disk for local debugging',
+    default: false,
+    type: 'boolean',
+  },
 };
 
 export const usage = 'Usage: $0 --config=<webpackConfigPath>';
