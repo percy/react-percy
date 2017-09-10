@@ -41,6 +41,8 @@ module.exports = {
         bracketSpacing: true,
       },
     ],
+
+    'react/react-in-jsx-scope': 'off',
   },
 
   overrides: [
