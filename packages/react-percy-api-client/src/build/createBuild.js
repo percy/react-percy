@@ -15,7 +15,7 @@ export default function createBuild(percyClient, resources) {
           resolve(response.body.data);
         },
         err => {
-          debug('error creating build: %s (%s)', err.error, err.statusCode);
+          debug('error creating build: %o (%s)', err.error, err.statusCode);
           reject(err);
         },
       );
