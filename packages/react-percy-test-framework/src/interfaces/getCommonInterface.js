@@ -1,5 +1,8 @@
+import createDebug from 'debug';
 import Snapshot from '../Snapshot';
 import Suite from '../Suite';
+
+const debug = createDebug('react-percy:test-framework');
 
 export default function getCommonInterface(suites) {
   const snapshotNames = {};
@@ -17,7 +20,7 @@ export default function getCommonInterface(suites) {
     afterAll(fn) {
       suites[0].addAfterAll(fn);
     },
-    async suite(title, options, fn) {
+    suite(title, options, fn) {
       if (typeof fn === 'undefined') {
         fn = options;
         options = undefined;
@@ -25,8 +28,14 @@ export default function getCommonInterface(suites) {
       const suite = new Suite(title, options);
       suites[0].addSuite(suite);
       suites.unshift(suite);
+      if (suite.fullTitle()) {
+        debug('processing suite %o', suite.fullTitle());
+      }
       if (typeof fn === 'function') {
-        await fn.call(suite);
+        fn.call(suite);
+      }
+      if (suite.fullTitle()) {
+        debug('finished processing suite %o', suite.fullTitle());
       }
       suites.shift();
       return suite;
@@ -41,6 +50,7 @@ export default function getCommonInterface(suites) {
         );
       }
       snapshotNames[snapshotFullTitle] = true;
+      debug('added snapshot %o', snapshotFullTitle);
       return snapshot;
     },
   };

@@ -2,6 +2,26 @@ import defaults from '../defaults';
 import normalize from '../normalize';
 import path from 'path';
 
+it('sets `debug` to false given `debug` mode is off', () => {
+  const config = {};
+  const packageRoot = '/package/root';
+  const debug = false;
+
+  const normalizedConfig = normalize(config, packageRoot, debug);
+
+  expect(normalizedConfig.debug).toBe(false);
+});
+
+it('sets `debug` to true given `debug` mode is on', () => {
+  const config = {};
+  const packageRoot = '/package/root';
+  const debug = true;
+
+  const normalizedConfig = normalize(config, packageRoot, debug);
+
+  expect(normalizedConfig.debug).toBe(true);
+});
+
 it('sets `includeFiles` to an empty array given no `includeFiles` in config', () => {
   const config = {};
   const packageRoot = '/package/root';

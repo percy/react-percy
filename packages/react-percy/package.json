@@ -9,7 +9,7 @@
   "bugs": {
     "url": "https://github.com/percy/react-percy/issues"
   },
-  "homepage": "https://github.com/percy/react-percy",
+  "homepage": "https://percy.io/docs/clients/javascript/react",
   "license": "MIT",
   "engines": {
     "node": ">=4.0",

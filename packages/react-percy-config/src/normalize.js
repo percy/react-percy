@@ -1,8 +1,10 @@
 import defaults from './defaults';
 import path from 'path';
 
-export default function normalize(config, packageRoot) {
+export default function normalize(config, packageRoot, debug = false) {
   const normalizedConfig = {};
+
+  normalizedConfig.debug = debug;
 
   normalizedConfig.includeFiles = config.includeFiles || [];
 

@@ -16,6 +16,7 @@
   ],
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "debug": "^2.6.3",
     "promise-each": "^2.2.0"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@ const VERSION = require('../package.json').version;
 
 function formatError(error) {
   if (error.error && error.error.errors && error.error.errors.length) {
-    return error.error.errors.map(e => e.datail).join(', ');
+    return error.error.errors.map(e => e.detail).join(', ');
   }
   return error.stack || error;
 }
@@ -43,7 +43,7 @@ export function run(argv, rootDir) {
     return;
   }
 
-  if (!process.env.PERCY_TOKEN) {
+  if (!argv.debug && !process.env.PERCY_TOKEN) {
     process.stdout.write(
       chalk.bold.red('PERCY_TOKEN') + chalk.red(' environment variable must be set.\n'),
     );
@@ -51,7 +51,7 @@ export function run(argv, rootDir) {
     return;
   }
 
-  if (!process.env.PERCY_PROJECT) {
+  if (!argv.debug && !process.env.PERCY_PROJECT) {
     process.stdout.write(
       chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.\n'),
     );
@@ -61,7 +61,7 @@ export function run(argv, rootDir) {
 
   const packageRoot = rootDir || process.cwd();
 
-  const percyConfig = readPercyConfig(packageRoot);
+  const percyConfig = readPercyConfig(packageRoot, argv.debug);
   const webpackConfig = readWebpackConfig(packageRoot, argv.config);
 
   return runPercy(percyConfig, webpackConfig, process.env.PERCY_TOKEN)
