@@ -16,6 +16,10 @@ const debug = createDebug('react-percy:ci');
 export default async function run(percyConfig, webpackConfig, percyToken) {
   const client = new ApiClient(percyToken);
 
+  if (percyConfig.debug) {
+    reporter.log(chalk.blue.bold('DEBUG MODE: No snapshots will be uploaded to Percy'));
+  }
+
   reporter.log('Compiling...');
   debug('compiling assets');
   const assets = await compileAssets(percyConfig, webpackConfig);
@@ -38,8 +42,8 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
     const htmlPath = path.join(percyConfig.rootDir, '.percy-debug', 'index.html');
     fs.writeFileSync(htmlPath, html);
     reporter.log(
-      'Debug snapshots by opening %s in your browser and using the following query strings:',
-      chalk.blue(htmlPath),
+      'Debug snapshots by opening %s in your browser and appending the following query strings:',
+      chalk.blue.underline(`file://${htmlPath}`),
     );
     snapshots.sort().forEach(snapshot => {
       reporter.log(

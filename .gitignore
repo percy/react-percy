@@ -51,3 +51,6 @@ packages/*/lib
 
 # Packed npm
 *.tgz
+
+# Percy debug files
+.percy-debug

@@ -6,7 +6,8 @@ export const options = {
     description: 'Path to the webpack config file',
   },
   debug: {
-    description: 'Output Percy snapshots to disk for local debugging',
+    description:
+      'Output Percy snapshots to disk for local debugging; no snapshots will be uploaded to Percy',
     default: false,
     type: 'boolean',
   },
