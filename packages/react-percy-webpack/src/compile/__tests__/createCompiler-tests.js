@@ -101,6 +101,97 @@ it('adds percy snapshot loader as a pre-enforced rule given webpack 3', () => {
   );
 });
 
+it('adds percy snapshot babel loader given webpack 1', () => {
+  detectWebpackVersion.mockReturnValue(1);
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const webpackConfig = {
+    config: true,
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      module: expect.objectContaining({
+        loaders: expect.arrayContaining([
+          {
+            test: /\.percy\.(js|jsx)/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            query: {
+              plugins: [require.resolve('babel-plugin-react-require')],
+            },
+          },
+        ]),
+      }),
+    }),
+  );
+});
+
+it('adds percy snapshot babel loader given webpack 2', () => {
+  detectWebpackVersion.mockReturnValue(2);
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const webpackConfig = {
+    config: true,
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      module: expect.objectContaining({
+        rules: expect.arrayContaining([
+          {
+            test: /\.percy\.(js|jsx)/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                plugins: [require.resolve('babel-plugin-react-require')],
+              },
+            },
+          },
+        ]),
+      }),
+    }),
+  );
+});
+
+it('adds percy snapshot babel loader given webpack 3', () => {
+  detectWebpackVersion.mockReturnValue(3);
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const webpackConfig = {
+    config: true,
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      module: expect.objectContaining({
+        rules: expect.arrayContaining([
+          {
+            test: /\.percy\.(js|jsx)/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                plugins: [require.resolve('babel-plugin-react-require')],
+              },
+            },
+          },
+        ]),
+      }),
+    }),
+  );
+});
+
 it('removes commons chunk plugins', () => {
   const percyConfig = {
     rootDir: '/foo/bar',

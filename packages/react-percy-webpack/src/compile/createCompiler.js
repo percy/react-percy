@@ -17,6 +17,16 @@ export default function createCompiler(percyConfig, webpackConfig) {
               loader: require.resolve('./percySnapshotLoader'),
             },
           ],
+          loaders: [
+            {
+              test: /\.percy\.(js|jsx)/,
+              exclude: /node_modules/,
+              loader: 'babel-loader',
+              query: {
+                plugins: [require.resolve('babel-plugin-react-require')],
+              },
+            },
+          ],
         }
       : {
           rules: [
@@ -25,6 +35,16 @@ export default function createCompiler(percyConfig, webpackConfig) {
               exclude: /node_modules/,
               enforce: 'pre',
               loader: require.resolve('./percySnapshotLoader'),
+            },
+            {
+              test: /\.percy\.(js|jsx)/,
+              exclude: /node_modules/,
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  plugins: [require.resolve('babel-plugin-react-require')],
+                },
+              },
             },
           ],
         };
