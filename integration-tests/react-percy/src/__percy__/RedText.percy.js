@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/react-in-jsx-scope */
+
 import RedText from '../RedText';
 
 suite('RedText', () => {
