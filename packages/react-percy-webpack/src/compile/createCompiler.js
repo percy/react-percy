@@ -30,6 +30,7 @@ export default function createCompiler(percyConfig, webpackConfig) {
         };
 
   const mergedWebpackConfig = merge(webpackConfig, {
+    context: percyConfig.rootDir,
     output: {
       chunkFilename: '[name].chunk.js',
       filename: '[name].js',

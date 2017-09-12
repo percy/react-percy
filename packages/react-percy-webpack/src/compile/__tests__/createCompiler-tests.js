@@ -29,6 +29,24 @@ beforeEach(() => {
   webpack.mockClear();
 });
 
+it('sets context to the project root directory', () => {
+  const percyConfig = {
+    rootDir: '/foo/bar',
+  };
+  const webpackConfig = {
+    context: '/some/other/context',
+    config: true,
+  };
+
+  createCompiler(percyConfig, webpackConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      context: '/foo/bar',
+    }),
+  );
+});
+
 it('adds percy snapshot loader as a preloader given webpack 1', () => {
   detectWebpackVersion.mockReturnValue(1);
   const percyConfig = {
