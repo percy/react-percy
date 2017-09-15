@@ -38,3 +38,25 @@ it('returns ES6 config object', () => {
     config: true,
   });
 });
+
+it('returns ES5 config function', () => {
+  const config = getWebpackConfigExports(() => ({
+    config: true,
+  }));
+
+  expect(config).toEqual({
+    config: true,
+  });
+});
+
+it('returns ES6 config function', () => {
+  const config = getWebpackConfigExports({
+    default: () => ({
+      config: true,
+    }),
+  });
+
+  expect(config).toEqual({
+    config: true,
+  });
+});
