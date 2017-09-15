@@ -1,10 +1,14 @@
 export default function getWebpackConfigExports(webpackConfig) {
-  if (typeof webpackConfig !== 'object' || Array.isArray(webpackConfig)) {
-    throw new Error('Webpack config did not export an object');
+  if (Array.isArray(webpackConfig)) {
+    throw new Error('Percy does not support arrays of webpack configs');
   }
 
-  if (typeof webpackConfig.default === 'object') {
-    return getWebpackConfigExports(webpackConfig.default);
+  if (typeof webpackConfig.default !== 'undefined') {
+    webpackConfig = webpackConfig.default;
+  }
+
+  if (typeof webpackConfig === 'function') {
+    return webpackConfig();
   }
 
   return webpackConfig;

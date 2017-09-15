@@ -53,7 +53,14 @@ it('adds percy snapshot loader as a preloader given webpack 1', () => {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -73,13 +80,20 @@ it('adds percy snapshot loader as a preloader given webpack 1', () => {
   );
 });
 
-it('adds percy snapshot loader as a pre-enforced rule given webpack 2', () => {
+it('adds percy snapshot loader as a pre-enforced rule given webpack 2 config with rules', () => {
   detectWebpackVersion.mockReturnValue(2);
   const percyConfig = {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -100,13 +114,20 @@ it('adds percy snapshot loader as a pre-enforced rule given webpack 2', () => {
   );
 });
 
-it('adds percy snapshot loader as a pre-enforced rule given webpack 3', () => {
-  detectWebpackVersion.mockReturnValue(3);
+it('adds percy snapshot loader as a pre-enforced loader given webpack 2 config with loaders', () => {
+  detectWebpackVersion.mockReturnValue(2);
   const percyConfig = {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -114,7 +135,7 @@ it('adds percy snapshot loader as a pre-enforced rule given webpack 3', () => {
   expect(webpack).toHaveBeenCalledWith(
     expect.objectContaining({
       module: expect.objectContaining({
-        rules: expect.arrayContaining([
+        loaders: expect.arrayContaining([
           {
             test: /\.percy\.(js|jsx)/,
             exclude: /node_modules/,
@@ -205,7 +226,14 @@ it('adds percy snapshot babel loader given webpack 1', () => {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -228,13 +256,19 @@ it('adds percy snapshot babel loader given webpack 1', () => {
   );
 });
 
-it('adds percy snapshot babel loader given webpack 2', () => {
-  detectWebpackVersion.mockReturnValue(2);
+it('adds percy snapshot babel loader given webpack 2 config with rules', () => {
   const percyConfig = {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -259,13 +293,19 @@ it('adds percy snapshot babel loader given webpack 2', () => {
   );
 });
 
-it('adds percy snapshot babel loader given webpack 3', () => {
-  detectWebpackVersion.mockReturnValue(3);
+it('adds percy snapshot babel loader given webpack 2 config with loaders', () => {
   const percyConfig = {
     rootDir: '/foo/bar',
   };
   const webpackConfig = {
-    config: true,
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
   };
 
   createCompiler(percyConfig, webpackConfig);
@@ -273,7 +313,7 @@ it('adds percy snapshot babel loader given webpack 3', () => {
   expect(webpack).toHaveBeenCalledWith(
     expect.objectContaining({
       module: expect.objectContaining({
-        rules: expect.arrayContaining([
+        loaders: expect.arrayContaining([
           {
             test: /\.percy\.(js|jsx)/,
             exclude: /node_modules/,

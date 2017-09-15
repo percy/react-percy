@@ -4,50 +4,69 @@ import merge from 'webpack-merge';
 import path from 'path';
 import webpack from 'webpack';
 
+const percySnapshotPreloader = {
+  test: /\.percy\.(js|jsx)/,
+  exclude: /node_modules/,
+  loader: require.resolve('./percySnapshotLoader'),
+};
+
 export default function createCompiler(percyConfig, webpackConfig) {
   const webpackVersion = detectWebpackVersion();
 
-  const module =
-    webpackVersion === 1
-      ? {
-          preLoaders: [
-            {
-              test: /\.percy\.(js|jsx)/,
-              exclude: /node_modules/,
-              loader: require.resolve('./percySnapshotLoader'),
+  let module;
+  if (webpackVersion === 1) {
+    module = {
+      preLoaders: [percySnapshotPreloader],
+      loaders: [
+        {
+          test: /\.percy\.(js|jsx)/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            plugins: [require.resolve('babel-plugin-react-require')],
+          },
+        },
+      ],
+    };
+  } else if (webpackConfig.module && webpackConfig.module.loaders) {
+    module = {
+      loaders: [
+        {
+          ...percySnapshotPreloader,
+          enforce: 'pre',
+        },
+        {
+          test: /\.percy\.(js|jsx)/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: [require.resolve('babel-plugin-react-require')],
             },
-          ],
-          loaders: [
-            {
-              test: /\.percy\.(js|jsx)/,
-              exclude: /node_modules/,
-              loader: 'babel-loader',
-              query: {
-                plugins: [require.resolve('babel-plugin-react-require')],
-              },
+          },
+        },
+      ],
+    };
+  } else {
+    module = {
+      rules: [
+        {
+          ...percySnapshotPreloader,
+          enforce: 'pre',
+        },
+        {
+          test: /\.percy\.(js|jsx)/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              plugins: [require.resolve('babel-plugin-react-require')],
             },
-          ],
-        }
-      : {
-          rules: [
-            {
-              test: /\.percy\.(js|jsx)/,
-              exclude: /node_modules/,
-              enforce: 'pre',
-              loader: require.resolve('./percySnapshotLoader'),
-            },
-            {
-              test: /\.percy\.(js|jsx)/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  plugins: [require.resolve('babel-plugin-react-require')],
-                },
-              },
-            },
-          ],
-        };
+          },
+        },
+      ],
+    };
+  }
 
   const mergedWebpackConfig = merge(webpackConfig, {
     context: percyConfig.rootDir,
