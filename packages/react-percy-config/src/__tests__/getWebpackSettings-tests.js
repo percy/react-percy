@@ -1,7 +1,11 @@
 import path from 'path';
 import getWebpackSettings from '../getWebpackSettings';
 
+// eslint-disable-next-line no-console
+console.log = jest.fn();
+
 const packageRoot = path.normalize('/some/package/root');
+const configPath = path.join(packageRoot, 'percy.config.js');
 
 let mockPackage;
 jest.mock(require('path').normalize('/some/package/root/package.json'), () => mockPackage, {
@@ -50,7 +54,7 @@ it('removes entry field off webpack config', () => {
     plugins: ['foo'],
   };
 
-  const settings = getWebpackSettings(webpack, packageRoot);
+  const settings = getWebpackSettings(webpack, packageRoot, configPath);
 
   expect(settings).toEqual({
     plugins: ['foo'],
@@ -65,7 +69,7 @@ it('removes output field off webpack config', () => {
     plugins: ['foo'],
   };
 
-  const settings = getWebpackSettings(webpack, packageRoot);
+  const settings = getWebpackSettings(webpack, packageRoot, configPath);
 
   expect(settings).toEqual({
     plugins: ['foo'],
@@ -85,7 +89,7 @@ it('moves module loaders to module rules', () => {
     plugins: ['foo'],
   };
 
-  const settings = getWebpackSettings(webpack, packageRoot);
+  const settings = getWebpackSettings(webpack, packageRoot, configPath);
 
   expect(settings).toEqual({
     module: {
@@ -100,12 +104,33 @@ it('moves module loaders to module rules', () => {
   });
 });
 
+it('removes module preLoaders field off webpack config', () => {
+  const webpack = {
+    module: {
+      preLoaders: [
+        {
+          test: /\.js$/,
+          loader: 'eslint-loader',
+        },
+      ],
+    },
+    plugins: ['foo'],
+  };
+
+  const settings = getWebpackSettings(webpack, packageRoot, configPath);
+
+  expect(settings).toEqual({
+    module: {},
+    plugins: ['foo'],
+  });
+});
+
 it('returns create-react-app config when no webpack config is specified and react-scripts is a dependency', () => {
   mockPackage.dependencies = {
     'react-scripts': '^1.1.0',
   };
 
-  const settings = getWebpackSettings(undefined, packageRoot);
+  const settings = getWebpackSettings(undefined, packageRoot, configPath);
 
   expect(settings).toEqual({
     module: {
@@ -124,7 +149,7 @@ it('returns create-react-app config when no webpack config is specified and reac
     'react-scripts': '^1.1.0',
   };
 
-  const settings = getWebpackSettings(undefined, packageRoot);
+  const settings = getWebpackSettings(undefined, packageRoot, configPath);
 
   expect(settings).toEqual({
     module: {
@@ -143,7 +168,7 @@ it('returns create-react-app config when no webpack config is specified and reac
     'react-scripts': '^1.1.0',
   };
 
-  const settings = getWebpackSettings(undefined, packageRoot);
+  const settings = getWebpackSettings(undefined, packageRoot, configPath);
 
   expect(settings).toEqual({
     module: {
