@@ -8,27 +8,33 @@ jest.mock(require('path').normalize('/some/package/root/package.json'), () => mo
   virtual: true,
 });
 
-jest.mock('react-scripts/config/webpack.config.dev', () => ({
-  entry: {
-    'create-react-app': 'entry.js',
+jest.mock(
+  'react-scripts/config/webpack.config.dev',
+  () => ({
+    entry: {
+      'create-react-app': 'entry.js',
+    },
+    output: {
+      path: '/create-react-app/',
+    },
+    module: {
+      rules: [
+        {
+          enforce: 'pre',
+          test: /\.js$/,
+          loader: 'eslint-loader',
+        },
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+        },
+      ],
+    },
+  }),
+  {
+    virtual: true,
   },
-  output: {
-    path: '/create-react-app/',
-  },
-  module: {
-    rules: [
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'eslint-loader',
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-      },
-    ],
-  },
-}));
+);
 
 beforeEach(() => {
   jest.resetModules();
