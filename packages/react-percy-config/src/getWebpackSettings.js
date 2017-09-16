@@ -3,7 +3,31 @@
 import chalk from 'chalk';
 import path from 'path';
 
+class ConfigError extends Error {
+  constructor(message) {
+    super(message);
+
+    Error.stackTraceLimit = 0;
+    Error.captureStackTrace(this, ConfigError);
+
+    this.name = '';
+    this.message = chalk.bold.red(`Error: ${message}`);
+  }
+}
+
 function sanitizeCustomWebpackConfig(config = {}) {
+  if (typeof config !== 'object') {
+    throw new ConfigError(
+      `The \`webpack\` field in percy.config.js must be a plain object, but was "${typeof config}".`,
+    );
+  }
+
+  if (Array.isArray(config)) {
+    throw new ConfigError(
+      'The `webpack` field in percy.config.js must be a plain object, but was "array".',
+    );
+  }
+
   // Do not allow users to customize the entry config
   if (config.entry) {
     console.log(chalk.bold.yellow('Warning: ignoring `webpack.entry` field in percy.config.js.'));
