@@ -72,25 +72,6 @@ it('adds percy entries', () => {
   );
 });
 
-it('ignores custom entries', () => {
-  const percyConfig = {
-    rootDir: '/foo/bar',
-    webpack: {
-      entry: {
-        foo: 'bar',
-      },
-    },
-  };
-
-  createCompiler(percyConfig);
-
-  expect(webpack).toHaveBeenCalledWith(
-    expect.objectContaining({
-      entry: mockEntry,
-    }),
-  );
-});
-
 it('adds babel rule', () => {
   const percyConfig = {
     rootDir: '/foo/bar',
@@ -117,7 +98,7 @@ it('adds babel rule', () => {
   );
 });
 
-it('includes additional rules', () => {
+it('includes custom rules', () => {
   const percyConfig = {
     rootDir: '/foo/bar',
     webpack: {
@@ -148,14 +129,11 @@ it('includes additional rules', () => {
   );
 });
 
-it('ignores custom output chunk filenames', () => {
+it('sets output public path to an empty string in debug mode', () => {
   const percyConfig = {
+    debug: true,
     rootDir: '/foo/bar',
-    webpack: {
-      output: {
-        chunkFilename: 'custom.chunk.[name].js',
-      },
-    },
+    webpack: {},
   };
 
   createCompiler(percyConfig);
@@ -163,41 +141,17 @@ it('ignores custom output chunk filenames', () => {
   expect(webpack).toHaveBeenCalledWith(
     expect.objectContaining({
       output: expect.objectContaining({
-        chunkFilename: '[name].chunk.js',
+        publicPath: '',
       }),
     }),
   );
 });
 
-it('ignores custom output filenames', () => {
+it('sets output public path to `/` when not in debug mode', () => {
   const percyConfig = {
+    debug: false,
     rootDir: '/foo/bar',
-    webpack: {
-      output: {
-        filename: 'custom.[name].js',
-      },
-    },
-  };
-
-  createCompiler(percyConfig);
-
-  expect(webpack).toHaveBeenCalledWith(
-    expect.objectContaining({
-      output: expect.objectContaining({
-        filename: '[name].js',
-      }),
-    }),
-  );
-});
-
-it('ignores custom output public paths', () => {
-  const percyConfig = {
-    rootDir: '/foo/bar',
-    webpack: {
-      output: {
-        publicPath: 'http://localhost/',
-      },
-    },
+    webpack: {},
   };
 
   createCompiler(percyConfig);
@@ -242,28 +196,6 @@ it('outputs to .percy-debug folder given debug mode is on', () => {
     expect.objectContaining({
       output: expect.objectContaining({
         path: path.normalize('/foo/bar/.percy-debug'),
-      }),
-    }),
-  );
-});
-
-it('ignores custom output paths', () => {
-  const percyConfig = {
-    debug: false,
-    rootDir: '/foo/bar',
-    webpack: {
-      output: {
-        path: '/foo/bar/custom',
-      },
-    },
-  };
-
-  createCompiler(percyConfig);
-
-  expect(webpack).toHaveBeenCalledWith(
-    expect.objectContaining({
-      output: expect.objectContaining({
-        path: path.normalize('/foo/bar/static'),
       }),
     }),
   );

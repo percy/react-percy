@@ -1,4 +1,5 @@
 import defaults from './defaults';
+import getWebpackSettings from './getWebpackSettings';
 import path from 'path';
 
 export default function normalize(config, packageRoot, debug = false) {
@@ -17,7 +18,7 @@ export default function normalize(config, packageRoot, debug = false) {
 
   normalizedConfig.snapshotPatterns = config.snapshotPatterns || defaults.snapshotPatterns;
 
-  normalizedConfig.webpack = config.webpack || {};
+  normalizedConfig.webpack = getWebpackSettings(config.webpack, packageRoot);
 
   return normalizedConfig;
 }

@@ -5,15 +5,12 @@ import path from 'path';
 import webpack from 'webpack';
 
 export default function createCompiler(percyConfig) {
-  const config = merge.strategy({
-    entry: 'replace',
-    'module.rules': 'append',
-    plugins: 'append',
-  })(
+  const config = merge(
     {
       bail: true,
       context: percyConfig.rootDir,
       devtool: '#cheap-module-source-map',
+      entry: getEntry(percyConfig),
       module: {
         rules: [
           {
@@ -33,6 +30,14 @@ export default function createCompiler(percyConfig) {
         tls: 'empty',
         child_process: 'empty',
       },
+      output: {
+        chunkFilename: '[name].chunk.js',
+        filename: '[name].js',
+        path: percyConfig.debug
+          ? path.join(percyConfig.rootDir, '.percy-debug')
+          : path.join(percyConfig.rootDir, 'static'),
+        publicPath: percyConfig.debug ? '' : '/',
+      },
       plugins: [
         new webpack.DefinePlugin({
           'process.env': {
@@ -49,18 +54,6 @@ export default function createCompiler(percyConfig) {
       },
     },
     percyConfig.webpack,
-    // The settings below always take precedence over user webpack configs
-    {
-      entry: getEntry(percyConfig),
-      output: {
-        chunkFilename: '[name].chunk.js',
-        filename: '[name].js',
-        path: percyConfig.debug
-          ? path.join(percyConfig.rootDir, '.percy-debug')
-          : path.join(percyConfig.rootDir, 'static'),
-        publicPath: '/',
-      },
-    },
   );
 
   return webpack(config);

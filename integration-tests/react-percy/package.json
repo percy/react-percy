@@ -3,7 +3,7 @@
   "name": "react-percy-integration-tests",
   "version": "1.2.6",
   "scripts": {
-    "percy": "react-percy --config webpack/webpack.config.js"
+    "percy": "react-percy"
   },
   "dependencies": {
     "prop-types": "^15.5.10",

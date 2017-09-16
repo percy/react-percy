@@ -2,6 +2,9 @@ import defaults from '../defaults';
 import normalize from '../normalize';
 import path from 'path';
 
+const mockWebpack = { mock: 'webpack' };
+jest.mock('../getWebpackSettings', () => () => mockWebpack);
+
 it('sets `debug` to false given `debug` mode is off', () => {
   const config = {};
   const packageRoot = '/package/root';
@@ -122,40 +125,11 @@ it('sets `snapshotPatterns` to `snapshotPatterns` from config', () => {
   expect(normalizedConfig.snapshotPatterns).toEqual(['**/*.snapshot.js']);
 });
 
-it('sets `webpack` to an empty object given none specified in config', () => {
+it('sets `webpack` to the loaded webpack settings', () => {
   const config = {};
   const packageRoot = '/package/root';
 
   const normalizedConfig = normalize(config, packageRoot);
 
-  expect(normalizedConfig.webpack).toEqual({});
-});
-
-it('sets `webpack` to `webpack` from config', () => {
-  const config = {
-    webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.css$/,
-            loader: 'css-loader',
-          },
-        ],
-      },
-    },
-  };
-  const packageRoot = '/package/root';
-
-  const normalizedConfig = normalize(config, packageRoot);
-
-  expect(normalizedConfig.webpack).toEqual({
-    module: {
-      rules: [
-        {
-          test: /\.css$/,
-          loader: 'css-loader',
-        },
-      ],
-    },
-  });
+  expect(normalizedConfig.webpack).toEqual(mockWebpack);
 });
