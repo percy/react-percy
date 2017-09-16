@@ -14,8 +14,11 @@
   "files": [
     "lib"
   ],
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "babel-runtime": "^6.26.0"
+  },
   "devDependencies": {
-    "babel-runtime": "^6.26.0",
     "micromatch": "^3.0.4"
   },
   "publishConfig": {
