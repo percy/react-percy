@@ -1,16 +1,17 @@
-import uploadResource from '../uploadResource';
 import uploadResources from '../uploadResources';
-
-jest.mock('../uploadResource', () => jest.fn(() => Promise.resolve()));
 
 let percyClient;
 
 beforeEach(() => {
-  percyClient = {};
+  percyClient = {
+    uploadResources: jest.fn(),
+  };
 });
 
 it('uploads the specified resources', async () => {
-  const build = { id: '123' };
+  const build = {
+    id: 'buildid',
+  };
   const resources = [
     {
       resourceUrl: '/a',
@@ -25,10 +26,39 @@ it('uploads the specified resources', async () => {
       content: 'c',
     },
   ];
+  percyClient.uploadResources.mockImplementation(() => Promise.resolve());
 
   await uploadResources(percyClient, build, resources);
 
-  resources.forEach(resource =>
-    expect(uploadResource).toHaveBeenCalledWith(percyClient, build, resource),
-  );
+  expect(percyClient.uploadResources).toHaveBeenCalledWith(build.id, resources);
+});
+
+it('rejects the error response on failure', async () => {
+  const build = {
+    id: 'buildid',
+  };
+  const resources = [
+    {
+      resourceUrl: '/a',
+      content: 'a',
+    },
+    {
+      resourceUrl: '/b',
+      content: 'b',
+    },
+    {
+      resourceUrl: '/c',
+      content: 'c',
+    },
+  ];
+  const error = new Error('there was an error');
+  percyClient.uploadResources.mockImplementation(() => Promise.reject(error));
+
+  try {
+    await uploadResources(percyClient, build, resources);
+  } catch (e) {
+    expect(e).toBe(error);
+  }
+
+  expect.assertions(1);
 });
