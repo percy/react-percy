@@ -1,3 +1,4 @@
+import babelConfig from '../babelConfig';
 import createCompiler from '../createCompiler';
 import path from 'path';
 import webpack from 'webpack';
@@ -87,9 +88,7 @@ it('adds babel rule', () => {
           expect.objectContaining({
             test: /\.(js|jsx)$/,
             loader: require.resolve('babel-loader'),
-            query: {
-              plugins: [require.resolve('babel-plugin-react-require')],
-            },
+            query: babelConfig,
             exclude: /node_modules/,
           }),
         ]),
@@ -125,6 +124,38 @@ it('includes custom rules', () => {
           }),
         ]),
       }),
+    }),
+  );
+});
+
+it('uses custom devtool setting when specified', () => {
+  const percyConfig = {
+    rootDir: '/foo/bar',
+    webpack: {
+      devtool: 'source-map',
+    },
+  };
+
+  createCompiler(percyConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      devtool: 'source-map',
+    }),
+  );
+});
+
+it('sets default devtool when none is specified', () => {
+  const percyConfig = {
+    rootDir: '/foo/bar',
+    webpack: {},
+  };
+
+  createCompiler(percyConfig);
+
+  expect(webpack).toHaveBeenCalledWith(
+    expect.objectContaining({
+      devtool: '#cheap-module-source-map',
     }),
   );
 });
