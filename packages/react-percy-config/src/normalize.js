@@ -17,5 +17,7 @@ export default function normalize(config, packageRoot, debug = false) {
 
   normalizedConfig.snapshotPatterns = config.snapshotPatterns || defaults.snapshotPatterns;
 
+  normalizedConfig.webpack = config.webpack || {};
+
   return normalizedConfig;
 }

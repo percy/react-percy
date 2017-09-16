@@ -14,10 +14,8 @@
   "files": [
     "lib"
   ],
-  "peerDependencies": {
-    "webpack": "^1.13 || 2.x || 3.x"
-  },
   "dependencies": {
+    "babel-loader": "^7.1.2",
     "babel-plugin-react-require": "^3.0.0",
     "babel-runtime": "^6.26.0",
     "chalk": "^2.0.1",
@@ -25,7 +23,8 @@
     "interpret": "^1.0.1",
     "memory-fs": "^0.4.1",
     "tmp": "^0.0.33",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^3.0.0",
+    "webpack": "^3.5.5"
   },
   "publishConfig": {
     "access": "public"
