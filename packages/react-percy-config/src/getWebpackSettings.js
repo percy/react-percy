@@ -45,12 +45,7 @@ function sanitizeCustomWebpackConfig(config = {}) {
     if (config.module.loaders) {
       console.log(
         chalk.bold.yellow(
-          'Warning: found `webpack.module.loaders` field in percy.config.js, but react-percy requires a webpack 3 compatible config.',
-        ),
-      );
-      console.log(
-        chalk.bold.yellow(
-          '`webpack.module.loaders` have been automatically moved to `webpack.module.rules`.',
+          'Warning: automatically moved `webpack.module.loaders` field in percy.config.js to `webpack.module.rules` as react-percy requires a webpack 3 compatible config.',
         ),
       );
       config.module.rules = config.module.loaders;
@@ -60,10 +55,9 @@ function sanitizeCustomWebpackConfig(config = {}) {
     if (config.module.preLoaders) {
       console.log(
         chalk.bold.yellow(
-          'Warning: found `webpack.module.preLoaders` field in percy.config.js, but react-percy requires a webpack 3 compatible config.',
+          'Warning: ignoring `webpack.module.preLoaders` field in percy.config.js as react-percy requires a webpack 3 compatible config.',
         ),
       );
-      console.log(chalk.bold.yellow('`webpack.module.preLoaders` have been removed.'));
       delete config.module.preLoaders;
     }
   }
