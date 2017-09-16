@@ -1,15 +1,19 @@
-import PromisePool from 'es6-promise-pool';
-import uploadResource from './uploadResource';
+import createDebug from 'debug';
 
-const concurrency = 2;
+const debug = createDebug('react-percy:api');
 
 export default function uploadResources(percyClient, build, resources) {
-  function* generatePromises() {
-    for (const resource of resources) {
-      yield uploadResource(percyClient, build, resource);
-    }
-  }
-
-  const pool = new PromisePool(generatePromises(), concurrency);
-  return pool.start();
+  debug('uploading resources %o');
+  return new Promise((resolve, reject) => {
+    percyClient.uploadResources(build.id, resources).then(
+      () => {
+        debug('uploaded %d resources', resources.length);
+        resolve();
+      },
+      err => {
+        debug('error uploading resources: %o (%s)', err.error, err.statusCode);
+        reject(err);
+      },
+    );
+  });
 }
