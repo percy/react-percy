@@ -19,15 +19,14 @@ beforeEach(() => {
   percy.createSnapshot.mockClear();
   percy.finalizeBuild.mockClear();
   percy.finalizeSnapshot.mockClear();
-  percy.uploadResource.mockClear();
+  percy.uploadResources.mockClear();
 });
 
 const expectPercyToHaveRunSnapshots = () => {
   const expectedSnapshots = 3;
-  const expectedAssets = 4;
 
   expect(percy.createBuild).toHaveBeenCalledTimes(1);
-  expect(percy.uploadResource).toHaveBeenCalledTimes(expectedAssets);
+  expect(percy.uploadResources).toHaveBeenCalledTimes(1);
   expect(percy.createSnapshot).toHaveBeenCalledTimes(expectedSnapshots);
   expect(percy.finalizeSnapshot).toHaveBeenCalledTimes(expectedSnapshots);
   expect(percy.finalizeBuild).toHaveBeenCalledTimes(1);

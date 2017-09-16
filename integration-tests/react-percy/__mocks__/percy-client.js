@@ -38,7 +38,7 @@ export const makeResource = jest.fn(resource => {
   });
 });
 
-export const uploadResource = jest.fn(() => Promise.resolve());
+export const uploadResources = jest.fn(() => Promise.resolve());
 
 export default class FakePercyClient {
   createBuild = createBuild;
@@ -46,5 +46,5 @@ export default class FakePercyClient {
   finalizeBuild = finalizeBuild;
   finalizeSnapshot = finalizeSnapshot;
   makeResource = makeResource;
-  uploadResource = uploadResource;
+  uploadResources = uploadResources;
 }
