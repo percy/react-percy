@@ -1,7 +1,6 @@
 import * as args from './args';
 import chalk from 'chalk';
 import readPercyConfig from '@percy-io/react-percy-config';
-import { resolve as readWebpackConfig } from '@percy-io/react-percy-webpack';
 import runPercy from '@percy-io/react-percy-ci';
 import yargs from 'yargs';
 
@@ -62,9 +61,8 @@ export function run(argv, rootDir) {
   const packageRoot = rootDir || process.cwd();
 
   const percyConfig = readPercyConfig(packageRoot, argv.debug);
-  const webpackConfig = readWebpackConfig(packageRoot, argv.config);
 
-  return runPercy(percyConfig, webpackConfig, process.env.PERCY_TOKEN)
+  return runPercy(percyConfig, process.env.PERCY_TOKEN)
     .then(() => {
       process.on('exit', () => process.exit(0));
     })

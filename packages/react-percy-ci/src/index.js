@@ -1,6 +1,6 @@
 import ApiClient from '@percy-io/react-percy-api-client';
 import chalk from 'chalk';
-import compileAssets from './compileAssets';
+import { compile } from '@percy-io/react-percy-webpack';
 import createDebug from 'debug';
 import { EntryNames } from '@percy-io/react-percy-webpack';
 import Environment from './Environment';
@@ -13,7 +13,7 @@ import reporter from './reporter';
 
 const debug = createDebug('react-percy:ci');
 
-export default async function run(percyConfig, webpackConfig, percyToken) {
+export default async function run(percyConfig, percyToken) {
   const client = new ApiClient(percyToken);
 
   if (percyConfig.debug) {
@@ -22,7 +22,7 @@ export default async function run(percyConfig, webpackConfig, percyToken) {
 
   reporter.log('Compiling...');
   debug('compiling assets');
-  const assets = await compileAssets(percyConfig, webpackConfig);
+  const assets = await compile(percyConfig);
 
   const environment = new Environment();
   const snapshotsEntry = findEntryPath(assets, EntryNames.snapshots);

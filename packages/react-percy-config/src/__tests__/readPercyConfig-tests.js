@@ -1,16 +1,16 @@
-import loadFromPackage from '../loadFromPackage';
+import loadFile from '../loadFile';
 import path from 'path';
 import readPercyConfig from '../';
 
-jest.mock('../loadFromPackage', () => jest.fn(() => ({})));
+jest.mock('../loadFile', () => jest.fn(() => ({})));
 
 const mockNormalizedConfig = { normalized: true };
 jest.mock('../normalize', () => () => mockNormalizedConfig);
 
-it('loads package JSON file from package root', () => {
+it('loads percy config file from package root', () => {
   readPercyConfig(path.normalize('/package/root'));
 
-  expect(loadFromPackage).toHaveBeenCalledWith(path.normalize('/package/root/package.json'));
+  expect(loadFile).toHaveBeenCalledWith(path.normalize('/package/root/percy.config.js'));
 });
 
 it('returns normalized percy config', () => {

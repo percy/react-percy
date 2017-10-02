@@ -1,5 +1,5 @@
-import configureEntry from '../';
 import { EntryNames } from '../constants';
+import getEntry from '../';
 import getEntryPath from '../getEntryPath';
 import writeRenderEntry from '../writeRenderEntry';
 import writeSnapshotsEntry from '../writeSnapshotsEntry';
@@ -31,11 +31,7 @@ beforeEach(() => {
   writeSnapshotsEntry.mockReset();
 });
 
-it('does not mutate the original Webpack config', () => {
-  const originalConfig = {
-    old: 'config',
-    entry: 'foo',
-  };
+it('returns framework entry', () => {
   const percyConfig = {
     includeFiles: [],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -43,49 +39,9 @@ it('does not mutate the original Webpack config', () => {
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
+  const entry = getEntry(percyConfig);
 
-  expect(modifiedConfig).not.toBe(originalConfig);
-  expect(originalConfig).toEqual({
-    old: 'config',
-    entry: 'foo',
-  });
-});
-
-it('replaces all original entries', () => {
-  const originalConfig = {
-    entry: {
-      foo: 'bar',
-    },
-  };
-  const percyConfig = {
-    includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
-    rootDir: '/foo',
-    snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
-  };
-
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
-
-  expect(modifiedConfig.entry).not.toEqual(
-    expect.objectContaining({
-      foo: 'bar',
-    }),
-  );
-});
-
-it('adds framework entry to config', () => {
-  const originalConfig = {};
-  const percyConfig = {
-    includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
-    rootDir: '/foo',
-    snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
-  };
-
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
-
-  expect(modifiedConfig.entry).toEqual(
+  expect(entry).toEqual(
     expect.objectContaining({
       [EntryNames.framework]: mockFrameworkFile,
     }),
@@ -93,7 +49,6 @@ it('adds framework entry to config', () => {
 });
 
 it('writes render entry file', () => {
-  const originalConfig = {};
   const percyConfig = {
     includeFiles: [],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -101,13 +56,12 @@ it('writes render entry file', () => {
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  configureEntry(originalConfig, percyConfig);
+  getEntry(percyConfig);
 
   expect(writeRenderEntry).toHaveBeenCalledWith(percyConfig, mockRenderFile);
 });
 
-it('adds render entry to config', () => {
-  const originalConfig = {};
+it('returns render entry', () => {
   const percyConfig = {
     includeFiles: [],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -115,9 +69,9 @@ it('adds render entry to config', () => {
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
+  const entry = getEntry(percyConfig);
 
-  expect(modifiedConfig.entry).toEqual(
+  expect(entry).toEqual(
     expect.objectContaining({
       [EntryNames.render]: mockRenderFile,
     }),
@@ -125,7 +79,6 @@ it('adds render entry to config', () => {
 });
 
 it('writes snapshots entry file', () => {
-  const originalConfig = {};
   const percyConfig = {
     includeFiles: [],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -133,13 +86,12 @@ it('writes snapshots entry file', () => {
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  configureEntry(originalConfig, percyConfig);
+  getEntry(percyConfig);
 
   expect(writeSnapshotsEntry).toHaveBeenCalledWith(mockSnapshotFiles, mockSnapshotsFile);
 });
 
-it('adds snapshots entry to config containing snapshots entry file given no include files in percy config', () => {
-  const originalConfig = {};
+it('returns snapshots entry containing snapshots entry file given no include files in percy config', () => {
   const percyConfig = {
     includeFiles: [],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -147,17 +99,16 @@ it('adds snapshots entry to config containing snapshots entry file given no incl
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
+  const entry = getEntry(percyConfig);
 
-  expect(modifiedConfig.entry).toEqual(
+  expect(entry).toEqual(
     expect.objectContaining({
       [EntryNames.snapshots]: [mockSnapshotsFile],
     }),
   );
 });
 
-it('adds snapshots entry to config containing include files and snapshots entry file given include files in percy config', () => {
-  const originalConfig = {};
+it('returns snapshots entry containing include files and snapshots entry file given include files in percy config', () => {
   const percyConfig = {
     includeFiles: ['babel-polyfill', './src/foo.js'],
     renderer: '@percy-io/percy-snapshot-render-react',
@@ -165,9 +116,9 @@ it('adds snapshots entry to config containing include files and snapshots entry 
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
 
-  const modifiedConfig = configureEntry(originalConfig, percyConfig);
+  const entry = getEntry(percyConfig);
 
-  expect(modifiedConfig.entry).toEqual(
+  expect(entry).toEqual(
     expect.objectContaining({
       [EntryNames.snapshots]: ['babel-polyfill', './src/foo.js', mockSnapshotsFile],
     }),

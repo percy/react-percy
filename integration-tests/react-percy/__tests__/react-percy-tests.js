@@ -32,14 +32,8 @@ const expectPercyToHaveRunSnapshots = () => {
   expect(percy.finalizeBuild).toHaveBeenCalledTimes(1);
 };
 
-it('handles ES5 webpack configs', async () => {
-  await run(['--config', require.resolve('../webpack/webpack.config.js')], packageRoot);
-
-  expectPercyToHaveRunSnapshots();
-});
-
-it('handles ES6 webpack configs', async () => {
-  await run(['--config', require.resolve('../webpack/webpack.config.babel.js')], packageRoot);
+it('can snapshot components', async () => {
+  await run([], packageRoot);
 
   expectPercyToHaveRunSnapshots();
 });
