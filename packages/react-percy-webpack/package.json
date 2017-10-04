@@ -15,6 +15,7 @@
     "lib"
   ],
   "dependencies": {
+    "@percy/react-percy-test-framework": "^0.2.5",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-react-require": "^3.0.0",
