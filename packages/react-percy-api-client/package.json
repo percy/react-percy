@@ -1,5 +1,5 @@
 {
-  "name": "@percy-io/react-percy-api-client",
+  "name": "@percy/react-percy-api-client",
   "version": "0.3.0",
   "repository": {
     "type": "git",

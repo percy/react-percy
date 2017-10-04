@@ -34,7 +34,7 @@ beforeEach(() => {
 it('returns framework entry', () => {
   const percyConfig = {
     includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
@@ -51,7 +51,7 @@ it('returns framework entry', () => {
 it('writes render entry file', () => {
   const percyConfig = {
     includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
@@ -64,7 +64,7 @@ it('writes render entry file', () => {
 it('returns render entry', () => {
   const percyConfig = {
     includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
@@ -81,7 +81,7 @@ it('returns render entry', () => {
 it('writes snapshots entry file', () => {
   const percyConfig = {
     includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
@@ -94,7 +94,7 @@ it('writes snapshots entry file', () => {
 it('returns snapshots entry containing snapshots entry file given no include files in percy config', () => {
   const percyConfig = {
     includeFiles: [],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };
@@ -111,7 +111,7 @@ it('returns snapshots entry containing snapshots entry file given no include fil
 it('returns snapshots entry containing include files and snapshots entry file given include files in percy config', () => {
   const percyConfig = {
     includeFiles: ['babel-polyfill', './src/foo.js'],
-    renderer: '@percy-io/percy-snapshot-render-react',
+    renderer: '@percy/react-percy-snapshot-render',
     rootDir: '/foo',
     snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
   };

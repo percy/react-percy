@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-react-percy",
-  "description": "ESLint rules for react-percy",
+  "description": "ESLint rules for @percy/react",
   "version": "0.1.3",
   "repository": {
     "type": "git",

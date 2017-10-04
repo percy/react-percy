@@ -1,7 +1,7 @@
 import * as args from './args';
 import chalk from 'chalk';
-import readPercyConfig from '@percy-io/react-percy-config';
-import runPercy from '@percy-io/react-percy-ci';
+import readPercyConfig from '@percy/react-percy-config';
+import runPercy from '@percy/react-percy-ci';
 import yargs from 'yargs';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';

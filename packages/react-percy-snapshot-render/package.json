@@ -1,5 +1,5 @@
 {
-  "name": "@percy-io/percy-snapshot-render-react",
+  "name": "@percy/react-percy-snapshot-render",
   "version": "0.2.4",
   "repository": {
     "type": "git",

@@ -1,8 +1,8 @@
-import ApiClient from '@percy-io/react-percy-api-client';
+import ApiClient from '@percy/react-percy-api-client';
 import chalk from 'chalk';
-import { compile } from '@percy-io/react-percy-webpack';
+import { compile } from '@percy/react-percy-webpack';
 import createDebug from 'debug';
-import { EntryNames } from '@percy-io/react-percy-webpack';
+import { EntryNames } from '@percy/react-percy-webpack';
 import Environment from './Environment';
 import findEntryPath from './findEntryPath';
 import fs from 'fs';
