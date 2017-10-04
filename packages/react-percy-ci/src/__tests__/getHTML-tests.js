@@ -1,4 +1,4 @@
-import { EntryNames } from '@percy-io/react-percy-webpack';
+import { EntryNames } from '@percy/react-percy-webpack';
 import getHTML from '../getHTML';
 
 it('generates HTML with all stylesheets and the three entry scripts', () => {

@@ -1,6 +1,6 @@
 import { GlobalVariables } from '../constants';
 
-jest.mock('@percy-io/react-percy-test-framework', () => jest.fn(() => mockSuite));
+jest.mock('@percy/react-percy-test-framework', () => jest.fn(() => mockSuite));
 
 let mockSuite;
 

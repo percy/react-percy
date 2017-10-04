@@ -1,5 +1,5 @@
 import { run } from '../cli';
-import runPercy from '@percy-io/react-percy-ci';
+import runPercy from '@percy/react-percy-ci';
 import yargs from 'yargs';
 
 const VERSION = require('../../package.json').version;
@@ -15,9 +15,9 @@ jest.mock('yargs', () => {
 });
 
 const mockPercyConfig = { percy: 'config' };
-jest.mock('@percy-io/react-percy-config', () => () => mockPercyConfig);
+jest.mock('@percy/react-percy-config', () => () => mockPercyConfig);
 
-jest.mock('@percy-io/react-percy-ci', () => jest.fn());
+jest.mock('@percy/react-percy-ci', () => jest.fn());
 
 let argv;
 let stdout;

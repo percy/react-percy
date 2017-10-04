@@ -1,4 +1,4 @@
-import { EntryNames, RootElementId } from '@percy-io/react-percy-webpack';
+import { EntryNames, RootElementId } from '@percy/react-percy-webpack';
 import findEntryPath from './findEntryPath';
 
 const getStylesheets = assets => Object.keys(assets).filter(name => /\.css$/.test(name));

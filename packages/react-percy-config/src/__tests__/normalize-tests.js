@@ -54,12 +54,12 @@ it('sets `renderer` to `renderer` from config', () => {
   expect(normalizedConfig.renderer).toBe('foo');
 });
 
-it('sets `renderer` to @percy-io/percy-snapshot-render-react given no `renderer` in config', () => {
+it('sets `renderer` to @percy/react-percy-snapshot-render given no `renderer` in config', () => {
   const config = {};
 
   const normalizedConfig = normalize(config, packageRoot, configPath);
 
-  expect(normalizedConfig.renderer).toBe('@percy-io/percy-snapshot-render-react');
+  expect(normalizedConfig.renderer).toBe('@percy/react-percy-snapshot-render');
 });
 
 it('sets `rootDir` to the package root given no `rootDir` in config', () => {

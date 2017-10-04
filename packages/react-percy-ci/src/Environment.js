@@ -1,5 +1,5 @@
 import { evalVMScript, jsdom } from 'jsdom';
-import createSuite from '@percy-io/react-percy-test-framework';
+import createSuite from '@percy/react-percy-test-framework';
 import vm from 'vm';
 
 export default class Environment {

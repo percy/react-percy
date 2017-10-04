@@ -1,5 +1,5 @@
 {
-  "name": "@percy-io/react-percy-test-framework",
+  "name": "@percy/react-percy-test-framework",
   "version": "0.2.5",
   "repository": {
     "type": "git",
