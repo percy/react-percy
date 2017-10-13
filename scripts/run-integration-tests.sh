@@ -14,6 +14,12 @@ if [ "$SUITE" = "react-percy" ]; then
   DEBUG="react-percy:*" yarn percy -- --color
 elif [ "$SUITE" = "create-react-app" ]; then
   cd integration-tests/create-react-app
+  # Test React 15
+  yarn add react@^15 react-dom@^15
+  DEBUG="react-percy:*" yarn percy -- --color
+
+  # Test React 16.
+  yarn add react@^16 react-dom@^16
   DEBUG="react-percy:*" yarn percy -- --color
 else
   cat <<EOF
