@@ -21,15 +21,15 @@ it('sets resource URL to slug-ified snapshot name', () => {
   );
 });
 
-it('strips quotes from snapshot name when setting resource URL', () => {
-  const snapshotName = 'Suite - renders "my' + "' component";
+it('creates a safe url from snapshot name when setting resource URL', () => {
+  const snapshotName = 'Suite - renders "my' + "' component<>#%{}|\\^[]`;/?=&";
   const html = '<html></html>';
 
   const rootResource = makeRootResource(percyClient, snapshotName, html);
 
   expect(rootResource).toEqual(
     expect.objectContaining({
-      resourceUrl: '/suite-renders-my-component.html',
+      resourceUrl: "/suite-renders-%22my'-componentlessgreaterorand.html",
     }),
   );
 });
