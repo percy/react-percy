@@ -1,7 +1,7 @@
 {
   "name": "@percy/react",
   "description": "",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/percy/react-percy.git"
@@ -33,7 +33,7 @@
     "webpack"
   ],
   "dependencies": {
-    "@percy/react-percy-ci": "^0.4.2",
+    "@percy/react-percy-ci": "^0.4.3",
     "@percy/react-percy-config": "^0.4.1",
     "babel-runtime": "^6.26.0",
     "chalk": "^2.0.1",

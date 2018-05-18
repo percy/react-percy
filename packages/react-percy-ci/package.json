@@ -1,6 +1,6 @@
 {
   "name": "@percy/react-percy-ci",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/percy/react-percy.git"
@@ -15,7 +15,7 @@
     "lib"
   ],
   "dependencies": {
-    "@percy/react-percy-api-client": "^0.4.2",
+    "@percy/react-percy-api-client": "^0.4.3",
     "@percy/react-percy-snapshot-render": "^0.4.1",
     "@percy/react-percy-test-framework": "^0.4.1",
     "@percy/react-percy-webpack": "^0.4.1",
