@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @jest-environment jest-environment-jsdom-global
  */
 
 /* eslint-env browser */
@@ -29,12 +29,8 @@ const givenRenderer = mockRenderer => {
 
 const givenSnapshot = (name, markup) => {
   const href = `http://percy.test?snapshot=${encodeURIComponent(name)}`;
-  Object.defineProperty(window.location, 'href', {
-    get() {
-      return href;
-    },
-    configurable: true,
-    writeable: true,
+  jsdom.reconfigure({  // eslint-disable-line
+    url: href,
   });
 
   window[GlobalVariables.rootSuite] = {

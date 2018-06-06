@@ -34,7 +34,13 @@ beforeEach(() => {
   };
 
   process.exit = jest.fn();
-  process.on = jest.fn((event, cb) => cb());
+  process.on = jest.fn((event, cb) => {
+    if (event !== 'uncaughtException') {
+      cb();
+    } else {
+      throw cb;
+    }
+  });
 
   stdout = [];
   process.stdout.write = message => stdout.push(message);
