@@ -19,7 +19,7 @@
     "debug": "^2.6.3",
     "es6-promise-pool": "^2.4.4",
     "mime-types": "^2.1.14",
-    "percy-client": "^2.8.2",
+    "percy-client": "^2.10.0",
     "slugify": "^1.1.0"
   },
   "publishConfig": {
