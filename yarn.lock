@@ -3591,6 +3591,10 @@ foreach@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
 
+foreachasync@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/foreachasync/-/foreachasync-3.0.0.tgz#5502987dc8714be3392097f32e0071c9dee07cf6"
+
 forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
@@ -6438,9 +6442,9 @@ pbkdf2@^3.0.3:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-percy-client@^2.8.2:
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-2.8.2.tgz#2415dcc5d07bd4dea913df5f237cff4f0295839a"
+percy-client@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-2.10.0.tgz#9e70e5c51dc32721ea72fd35efe4b18657e897a6"
   dependencies:
     base64-js "^1.2.3"
     bluebird "^3.5.1"
@@ -6450,6 +6454,7 @@ percy-client@^2.8.2:
     regenerator-runtime "^0.11.1"
     request "^2.85.0"
     request-promise "^4.2.2"
+    walk "^2.3.14"
   optionalDependencies:
     lint-staged "^7.0.4"
 
@@ -8692,6 +8697,12 @@ w3c-hr-time@^1.0.1:
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"
   dependencies:
     browser-process-hrtime "^0.1.2"
+
+walk@^2.3.14:
+  version "2.3.14"
+  resolved "https://registry.yarnpkg.com/walk/-/walk-2.3.14.tgz#60ec8631cfd23276ae1e7363ce11d626452e1ef3"
+  dependencies:
+    foreachasync "^3.0.0"
 
 walker@~1.0.5:
   version "1.0.7"
