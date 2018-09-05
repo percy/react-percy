@@ -31,7 +31,7 @@
     "glob": "^7.1.2",
     "memory-fs": "^0.4.1",
     "tmp": "^0.0.33",
-    "webpack": "^3.5.5",
+    "webpack": "^4.0.0",
     "webpack-merge": "^3.0.0"
   },
   "publishConfig": {
