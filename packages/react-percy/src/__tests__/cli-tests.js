@@ -41,7 +41,6 @@ beforeEach(() => {
 
   delete process.env.PERCY_ENABLE;
   process.env.PERCY_TOKEN = 'token';
-  process.env.PERCY_PROJECT = 'project';
 });
 
 it('shows help text given help arg', async () => {
@@ -95,24 +94,6 @@ it('exits with error code given no PERCY_TOKEN environment variable', async () =
 it('exits with success code given debug flag even with no PERCY_TOKEN environment variable', async () => {
   argv.debug = true;
   delete process.env.PERCY_TOKEN;
-  runPercy.mockImplementation(() => Promise.resolve());
-
-  await run();
-
-  expect(process.exit).toHaveBeenCalledWith(0);
-});
-
-it('exits with error code given no PERCY_PROJECT environment variable', async () => {
-  delete process.env.PERCY_PROJECT;
-
-  await run();
-
-  expect(process.exit).toHaveBeenCalledWith(1);
-});
-
-it('exits with success code given debug flag even with no PERCY_PROJECT environment variable', async () => {
-  argv.debug = true;
-  delete process.env.PERCY_PROJECT;
   runPercy.mockImplementation(() => Promise.resolve());
 
   await run();

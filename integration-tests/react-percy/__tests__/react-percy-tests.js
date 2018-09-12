@@ -3,7 +3,6 @@ import * as percy from 'percy-client';
 import path from 'path';
 import { run } from '@percy/react/lib/cli';
 
-process.env.PERCY_PROJECT = 'test/project';
 process.env.PERCY_TOKEN = 'fake token';
 
 jest.mock('percy-client');
