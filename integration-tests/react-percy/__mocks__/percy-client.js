@@ -1,4 +1,4 @@
-export const createBuild = jest.fn((project, { resources }) =>
+export const createBuild = jest.fn(({ resources }) =>
   Promise.resolve({
     body: {
       data: {

@@ -50,14 +50,6 @@ export function run(argv, rootDir) {
     return;
   }
 
-  if (!argv.debug && !process.env.PERCY_PROJECT) {
-    process.stdout.write(
-      chalk.bold.red('PERCY_PROJECT') + chalk.red(' environment variable must be set.\n'),
-    );
-    process.on('exit', () => process.exit(1));
-    return;
-  }
-
   const packageRoot = rootDir || process.cwd();
 
   const percyConfig = readPercyConfig(packageRoot, argv.debug);
