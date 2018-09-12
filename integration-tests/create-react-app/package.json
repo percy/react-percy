@@ -1,6 +1,6 @@
 {
   "name": "create-react-app",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
@@ -10,7 +10,7 @@
     "react-scripts": "1.0.11"
   },
   "devDependencies": {
-    "@percy/react": "^0.4.4",
+    "@percy/react": "^0.4.5",
     "webpack": "^3.5.5"
   },
   "scripts": {
