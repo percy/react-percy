@@ -22,7 +22,7 @@ beforeEach(() => {
 });
 
 const expectPercyToHaveRunSnapshots = () => {
-  const expectedSnapshots = 3;
+  const expectedSnapshots = 6;
 
   expect(percy.createBuild).toHaveBeenCalledTimes(1);
   expect(percy.uploadResources).toHaveBeenCalledTimes(1);
