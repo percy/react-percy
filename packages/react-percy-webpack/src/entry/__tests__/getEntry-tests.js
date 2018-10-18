@@ -124,3 +124,20 @@ it('returns snapshots entry containing include files and snapshots entry file gi
     }),
   );
 });
+
+it('returns vendor entry containing react and react-dom', () => {
+  const percyConfig = {
+    includeFiles: [],
+    renderer: '@percy/react-percy-snapshot-render',
+    rootDir: '/foo',
+    snapshotPatterns: ['**/__percy__/*.js', '**/*.percy.js'],
+  };
+
+  const entry = getEntry(percyConfig);
+
+  expect(entry).toEqual(
+    expect.objectContaining({
+      [EntryNames.vendor]: ['react', 'react-dom'],
+    }),
+  );
+});

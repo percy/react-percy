@@ -1,5 +1,6 @@
 import babelConfig from './babelConfig';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import { EntryNames } from '../entry/constants';
 import getEntry from '../entry';
 import MemoryOutputPlugin from './MemoryOutputPlugin';
 import merge from 'webpack-merge';
@@ -47,6 +48,13 @@ export default function createCompiler(percyConfig) {
         },
       }),
       new CaseSensitivePathsPlugin(),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: EntryNames.vendor,
+        minChunks: Infinity,
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: EntryNames.runtime,
+      }),
       percyConfig.debug ? undefined : new MemoryOutputPlugin('/static/'),
     ].filter(plugin => plugin !== undefined),
     resolve: {

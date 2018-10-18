@@ -7,7 +7,9 @@ it('generates HTML with all stylesheets and the three entry scripts', () => {
     '/static/styles2.css': 'styles 2 CSS',
     [`/static/${EntryNames.framework}.js`]: 'framework JS',
     [`/static/${EntryNames.render}.js`]: 'render JS',
+    [`/static/${EntryNames.runtime}.js`]: 'runtime JS',
     [`/static/${EntryNames.snapshots}.js`]: 'snapshots JS',
+    [`/static/${EntryNames.vendor}.js`]: 'vendor JS',
     '/static/other.js': 'other JS',
     '/static/foo.jpg': 'foo JPG',
   };
