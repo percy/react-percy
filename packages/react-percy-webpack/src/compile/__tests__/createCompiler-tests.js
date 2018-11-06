@@ -8,6 +8,9 @@ const mockCompiler = () => new WebpackCompiler();
 jest.mock('webpack', () => {
   const webpack = jest.fn(() => mockCompiler());
   webpack.DefinePlugin = class MockDefinePlugin {};
+  webpack.optimize = {
+    CommonsChunkPlugin: class CommonsChunkPlugin {},
+  };
   return webpack;
 });
 

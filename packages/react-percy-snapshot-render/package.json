@@ -15,16 +15,16 @@
     "lib"
   ],
   "peerDependencies": {
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0"
+    "react": "^15.4.0 || ^16.0.0",
+    "react-dom": "^15.4.0 || ^16.0.0"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "redbox-react": "^1.5.0"
+    "redbox-react": "^1.6.0"
   },
   "devDependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
   },
   "publishConfig": {
     "access": "public"

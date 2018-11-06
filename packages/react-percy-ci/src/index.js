@@ -25,9 +25,15 @@ export default async function run(percyConfig, percyToken) {
   const assets = await compile(percyConfig);
 
   const environment = new Environment();
+  const runtimeEntry = findEntryPath(assets, EntryNames.runtime);
+  const vendorEntry = findEntryPath(assets, EntryNames.vendor);
   const snapshotsEntry = findEntryPath(assets, EntryNames.snapshots);
-  debug('executing snapshots script');
-  environment.runScript(assets[snapshotsEntry]);
+  debug('executing scripts');
+  environment.runScript(`
+    ${assets[runtimeEntry]}
+    ${assets[vendorEntry]}
+    ${assets[snapshotsEntry]}
+  `);
 
   debug('getting snapshots');
   const snapshots = environment.getSnapshotDefinitions();

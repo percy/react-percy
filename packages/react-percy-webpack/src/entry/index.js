@@ -18,5 +18,6 @@ export default function getEntry(percyConfig) {
     [EntryNames.framework]: frameworkEntryFile,
     [EntryNames.render]: renderEntryFile,
     [EntryNames.snapshots]: [...percyConfig.includeFiles, snapshotsEntryFile],
+    [EntryNames.vendor]: ['react', 'react-dom'],
   };
 }

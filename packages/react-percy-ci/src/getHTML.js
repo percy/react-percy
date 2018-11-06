@@ -7,6 +7,8 @@ export default function getHTML(assets) {
   const stylesheets = getStylesheets(assets);
 
   const scripts = [
+    findEntryPath(assets, EntryNames.runtime),
+    findEntryPath(assets, EntryNames.vendor),
     findEntryPath(assets, EntryNames.framework),
     findEntryPath(assets, EntryNames.snapshots),
     findEntryPath(assets, EntryNames.render),

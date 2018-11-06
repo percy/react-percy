@@ -17,6 +17,9 @@ jest.mock('redbox-react', () => ({ error }) =>
 );
 /* eslint-enable react/display-name, react/prop-types */
 
+// eslint-disable-next-line no-console
+console.error = jest.fn();
+
 let el;
 
 beforeEach(() => {
