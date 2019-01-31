@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "debug": "^2.6.3",
+    "debug": "^4.1.1",
     "es6-promise-pool": "^2.4.4",
     "mime-types": "^2.1.14",
     "percy-client": "^3.0.0",
