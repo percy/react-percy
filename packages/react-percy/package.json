@@ -37,7 +37,7 @@
     "@percy/react-percy-config": "^0.4.4",
     "babel-runtime": "^6.26.0",
     "chalk": "^2.0.1",
-    "yargs": "^7.0.2"
+    "yargs": "^13.2.4"
   },
   "publishConfig": {
     "access": "public"
