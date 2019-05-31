@@ -20,7 +20,7 @@
     "chalk": "^2.0.1"
   },
   "devDependencies": {
-    "micromatch": "^3.0.4"
+    "micromatch": "^4.0.2"
   },
   "publishConfig": {
     "access": "public"
