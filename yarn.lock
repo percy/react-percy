@@ -1429,7 +1429,7 @@ balanced-match@^1.0.0:
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
   integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
 
-base64-js@^1.0.2, base64-js@^1.2.3:
+base64-js@^1.0.2:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.3.0.tgz#cab1e6118f051095e58b5281aea8c1cd22bfc0e3"
   integrity sha512-ccav/yGvoa80BQDljCxsmmQ3Xvx60/UpBIij5QN21W3wBi/hhIC9OoO+KLpu9IJTS9j4DRVJ3aDDF9cMSoa2lw==
@@ -2967,6 +2967,11 @@ dotenv@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
   integrity sha1-hk7xN5rO1Vzm+V3r7NzhefegzR0=
+
+dotenv@^8.1.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
 duplexer2@^0.1.4:
   version "0.1.4"
@@ -6932,13 +6937,13 @@ pbkdf2@^3.0.3:
     sha.js "^2.4.8"
 
 percy-client@^3.0.0:
-  version "3.0.13"
-  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-3.0.13.tgz#86f48ac39bca8474a02917cea1756978d0214b83"
-  integrity sha512-XJllub665ccrxK2qLnrweBma1aMSu0Qkj4EYepw6dxsMp1kcE41HMpL3vpjwSnMO7wOvhVYdv7Jx3o5EcMAxLw==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/percy-client/-/percy-client-3.3.0.tgz#1f3c29d3c7e309a763ab8087f55a5adb3c663bed"
+  integrity sha512-KkY6jzUf5s03bHmV6cuaGMXTF7+eYUJIQpB+QXMNlw+V1XWpfzf/8v+xz8M1gxd17S9W5yNVWLYCvvnPQgZ9ag==
   dependencies:
-    base64-js "^1.2.3"
     bluebird "^3.5.1"
     bluebird-retry "^0.11.0"
+    dotenv "^8.1.0"
     es6-promise-pool "^2.5.0"
     jssha "^2.1.0"
     regenerator-runtime "^0.13.1"
