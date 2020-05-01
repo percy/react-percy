@@ -20,9 +20,15 @@
     "es6-promise-pool": "^2.4.4",
     "mime-types": "^2.1.14",
     "percy-client": "^3.0.0",
-    "slugify": "^1.1.0"
+    "slugify": "^1.1.0",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
