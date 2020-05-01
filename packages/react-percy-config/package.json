@@ -17,12 +17,18 @@
   "dependencies": {
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "chalk": "^2.0.1"
+    "chalk": "^2.0.1",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "micromatch": "^3.0.4"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
