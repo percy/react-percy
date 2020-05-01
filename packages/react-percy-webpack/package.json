@@ -32,9 +32,15 @@
     "memory-fs": "^0.4.1",
     "tmp": "^0.0.33",
     "webpack": "^3.5.5",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^3.0.0",
+    "snyk": "^1.316.1"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "scripts": {
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
