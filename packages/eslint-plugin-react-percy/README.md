@@ -25,7 +25,7 @@ Add `react-percy` to the plugins section of your `.eslintrc` configuration file:
 }
 ```
 
-You can whitelist the environment variables provided by `react-percy` by doing:
+You can allow the environment variables provided by `react-percy` by doing:
 
 ```json
 {
